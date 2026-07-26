@@ -21,6 +21,13 @@ const highRisk = [
   { area: "Satkhira", division: "Khulna", dry: 46, monsoon: 69, pop: "318k" },
 ];
 
+const dghsFacilities = [
+  { division: "Dhaka", count: 9979 }, { division: "Chattogram", count: 7480 },
+  { division: "Rajshahi", count: 5225 }, { division: "Khulna", count: 4821 },
+  { division: "Rangpur", count: 4025 }, { division: "Barishal", count: 2883 },
+  { division: "Mymensingh", count: 2789 }, { division: "Sylhet", count: 2226 },
+];
+
 type AnalysisMode = "surface" | "difference" | "catchment" | "e2sfca" | "underserved" | "hotspot" | "lisa" | "facility" | "flood" | "service" | "equity" | "priority" | "flow" | "swipe" | "isochrone";
 
 const analysisModes: { id: AnalysisMode; icon: string; title: string; text: string; mapTitle: string; stat: string }[] = [
@@ -98,7 +105,7 @@ export default function Home() {
           <div><strong>AccessBD</strong><small>Healthcare spatial intelligence</small></div>
         </div>
         <div className="headerActions">
-          <span className="status"><i /> Prototype data</span>
+          <span className="status real"><i /> Real-source inputs</span>
           <button className="iconButton" aria-label="Notifications">●</button>
           <div className="avatar">DG</div>
         </div>
@@ -120,7 +127,7 @@ export default function Home() {
         <article className="metric"><div className="metricTop"><span>Average travel time</span><i className="dot teal" /></div><strong>{metrics.avg}<small> min</small></strong><p><b className={season === "monsoon" ? "bad" : "good"}>{season === "monsoon" ? "+16 min" : "−16 min"}</b> vs. {season === "monsoon" ? "dry" : "monsoon"} season</p></article>
         <article className="metric"><div className="metricTop"><span>Underserved unions</span><i className="dot amber" /></div><strong>{metrics.underserved}<small>%</small></strong><p>{facility ? "Scenario estimate" : "1,061 of 4,554 unions"}</p></article>
         <article className="metric"><div className="metricTop"><span>Population beyond {threshold} min</span><i className="dot coral" /></div><strong>{metrics.population}<small>M</small></strong><p>{facility ? "7.5M fewer people at risk" : "18.6% of national population"}</p></article>
-        <article className="metric impact"><div className="metricTop"><span>Seasonal access loss</span><i className="dot blue" /></div><strong>{season === "monsoon" ? "34.2" : "0"}<small>%</small></strong><p>Road access affected by flooding</p></article>
+        <article className="metric impact"><div className="metricTop"><span>DGHS registered facilities</span><i className="dot blue" /></div><strong>39,428</strong><p>Observed government registry total</p></article>
       </section>
 
       <section className="analysisStrip" aria-label="Map analysis type">
@@ -201,7 +208,18 @@ export default function Home() {
         </article>
       </section>
 
-      <footer><span>AccessBD prototype • ENGR6009 research project</span><span>OpenStreetMap · WorldPop · BWDB · DGHS</span></footer>
+      <section className="dataSection" aria-labelledby="data-sources-title">
+        <div className="dataHeading"><div><p className="eyebrow">Data provenance</p><h2 id="data-sources-title">Real inputs, clearly separated from model outputs</h2><p>Administrative geometry and facility totals are observed source data. Travel time, flood disruption, hotspots, catchments and proposed-facility impacts remain prototype model outputs until the full network analysis pipeline is run.</p></div><span className="verifiedBadge">✓ Sources verified</span></div>
+        <div className="sourceGrid">
+          <a href="https://hrm.dghs.gov.bd/public/facility-registry" target="_blank" rel="noreferrer"><b>DGHS Facility Registry</b><span>39,428 registered facilities</span><small>Live government registry • observed</small></a>
+          <a href="https://nsds.bbs.gov.bd/storage/files/1/Publications/BBS_Preliminary_Census_2022.pdf" target="_blank" rel="noreferrer"><b>BBS Population Census 2022</b><span>Population benchmark</span><small>Official census • observed</small></a>
+          <a href="https://www.geoboundaries.org/countryDownloads.html" target="_blank" rel="noreferrer"><b>geoBoundaries / BBS–OCHA</b><span>64 districts • 544 ADM3 areas</span><small>Boundary geometry • loaded in map</small></a>
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer"><b>OpenStreetMap</b><span>Road-network source</span><small>Planned routing input • not yet computed</small></a>
+        </div>
+        <div className="facilityDistribution"><div><b>DGHS facilities by division</b><small>Public registry snapshot • 26 Jul 2026</small></div><div className="facilityBars">{dghsFacilities.map((item) => <div key={item.division}><span>{item.division}</span><i><b style={{ width: `${item.count / 100}%` }} /></i><strong>{item.count.toLocaleString()}</strong></div>)}</div></div>
+      </section>
+
+      <footer><span>AccessBD prototype • ENGR6009 research project</span><span>Observed: geoBoundaries/BBS–OCHA, DGHS • Model inputs: OSM, census, flood data</span></footer>
     </main>
   );
 }
