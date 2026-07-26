@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { BangladeshBoundary } from "./BangladeshBoundary";
 
 const regions = [
   { name: "Rangpur", x: 42, y: 13, dry: 38, monsoon: 51, people: 3.2 },
@@ -34,7 +35,7 @@ function MapPreview({ mode, active, onOpen }: { mode: AnalysisMode; active: bool
   return <article className={`miniMapCard ${active ? "active" : ""}`}>
     <div className="miniMapHeader"><div><i>{meta.icon}</i><span><b>{meta.title}</b><small>{meta.text}</small></span></div><button onClick={onOpen}>Explore ↗</button></div>
     <div className={`miniMap mode-${mode}`}>
-      <div className="miniLand" /><div className="miniRiver" />
+      <BangladeshBoundary compact /><div className="miniRiver" />
       {mode === "difference" && <><i className="miniZone z1" /><i className="miniZone z2" /><i className="miniZone z3" /><div className="miniKey"><span>+6</span><span>+17</span><span>+28 min</span></div></>}
       {mode === "flood" && <div className="miniRoads"><i /><i /><i /><i /><i /></div>}
       {mode === "catchment" && <div className="miniRings"><i /><i /><i /><b>+</b></div>}
@@ -106,7 +107,7 @@ export default function Home() {
           </div>
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
-            <div className="bangladeshShape" />
+            <BangladeshBoundary />
             {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
             {analysisMode === "catchment" && <div className="catchments" aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
             {regions.map((r) => {
