@@ -6,7 +6,7 @@ type Position = [number, number];
 type Geometry = { type: "Polygon" | "MultiPolygon"; coordinates: Position[][] | Position[][][] };
 type BoundaryData = { features: Array<{ geometry: Geometry; properties?: { shapeName?: string } }> };
 
-export function BangladeshBoundary({ compact = false, interactive = false, selectedDistrict, onDistrictSelect }: { compact?: boolean; interactive?: boolean; selectedDistrict?: string | null; onDistrictSelect?: (name: string) => void }) {
+export function BangladeshBoundary({ compact = false, interactive = false, level = "district", selectedDistrict, selectedSubdistrict, onDistrictSelect, onSubdistrictSelect }: { compact?: boolean; interactive?: boolean; level?: "district" | "subdistrict"; selectedDistrict?: string | null; selectedSubdistrict?: string | null; onDistrictSelect?: (name: string) => void; onSubdistrictSelect?: (name: string) => void }) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [divisions, setDivisions] = useState<Geometry[]>([]);
   const [districts, setDistricts] = useState<Array<{ name: string; geometry: Geometry }>>([]);
@@ -15,7 +15,7 @@ export function BangladeshBoundary({ compact = false, interactive = false, selec
     Promise.all([
       fetch("/bangladesh-boundary.geojson").then((response) => response.json()),
       fetch("/bangladesh-divisions.geojson").then((response) => response.json()),
-      interactive ? fetch("/bangladesh-districts.geojson").then((response) => response.json()) : Promise.resolve({ features: [] }),
+      interactive ? fetch(level === "subdistrict" ? "/bangladesh-subdistricts.geojson" : "/bangladesh-districts.geojson").then((response) => response.json()) : Promise.resolve({ features: [] }),
     ])
       .then(([country, admin, districtData]: [BoundaryData, BoundaryData, BoundaryData]) => {
         setGeometry(country.features[0]?.geometry ?? null);
@@ -23,7 +23,7 @@ export function BangladeshBoundary({ compact = false, interactive = false, selec
         setDistricts(districtData.features.map((feature) => ({ name: feature.properties?.shapeName ?? "District", geometry: feature.geometry })));
       })
       .catch(() => setGeometry(null));
-  }, [interactive]);
+  }, [interactive, level]);
 
   const paths = useMemo(() => {
     if (!geometry) return { outline: "", divisions: [] as string[], districts: [] as Array<{ name: string; path: string }> };
@@ -50,7 +50,7 @@ export function BangladeshBoundary({ compact = false, interactive = false, selec
 
   return <svg className={compact ? "realBoundary compact" : "realBoundary"} viewBox="0 0 300 350" role="img" aria-label="Accurate national boundary outline of Bangladesh">
     <path className="countryFill" d={paths.outline} fillRule="evenodd" />
-    {interactive && paths.districts.map((district) => <path className={`districtLine ${selectedDistrict === district.name ? "selected" : ""}`} d={district.path} key={district.name} role="button" tabIndex={0} aria-label={`Select ${district.name} district`} onClick={() => onDistrictSelect?.(district.name)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") onDistrictSelect?.(district.name); }} />)}
+    {interactive && paths.districts.map((district) => { const selected = level === "subdistrict" ? selectedSubdistrict === district.name : selectedDistrict === district.name; const select = () => level === "subdistrict" ? onSubdistrictSelect?.(district.name) : onDistrictSelect?.(district.name); return <path className={`${level === "subdistrict" ? "subdistrictLine" : "districtLine"} ${selected ? "selected" : ""}`} d={district.path} key={district.name} role="button" tabIndex={0} aria-label={`Select ${district.name} ${level}`} onClick={select} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") select(); }} />; })}
     {!compact && paths.divisions.map((path, index) => <path className="divisionLine" d={path} key={index} fillRule="evenodd" />)}
   </svg>;
 }
