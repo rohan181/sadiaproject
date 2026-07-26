@@ -1,7 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { BangladeshBoundary } from "./BangladeshBoundary";
+
+const RealFacilityMap = dynamic(() => import("./RealFacilityMap").then((module) => module.RealFacilityMap), { ssr: false });
 
 const regions = [
   { name: "Rangpur", x: 33.6, y: 13.9, dry: 38, monsoon: 51, people: 3.2 },
@@ -129,6 +132,8 @@ export default function Home() {
         <article className="metric"><div className="metricTop"><span>Population beyond {threshold} min</span><i className="dot coral" /></div><strong>{metrics.population}<small>M</small></strong><p>{facility ? "7.5M fewer people at risk" : "18.6% of national population"}</p></article>
         <article className="metric impact"><div className="metricTop"><span>DGHS registered facilities</span><i className="dot blue" /></div><strong>39,428</strong><p>Observed government registry total</p></article>
       </section>
+
+      <RealFacilityMap />
 
       <section className="analysisStrip" aria-label="Map analysis type">
         <div className="analysisIntro"><p className="eyebrow">Analysis layers</p><h2>Choose a planning view</h2></div>
