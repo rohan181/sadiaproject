@@ -100,14 +100,14 @@ export default function Home() {
     if (!selectedDistrict) return null;
     const seed = selectedDistrict.split("").reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
     const dry = 18 + seed % 38;
-    return { dry, monsoon: dry + 8 + seed % 24, population: (0.45 + (seed % 190) / 100).toFixed(2), underserved: 14 + seed % 39, facilities: 9 + seed % 36 };
+    return { dry, monsoon: dry + 8 + seed % 24, population: (0.45 + (seed % 190) / 100).toFixed(2), underserved: 14 + seed % 39, facilities: "Not joined" };
   }, [selectedDistrict]);
 
   const subdistrictMetrics = useMemo(() => {
     if (!selectedSubdistrict) return null;
     const seed = selectedSubdistrict.split("").reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
     const dry = 12 + seed % 42;
-    return { dry, monsoon: dry + 7 + seed % 22, population: (0.08 + (seed % 62) / 100).toFixed(2), underserved: 9 + seed % 48, facilities: 2 + seed % 13 };
+    return { dry, monsoon: dry + 7 + seed % 22, population: (0.08 + (seed % 62) / 100).toFixed(2), underserved: 9 + seed % 48, facilities: "Not joined" };
   }, [selectedSubdistrict]);
 
   return (
@@ -137,9 +137,9 @@ export default function Home() {
       </section>
 
       <section className="metricGrid">
-        <article className="metric"><div className="metricTop"><span>Average travel time</span><i className="dot teal" /></div><strong>{metrics.avg}<small> min</small></strong><p><b className={season === "monsoon" ? "bad" : "good"}>{season === "monsoon" ? "+16 min" : "−16 min"}</b> vs. {season === "monsoon" ? "dry" : "monsoon"} season</p></article>
-        <article className="metric"><div className="metricTop"><span>Underserved unions</span><i className="dot amber" /></div><strong>{metrics.underserved}<small>%</small></strong><p>{facility ? "Scenario estimate" : "1,061 of 4,554 unions"}</p></article>
-        <article className="metric"><div className="metricTop"><span>Population beyond {threshold} min</span><i className="dot coral" /></div><strong>{metrics.population}<small>M</small></strong><p>{facility ? "7.5M fewer people at risk" : "18.6% of national population"}</p></article>
+        <article className="metric"><div className="metricTop"><span>Average travel time · modelled</span><i className="dot teal" /></div><strong>{metrics.avg}<small> min</small></strong><p><b className={season === "monsoon" ? "bad" : "good"}>{season === "monsoon" ? "+16 min" : "−16 min"}</b> vs. {season === "monsoon" ? "dry" : "monsoon"} season</p></article>
+        <article className="metric"><div className="metricTop"><span>Underserved unions · modelled</span><i className="dot amber" /></div><strong>{metrics.underserved}<small>%</small></strong><p>{facility ? "Scenario estimate" : "Prototype estimate—not observed"}</p></article>
+        <article className="metric"><div className="metricTop"><span>Population beyond {threshold} min · modelled</span><i className="dot coral" /></div><strong>{metrics.population}<small>M</small></strong><p>{facility ? "Scenario reduction estimate" : "Prototype estimate—not census result"}</p></article>
         <article className="metric impact"><div className="metricTop"><span>DGHS registered facilities</span><i className="dot blue" /></div><strong>39,428</strong><p>Observed government registry total</p></article>
       </section>
 

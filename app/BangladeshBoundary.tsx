@@ -11,9 +11,8 @@ const palettes: Record<string, string[]> = {
 };
 
 function mapFill(name: string, mode?: string) {
-  if (!mode) return undefined;
   const score = name.split("").reduce((sum, letter) => sum + letter.charCodeAt(0), 0) % 100;
-  const palette = palettes[mode] ?? palettes.surface;
+  const palette = palettes[mode ?? "surface"] ?? palettes.surface;
   return { color: palette[Math.min(3, Math.floor(score / 25))], score };
 }
 

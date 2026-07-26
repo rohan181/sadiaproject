@@ -3,10 +3,27 @@
 import { useEffect, useMemo, useState } from "react";
 import type { FeatureCollection } from "geojson";
 import { CircleMarker, GeoJSON, MapContainer, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 type Facility = { id: number; lat: number; lon: number; tags?: Record<string, string> };
 type Boundary = FeatureCollection;
 const QUERY = `[out:json][timeout:35];nwr["amenity"~"^(hospital|clinic)$"](20.55,88.0,26.65,92.75);out center tags;`;
+
+function inRing(lon: number, lat: number, ring: number[][]) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > lat) !== (yj > lat) && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+function insideBangladesh(facility: Facility, shape: FeatureCollection) {
+  const geometry = shape.features[0]?.geometry;
+  if (!geometry || !["Polygon", "MultiPolygon"].includes(geometry.type)) return false;
+  const polygons = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  return polygons.some((polygon) => inRing(facility.lon, facility.lat, polygon[0] as number[][]));
+}
 
 export function RealFacilityMap() {
   const [facilities, setFacilities] = useState<Facility[]>([]);
@@ -21,7 +38,7 @@ export function RealFacilityMap() {
       fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(QUERY)}`, { signal: controller.signal }).then((r) => { if (!r.ok) throw new Error("Overpass request failed"); return r.json(); }),
     ]).then(([shape, data]) => {
       setBoundary(shape);
-      setFacilities(data.elements.map((item: Facility & { center?: { lat: number; lon: number } }) => ({ ...item, lat: item.lat ?? item.center?.lat, lon: item.lon ?? item.center?.lon })).filter((item: Facility) => Number.isFinite(item.lat) && Number.isFinite(item.lon)));
+      setFacilities(data.elements.map((item: Facility & { center?: { lat: number; lon: number } }) => ({ ...item, lat: item.lat ?? item.center?.lat, lon: item.lon ?? item.center?.lon })).filter((item: Facility) => Number.isFinite(item.lat) && Number.isFinite(item.lon) && insideBangladesh(item, shape)));
     }).catch((reason) => { if (reason?.name !== "AbortError") setError(true); }).finally(() => setLoading(false));
     return () => controller.abort();
   }, []);
