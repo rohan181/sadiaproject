@@ -32,6 +32,14 @@ const dghsFacilities = [
 ];
 
 type AnalysisMode = "surface" | "difference" | "catchment" | "e2sfca" | "underserved" | "hotspot" | "lisa" | "facility" | "flood" | "service" | "equity" | "priority" | "flow" | "swipe" | "isochrone";
+type LibraryCategory = "all" | "access" | "seasonal" | "equity" | "planning";
+
+const analysisCategory: Record<AnalysisMode, Exclude<LibraryCategory, "all">> = {
+  surface: "access", catchment: "access", e2sfca: "access", underserved: "access", service: "access", isochrone: "access",
+  difference: "seasonal", flood: "seasonal", flow: "seasonal", swipe: "seasonal",
+  hotspot: "equity", lisa: "equity", equity: "equity",
+  facility: "planning", priority: "planning",
+};
 
 const analysisModes: { id: AnalysisMode; icon: string; title: string; text: string; mapTitle: string; stat: string }[] = [
   { id: "surface", icon: "◒", title: "Accessibility surface", text: "Continuous travel-time zones", mapTitle: "Travel-time accessibility surface", stat: "31.6M beyond 30 min" },
@@ -64,7 +72,8 @@ function MapPreview({ mode, active, onOpen }: { mode: AnalysisMode; active: bool
       {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(mode) && <div className={`previewMarks kind-${mode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{mode === "priority" ? i + 1 : mode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
       {mode === "swipe" && <div className="swipeDivider"><span>Dry</span><span>Monsoon</span></div>}
     </div>
-    <div className="miniMapFoot"><span>{meta.stat}</span><span>Prototype</span></div>
+    <div className="miniMapFoot"><span>{meta.stat}</span><span className="methodBadge">{analysisCategory[mode]}</span></div>
+    <div className="miniMapAction"><span><i /> Model-ready view</span><b>Explore full analysis →</b></div>
   </article>;
 }
 
@@ -78,6 +87,7 @@ export default function Home() {
   const [selectedSubdistrict, setSelectedSubdistrict] = useState<string | null>(null);
   const [mapLevel, setMapLevel] = useState<"district" | "subdistrict">("district");
   const [mapExpanded, setMapExpanded] = useState(false);
+  const [libraryCategory, setLibraryCategory] = useState<LibraryCategory>("all");
 
   const metrics = useMemo(() => {
     const reduction = facility ? 9 : 0;
@@ -195,8 +205,12 @@ export default function Home() {
       {mapExpanded && mapLevel === "subdistrict" && <div className="mapModal subLevel" role="dialog" aria-modal="true" aria-label="Interactive Bangladesh subdistrict analysis map"><div className="mapModalPanel"><div className="mapModalHeader"><div><p className="eyebrow">Subdistrict analysis • {analysisModes.find((mode) => mode.id === analysisMode)?.title}</p><h2>Bangladesh upazila accessibility explorer</h2><span>Real ADM3 geography • Tap any of 544 subdistrict polygons</span></div><button onClick={() => setMapExpanded(false)} aria-label="Close subdistrict map">×</button></div><div className="adminLevelBar"><button onClick={() => setMapLevel("district")}>← District level</button><span>District <b>→</b> Subdistrict / Upazila</span><strong>544 real boundaries</strong></div><div className="mapModalBody"><div className={`bigMap subdistrictMap mode-${analysisMode}`}><BangladeshBoundary interactive level="subdistrict" selectedDistrict={selectedDistrict} selectedSubdistrict={selectedSubdistrict} onSubdistrictSelect={setSelectedSubdistrict} />{analysisMode === "flow" && <div className="flowStory"><div className="flowPulse p1" /><div className="flowPulse p2" /><div className="flowPulse p3" /><div className="flowTimeline"><span>Dry</span><i><b /></i><span>Early monsoon</span><i><b /></i><span>Peak flood</span></div></div>}<div className="bigMapLegend"><span><i className="low" /> Better access</span><span><i className="medium" /> Moderate</span><span><i className="high" /> Underserved</span></div></div><aside><p className="eyebrow">Selected subdistrict</p><h3>{selectedSubdistrict ? `${selectedSubdistrict} Upazila` : "Choose a subdistrict"}</h3><div className="activeAnalysis"><small>Parent selection</small><b>{selectedDistrict ? `${selectedDistrict} District` : "Bangladesh"}</b><span>{analysisModes.find((mode) => mode.id === analysisMode)?.title}</span></div>{subdistrictMetrics ? <><div className="modalCompare"><span><small>Dry travel</small><b>{subdistrictMetrics.dry} min</b></span><span><small>Monsoon</small><b>{subdistrictMetrics.monsoon} min</b></span></div><div className="detailRows"><div><span>Population</span><b>{subdistrictMetrics.population}M</b></div><div><span>Beyond threshold</span><b>{subdistrictMetrics.underserved}%</b></div><div><span>Facilities</span><b>{subdistrictMetrics.facilities}</b></div></div></> : <p className="emptyHint">Select an upazila polygon to see local accessibility, seasonal change, population and facility estimates.</p>}<button className="primaryButton" onClick={() => setMapExpanded(false)}>Apply subdistrict <span>→</span></button></aside></div></div></div>}
 
       <section className="allMapsSection">
-        <div className="sectionTitle"><div><p className="eyebrow">Complete analysis library</p><h2>All healthcare-accessibility map views</h2><p>Review all 15 analytical lenses, then open any view in the interactive map above.</p></div><span>15 analysis maps</span></div>
-        <div className="allMapsGrid">{analysisModes.map((mode) => <MapPreview key={mode.id} mode={mode.id} active={analysisMode === mode.id} onOpen={() => { setAnalysisMode(mode.id); setMapLevel("district"); if (mode.id === "facility") setFacility(true); setMapExpanded(true); }} />)}</div>
+        <div className="sectionTitle"><div><p className="eyebrow">Complete analysis library</p><h2>Choose the right evidence for each planning question</h2><p>Explore access, seasonal resilience, spatial equity and intervention scenarios. Every view opens as a large interactive district map with upazila drill-down.</p></div><span>15 interactive analyses</span></div>
+        <div className="libraryToolbar" role="group" aria-label="Filter analysis library">
+          {(["all", "access", "seasonal", "equity", "planning"] as LibraryCategory[]).map((category) => <button key={category} className={libraryCategory === category ? "active" : ""} onClick={() => setLibraryCategory(category)}>{category === "all" ? "All analyses" : category === "seasonal" ? "Season & flood" : category === "equity" ? "Equity & clusters" : category === "planning" ? "Planning scenarios" : "Access & coverage"}<small>{category === "all" ? 15 : Object.values(analysisCategory).filter((item) => item === category).length}</small></button>)}
+        </div>
+        <div className="libraryGuide"><span><b>Observed inputs</b> Real boundaries, OSM facilities and DGHS totals</span><span><b>Model outputs</b> Travel times, catchments, clusters and scenarios</span><span><b>Interaction</b> Select district → open upazila analysis</span></div>
+        <div className="allMapsGrid">{analysisModes.filter((mode) => libraryCategory === "all" || analysisCategory[mode.id] === libraryCategory).map((mode) => <MapPreview key={mode.id} mode={mode.id} active={analysisMode === mode.id} onOpen={() => { setAnalysisMode(mode.id); setMapLevel("district"); if (mode.id === "facility") setFacility(true); setMapExpanded(true); }} />)}</div>
       </section>
 
       <section className="bottomGrid">
