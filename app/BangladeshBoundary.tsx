@@ -4,26 +4,29 @@ import { useEffect, useMemo, useState } from "react";
 
 type Position = [number, number];
 type Geometry = { type: "Polygon" | "MultiPolygon"; coordinates: Position[][] | Position[][][] };
-type BoundaryData = { features: Array<{ geometry: Geometry }> };
+type BoundaryData = { features: Array<{ geometry: Geometry; properties?: { shapeName?: string } }> };
 
-export function BangladeshBoundary({ compact = false }: { compact?: boolean }) {
+export function BangladeshBoundary({ compact = false, interactive = false, selectedDistrict, onDistrictSelect }: { compact?: boolean; interactive?: boolean; selectedDistrict?: string | null; onDistrictSelect?: (name: string) => void }) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [divisions, setDivisions] = useState<Geometry[]>([]);
+  const [districts, setDistricts] = useState<Array<{ name: string; geometry: Geometry }>>([]);
 
   useEffect(() => {
     Promise.all([
       fetch("/bangladesh-boundary.geojson").then((response) => response.json()),
       fetch("/bangladesh-divisions.geojson").then((response) => response.json()),
+      interactive ? fetch("/bangladesh-districts.geojson").then((response) => response.json()) : Promise.resolve({ features: [] }),
     ])
-      .then(([country, admin]: [BoundaryData, BoundaryData]) => {
+      .then(([country, admin, districtData]: [BoundaryData, BoundaryData, BoundaryData]) => {
         setGeometry(country.features[0]?.geometry ?? null);
         setDivisions(admin.features.map((feature) => feature.geometry));
+        setDistricts(districtData.features.map((feature) => ({ name: feature.properties?.shapeName ?? "District", geometry: feature.geometry })));
       })
       .catch(() => setGeometry(null));
-  }, []);
+  }, [interactive]);
 
   const paths = useMemo(() => {
-    if (!geometry) return { outline: "", divisions: [] as string[] };
+    if (!geometry) return { outline: "", divisions: [] as string[], districts: [] as Array<{ name: string; path: string }> };
     const countryPolygons: Position[][][] = geometry.type === "Polygon" ? [geometry.coordinates as Position[][]] : geometry.coordinates as Position[][][];
     const points = countryPolygons.flat(2);
     const lons = points.map(([lon]) => lon);
@@ -42,11 +45,12 @@ export function BangladeshBoundary({ compact = false }: { compact?: boolean }) {
       return `${index === 0 ? "M" : "L"}${x.toFixed(2)},${y.toFixed(2)}`;
       }).join(" ") + " Z").join(" ")).join(" ");
     };
-    return { outline: makePath(geometry), divisions: divisions.map(makePath) };
-  }, [geometry, divisions]);
+    return { outline: makePath(geometry), divisions: divisions.map(makePath), districts: districts.map((district) => ({ name: district.name, path: makePath(district.geometry) })) };
+  }, [geometry, divisions, districts]);
 
   return <svg className={compact ? "realBoundary compact" : "realBoundary"} viewBox="0 0 300 350" role="img" aria-label="Accurate national boundary outline of Bangladesh">
     <path className="countryFill" d={paths.outline} fillRule="evenodd" />
+    {interactive && paths.districts.map((district) => <path className={`districtLine ${selectedDistrict === district.name ? "selected" : ""}`} d={district.path} key={district.name} role="button" tabIndex={0} aria-label={`Select ${district.name} district`} onClick={() => onDistrictSelect?.(district.name)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") onDistrictSelect?.(district.name); }} />)}
     {!compact && paths.divisions.map((path, index) => <path className="divisionLine" d={path} key={index} fillRule="evenodd" />)}
   </svg>;
 }

@@ -64,6 +64,8 @@ export default function Home() {
   const [facility, setFacility] = useState(false);
   const [threshold, setThreshold] = useState(30);
   const [analysisMode, setAnalysisMode] = useState<AnalysisMode>("surface");
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [mapExpanded, setMapExpanded] = useState(false);
 
   const metrics = useMemo(() => {
     const reduction = facility ? 9 : 0;
@@ -71,6 +73,13 @@ export default function Home() {
       ? { avg: 48 - reduction, underserved: facility ? 14.2 : 18.7, population: facility ? 24.1 : 31.6 }
       : { avg: 32 - reduction, underserved: facility ? 8.1 : 11.4, population: facility ? 13.8 : 19.2 };
   }, [season, facility]);
+
+  const districtMetrics = useMemo(() => {
+    if (!selectedDistrict) return null;
+    const seed = selectedDistrict.split("").reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
+    const dry = 18 + seed % 38;
+    return { dry, monsoon: dry + 8 + seed % 24, population: (0.45 + (seed % 190) / 100).toFixed(2), underserved: 14 + seed % 39, facilities: 9 + seed % 36 };
+  }, [selectedDistrict]);
 
   return (
     <main>
@@ -116,11 +125,11 @@ export default function Home() {
         <article className="mapCard">
           <div className="cardHeader">
             <div><p className="eyebrow">{analysisModes.find((m) => m.id === analysisMode)?.title} map</p><h2>{analysisModes.find((m) => m.id === analysisMode)?.mapTitle}</h2></div>
-            <div className="mapTools"><span className="liveLayer"><i /> Layer active</span><button aria-label="Expand map">↗</button></div>
+            <div className="mapTools"><span className="liveLayer"><i /> 64 districts interactive</span><button aria-label="Open large map" onClick={() => setMapExpanded(true)}>Expand ↗</button></div>
           </div>
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
-            <BangladeshBoundary />
+            <BangladeshBoundary interactive selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} />
             {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
             {(analysisMode === "catchment" || analysisMode === "isochrone" || analysisMode === "flow") && <div className={`catchments ${analysisMode === "flow" ? "animated" : ""}`} aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
             {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(analysisMode) && <div className={`analysisOverlay kind-${analysisMode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{analysisMode === "priority" ? i + 1 : analysisMode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
@@ -143,19 +152,23 @@ export default function Home() {
         </article>
 
         <aside className="sidePanel">
-          <div className="panelHeader"><p className="eyebrow">Area detail</p><h2>{selected.name} Division</h2><span>{season === "monsoon" ? "Monsoon scenario" : "Dry-season baseline"}</span></div>
-          <div className="timeRing"><div><strong>{Math.max(10, selected[season] - (facility ? 18 : 0))}</strong><small>min avg.</small></div></div>
+          <div className="panelHeader"><p className="eyebrow">{selectedDistrict ? "Selected district" : "Area detail"}</p><h2>{selectedDistrict ? `${selectedDistrict} District` : `${selected.name} Division`}</h2><span>{season === "monsoon" ? "Monsoon scenario" : "Dry-season baseline"}</span></div>
+          <div className="timeRing"><div><strong>{districtMetrics ? districtMetrics[season] : Math.max(10, selected[season] - (facility ? 18 : 0))}</strong><small>min avg.</small></div></div>
           <div className="detailRows">
-            <div><span>Population</span><b>{selected.people}M</b></div>
-            <div><span>Unions over {threshold} min</span><b>{facility ? "21%" : selected[season] > 50 ? "46%" : "28%"}</b></div>
-            <div><span>Seasonal change</span><b className="bad">+{selected.monsoon - selected.dry} min</b></div>
+            <div><span>Population</span><b>{districtMetrics ? districtMetrics.population : selected.people}M</b></div>
+            <div><span>Population beyond {threshold} min</span><b>{districtMetrics ? districtMetrics.underserved : facility ? "21" : selected[season] > 50 ? "46" : "28"}%</b></div>
+            <div><span>Seasonal change</span><b className="bad">+{districtMetrics ? districtMetrics.monsoon - districtMetrics.dry : selected.monsoon - selected.dry} min</b></div>
+            {districtMetrics && <div><span>Mapped facilities</span><b>{districtMetrics.facilities}</b></div>}
           </div>
+          {districtMetrics && <div className="districtCompare"><p className="eyebrow">Dry / monsoon comparison</p><div><span><small>Dry</small><b>{districtMetrics.dry} min</b></span><i>→</i><span><small>Monsoon</small><b>{districtMetrics.monsoon} min</b></span></div><button onClick={() => setMapExpanded(true)}>Open district in big map ↗</button></div>}
           {analysisMode === "facility" && <div className="comparisonPanel"><p className="eyebrow">Before / after</p><div><span><small>Current</small><b>{selected[season]} min</b></span><i>→</i><span className="improved"><small>With clinic</small><b>{Math.max(10, selected[season] - 18)} min</b></span></div><p><b>{Math.min(820, Math.round(selected.people * 126))}k</b> people gain access within {threshold} minutes</p></div>}
           <div className="scenarioBox"><div><p className="eyebrow">Planning scenario</p><h3>Add a community clinic</h3></div><label><input type="checkbox" checked={facility} onChange={(e) => setFacility(e.target.checked)} /><span /></label></div>
           <p className="scenarioHint">{facility ? `Estimated access improvement applied to ${selected.name}.` : "Turn on to estimate the local impact of one new facility."}</p>
           <button className="primaryButton">View full area analysis <span>→</span></button>
         </aside>
       </section>
+
+      {mapExpanded && <div className="mapModal" role="dialog" aria-modal="true" aria-label="Interactive Bangladesh district map"><div className="mapModalPanel"><div className="mapModalHeader"><div><p className="eyebrow">District explorer</p><h2>Bangladesh healthcare accessibility</h2><span>Tap any district to inspect and compare seasonal access</span></div><button onClick={() => setMapExpanded(false)} aria-label="Close large map">×</button></div><div className="mapModalBody"><div className="bigMap"><BangladeshBoundary interactive selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} /></div><aside><p className="eyebrow">Selected location</p><h3>{selectedDistrict ? `${selectedDistrict} District` : "Choose a district"}</h3>{districtMetrics ? <><div className="modalCompare"><span><small>Dry travel</small><b>{districtMetrics.dry} min</b></span><span><small>Monsoon</small><b>{districtMetrics.monsoon} min</b></span></div><div className="detailRows"><div><span>Population</span><b>{districtMetrics.population}M</b></div><div><span>Beyond threshold</span><b>{districtMetrics.underserved}%</b></div><div><span>Facilities</span><b>{districtMetrics.facilities}</b></div></div></> : <p className="emptyHint">All 64 district polygons are interactive and use their real geographic boundaries.</p>}<button className="primaryButton" onClick={() => setMapExpanded(false)}>Apply selection <span>→</span></button></aside></div></div></div>}
 
       <section className="allMapsSection">
         <div className="sectionTitle"><div><p className="eyebrow">Complete analysis library</p><h2>All healthcare-accessibility map views</h2><p>Review all 15 analytical lenses, then open any view in the interactive map above.</p></div><span>15 analysis maps</span></div>
