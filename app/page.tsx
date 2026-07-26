@@ -88,6 +88,7 @@ export default function Home() {
   const [mapLevel, setMapLevel] = useState<"district" | "subdistrict">("district");
   const [mapExpanded, setMapExpanded] = useState(false);
   const [libraryCategory, setLibraryCategory] = useState<LibraryCategory>("all");
+  const [overviewZoom, setOverviewZoom] = useState(1);
 
   const metrics = useMemo(() => {
     const reduction = facility ? 9 : 0;
@@ -160,7 +161,7 @@ export default function Home() {
           </div>
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
-            <BangladeshBoundary interactive analysisMode={analysisMode} selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} />
+            <BangladeshBoundary interactive analysisMode={analysisMode} zoom={overviewZoom} selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} />
             {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
             {(analysisMode === "catchment" || analysisMode === "isochrone" || analysisMode === "flow") && <div className={`catchments ${analysisMode === "flow" ? "animated" : ""}`} aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
             {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(analysisMode) && <div className={`analysisOverlay kind-${analysisMode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{analysisMode === "priority" ? i + 1 : analysisMode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
@@ -172,7 +173,8 @@ export default function Home() {
               return <button key={r.name} className={`region ${risk} ${selected.name === r.name ? "selected" : ""}`} style={{ left: `${r.x}%`, top: `${r.y}%` }} onClick={() => setSelected(r)} aria-label={`${r.name}, ${value}`}><span>{r.name}</span><b>{value}{analysisMode === "difference" ? "+" : ["catchment", "isochrone"].includes(analysisMode) ? "%" : analysisMode === "e2sfca" ? "/10" : analysisMode === "underserved" ? "k" : ""}</b></button>;
             })}
             {analysisMode === "facility" && <button className="proposedPin" style={{ left: `${selected.x + 4}%`, top: `${selected.y + 6}%` }} aria-label={`Proposed clinic in ${selected.name}`}><b>+</b><span>Proposed clinic</span></button>}
-            <div className="mapZoom"><button>+</button><button>−</button></div>
+            <div className="mapZoom"><button aria-label="Zoom in" onClick={() => setOverviewZoom((value) => Math.min(2, Number((value + .2).toFixed(1))))}>+</button><button aria-label="Zoom out" onClick={() => setOverviewZoom((value) => Math.max(1, Number((value - .2).toFixed(1))))}>−</button><button aria-label="Reset map zoom" className="resetZoom" onClick={() => setOverviewZoom(1)}>↺</button></div>
+            <div className="mapInteractionHint"><b>{selectedDistrict ? `${selectedDistrict} selected` : "Tap a district"}</b><span>{Math.round(overviewZoom * 100)}% zoom • open large map for upazila analysis</span></div>
             {analysisMode === "difference" && <div className="legend"><span><i className="low" /> +0–10 min</span><span><i className="medium" /> +11–20</span><span><i className="high" /> +21+</span></div>}
             {analysisMode === "flood" && <div className="legend"><span><i className="roadOpen" /> Open</span><span><i className="roadSlow" /> Slowed</span><span><i className="roadClosed" /> Impassable</span></div>}
             {analysisMode === "catchment" && <div className="legend"><span><i className="ring15" /> 15 min</span><span><i className="ring30" /> 30 min</span><span><i className="ring60" /> 60 min</span></div>}

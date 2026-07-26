@@ -16,7 +16,7 @@ function mapFill(name: string, mode?: string) {
   return { color: palette[Math.min(3, Math.floor(score / 25))], score };
 }
 
-export function BangladeshBoundary({ compact = false, interactive = false, level = "district", analysisMode, selectedDistrict, selectedSubdistrict, onDistrictSelect, onSubdistrictSelect }: { compact?: boolean; interactive?: boolean; level?: "district" | "subdistrict"; analysisMode?: string; selectedDistrict?: string | null; selectedSubdistrict?: string | null; onDistrictSelect?: (name: string) => void; onSubdistrictSelect?: (name: string) => void }) {
+export function BangladeshBoundary({ compact = false, interactive = false, level = "district", analysisMode, zoom = 1, selectedDistrict, selectedSubdistrict, onDistrictSelect, onSubdistrictSelect }: { compact?: boolean; interactive?: boolean; level?: "district" | "subdistrict"; analysisMode?: string; zoom?: number; selectedDistrict?: string | null; selectedSubdistrict?: string | null; onDistrictSelect?: (name: string) => void; onSubdistrictSelect?: (name: string) => void }) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
   const [divisions, setDivisions] = useState<Geometry[]>([]);
   const [districts, setDistricts] = useState<Array<{ name: string; geometry: Geometry }>>([]);
@@ -58,7 +58,7 @@ export function BangladeshBoundary({ compact = false, interactive = false, level
     return { outline: makePath(geometry), divisions: divisions.map(makePath), districts: districts.map((district) => ({ name: district.name, path: makePath(district.geometry) })) };
   }, [geometry, divisions, districts]);
 
-  return <svg className={compact ? "realBoundary compact" : "realBoundary"} viewBox="0 0 300 350" role="img" aria-label="Accurate national boundary outline of Bangladesh">
+  return <svg className={compact ? "realBoundary compact" : "realBoundary"} style={{ transform: `translate(-50%, -50%) scale(${zoom})` }} viewBox="0 0 300 350" role="img" aria-label="Accurate interactive administrative map of Bangladesh">
     <path className="countryFill" d={paths.outline} fillRule="evenodd" />
     {interactive && paths.districts.map((district) => { const selected = level === "subdistrict" ? selectedSubdistrict === district.name : selectedDistrict === district.name; const select = () => level === "subdistrict" ? onSubdistrictSelect?.(district.name) : onDistrictSelect?.(district.name); const thematic = mapFill(district.name, analysisMode); return <path className={`${level === "subdistrict" ? "subdistrictLine" : "districtLine"} thematic ${selected ? "selected" : ""}`} style={selected ? undefined : { fill: thematic?.color }} d={district.path} key={district.name} role="button" tabIndex={0} aria-label={`Select ${district.name} ${level}; model index ${thematic?.score ?? 0}`} onClick={select} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") select(); }}><title>{district.name} • {analysisMode ?? "boundary"} model index {thematic?.score ?? 0}</title></path>; })}
     {!compact && paths.divisions.map((path, index) => <path className="divisionLine" d={path} key={index} fillRule="evenodd" />)}
