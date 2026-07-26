@@ -160,7 +160,7 @@ export default function Home() {
           </div>
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
-            <BangladeshBoundary interactive selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} />
+            <BangladeshBoundary interactive analysisMode={analysisMode} selectedDistrict={selectedDistrict} onDistrictSelect={setSelectedDistrict} />
             {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
             {(analysisMode === "catchment" || analysisMode === "isochrone" || analysisMode === "flow") && <div className={`catchments ${analysisMode === "flow" ? "animated" : ""}`} aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
             {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(analysisMode) && <div className={`analysisOverlay kind-${analysisMode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{analysisMode === "priority" ? i + 1 : analysisMode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
