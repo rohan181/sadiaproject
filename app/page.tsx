@@ -29,6 +29,21 @@ const analysisModes: { id: AnalysisMode; icon: string; title: string; text: stri
   { id: "facility", icon: "+", title: "Proposed facility", text: "Compare access before and after" },
 ];
 
+function MapPreview({ mode, active, onOpen }: { mode: AnalysisMode; active: boolean; onOpen: () => void }) {
+  const meta = analysisModes.find((item) => item.id === mode)!;
+  return <article className={`miniMapCard ${active ? "active" : ""}`}>
+    <div className="miniMapHeader"><div><i>{meta.icon}</i><span><b>{meta.title}</b><small>{meta.text}</small></span></div><button onClick={onOpen}>Explore ↗</button></div>
+    <div className={`miniMap mode-${mode}`}>
+      <div className="miniLand" /><div className="miniRiver" />
+      {mode === "difference" && <><i className="miniZone z1" /><i className="miniZone z2" /><i className="miniZone z3" /><div className="miniKey"><span>+6</span><span>+17</span><span>+28 min</span></div></>}
+      {mode === "flood" && <div className="miniRoads"><i /><i /><i /><i /><i /></div>}
+      {mode === "catchment" && <div className="miniRings"><i /><i /><i /><b>+</b></div>}
+      {mode === "facility" && <><div className="beforeArea"><small>Before</small><b>67 min</b></div><div className="afterArea"><small>After</small><b>49 min</b></div><div className="clinicMark">+</div></>}
+    </div>
+    <div className="miniMapFoot"><span>{mode === "flood" ? "18.4% roads exposed" : mode === "catchment" ? "3.8M people covered" : mode === "facility" ? "−18 min improvement" : "+16 min national average"}</span><span>Prototype</span></div>
+  </article>;
+}
+
 export default function Home() {
   const [season, setSeason] = useState<"dry" | "monsoon">("monsoon");
   const [selected, setSelected] = useState(regions[3]);
@@ -123,6 +138,11 @@ export default function Home() {
           <p className="scenarioHint">{facility ? `Estimated access improvement applied to ${selected.name}.` : "Turn on to estimate the local impact of one new facility."}</p>
           <button className="primaryButton">View full area analysis <span>→</span></button>
         </aside>
+      </section>
+
+      <section className="allMapsSection">
+        <div className="sectionTitle"><div><p className="eyebrow">All map views</p><h2>Compare every spatial lens</h2><p>Review the complete analysis set together, then open any view in the interactive map above.</p></div><span>4 analysis maps</span></div>
+        <div className="allMapsGrid">{analysisModes.map((mode) => <MapPreview key={mode.id} mode={mode.id} active={analysisMode === mode.id} onOpen={() => { setAnalysisMode(mode.id); if (mode.id === "facility") setFacility(true); window.scrollTo({ top: 540, behavior: "smooth" }); }} />)}</div>
       </section>
 
       <section className="bottomGrid">
