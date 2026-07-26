@@ -4,14 +4,14 @@ import { useMemo, useState } from "react";
 import { BangladeshBoundary } from "./BangladeshBoundary";
 
 const regions = [
-  { name: "Rangpur", x: 42, y: 13, dry: 38, monsoon: 51, people: 3.2 },
-  { name: "Rajshahi", x: 31, y: 34, dry: 31, monsoon: 43, people: 4.1 },
-  { name: "Mymensingh", x: 57, y: 31, dry: 27, monsoon: 39, people: 3.4 },
-  { name: "Sylhet", x: 76, y: 28, dry: 42, monsoon: 67, people: 2.7 },
-  { name: "Dhaka", x: 53, y: 48, dry: 19, monsoon: 27, people: 6.3 },
-  { name: "Khulna", x: 33, y: 65, dry: 35, monsoon: 52, people: 3.8 },
-  { name: "Barishal", x: 48, y: 72, dry: 39, monsoon: 61, people: 2.9 },
-  { name: "Chattogram", x: 70, y: 66, dry: 36, monsoon: 55, people: 4.6 },
+  { name: "Rangpur", x: 33.6, y: 13.9, dry: 38, monsoon: 51, people: 3.2 },
+  { name: "Rajshahi", x: 32.6, y: 34.5, dry: 31, monsoon: 43, people: 4.1 },
+  { name: "Mymensingh", x: 50.8, y: 32.2, dry: 27, monsoon: 39, people: 3.4 },
+  { name: "Sylhet", x: 66.0, y: 34.7, dry: 42, monsoon: 67, people: 2.7 },
+  { name: "Dhaka", x: 48.5, y: 45.9, dry: 19, monsoon: 27, people: 6.3 },
+  { name: "Khulna", x: 37.2, y: 62.8, dry: 35, monsoon: 52, people: 3.8 },
+  { name: "Barishal", x: 51.2, y: 71.3, dry: 39, monsoon: 61, people: 2.9 },
+  { name: "Chattogram", x: 66.9, y: 64.8, dry: 36, monsoon: 55, people: 4.6 },
 ];
 
 const highRisk = [

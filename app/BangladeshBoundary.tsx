@@ -8,20 +8,24 @@ type BoundaryData = { features: Array<{ geometry: Geometry }> };
 
 export function BangladeshBoundary({ compact = false }: { compact?: boolean }) {
   const [geometry, setGeometry] = useState<Geometry | null>(null);
+  const [divisions, setDivisions] = useState<Geometry[]>([]);
 
   useEffect(() => {
-    fetch("/bangladesh-boundary.geojson")
-      .then((response) => response.json())
-      .then((data: BoundaryData) => setGeometry(data.features[0]?.geometry ?? null))
+    Promise.all([
+      fetch("/bangladesh-boundary.geojson").then((response) => response.json()),
+      fetch("/bangladesh-divisions.geojson").then((response) => response.json()),
+    ])
+      .then(([country, admin]: [BoundaryData, BoundaryData]) => {
+        setGeometry(country.features[0]?.geometry ?? null);
+        setDivisions(admin.features.map((feature) => feature.geometry));
+      })
       .catch(() => setGeometry(null));
   }, []);
 
-  const path = useMemo(() => {
-    if (!geometry) return "";
-    const polygons: Position[][][] = geometry.type === "Polygon"
-      ? [geometry.coordinates as Position[][]]
-      : geometry.coordinates as Position[][][];
-    const points = polygons.flat(2);
+  const paths = useMemo(() => {
+    if (!geometry) return { outline: "", divisions: [] as string[] };
+    const countryPolygons: Position[][][] = geometry.type === "Polygon" ? [geometry.coordinates as Position[][]] : geometry.coordinates as Position[][][];
+    const points = countryPolygons.flat(2);
     const lons = points.map(([lon]) => lon);
     const lats = points.map(([, lat]) => lat);
     const minLon = Math.min(...lons), maxLon = Math.max(...lons);
@@ -31,13 +35,18 @@ export function BangladeshBoundary({ compact = false }: { compact?: boolean }) {
       padding + ((lon - minLon) / (maxLon - minLon)) * (width - padding * 2),
       padding + ((maxLat - lat) / (maxLat - minLat)) * (height - padding * 2),
     ];
-    return polygons.map((polygon) => polygon.map((ring) => ring.map((point, index) => {
+    const makePath = (item: Geometry) => {
+      const polygons: Position[][][] = item.type === "Polygon" ? [item.coordinates as Position[][]] : item.coordinates as Position[][][];
+      return polygons.map((polygon) => polygon.map((ring) => ring.map((point, index) => {
       const [x, y] = project(point);
       return `${index === 0 ? "M" : "L"}${x.toFixed(2)},${y.toFixed(2)}`;
-    }).join(" ") + " Z").join(" ")).join(" ");
-  }, [geometry]);
+      }).join(" ") + " Z").join(" ")).join(" ");
+    };
+    return { outline: makePath(geometry), divisions: divisions.map(makePath) };
+  }, [geometry, divisions]);
 
   return <svg className={compact ? "realBoundary compact" : "realBoundary"} viewBox="0 0 300 350" role="img" aria-label="Accurate national boundary outline of Bangladesh">
-    <path d={path} fillRule="evenodd" />
+    <path className="countryFill" d={paths.outline} fillRule="evenodd" />
+    {!compact && paths.divisions.map((path, index) => <path className="divisionLine" d={path} key={index} fillRule="evenodd" />)}
   </svg>;
 }
