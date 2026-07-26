@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { BangladeshBoundary } from "./BangladeshBoundary";
+import { PipelineStatus } from "./PipelineStatus";
 
 const RealFacilityMap = dynamic(() => import("./RealFacilityMap").then((module) => module.RealFacilityMap), { ssr: false });
 
@@ -145,6 +146,8 @@ export default function Home() {
       </section>
 
       <RealFacilityMap />
+
+      <PipelineStatus />
 
       <section className="analysisStrip" aria-label="Map analysis type">
         <div className="analysisIntro"><p className="eyebrow">Analysis layers</p><h2>Choose a planning view</h2></div>

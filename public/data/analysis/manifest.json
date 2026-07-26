@@ -1,0 +1,8 @@
+{
+  "status": "awaiting-source-data",
+  "generatedAt": null,
+  "method": "PostGIS/pgRouting + PySAL",
+  "featureCount": 0,
+  "outputs": {},
+  "nextStep": "Add source files, load and snap the PostGIS network, then run Snakemake."
+}

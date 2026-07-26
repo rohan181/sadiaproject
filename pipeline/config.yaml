@@ -1,0 +1,24 @@
+database_url: postgresql+psycopg://accessbd:accessbd_local@localhost:5432/accessbd
+database_dsn: postgresql://accessbd:accessbd_local@localhost:5432/accessbd
+analysis_crs: EPSG:32646
+thresholds_minutes: [15, 30, 60]
+seasons: [dry, monsoon]
+population_raster: data/population/bgd_population_2025_100m.tif
+facilities_file: data/facilities/dghs_facilities.csv
+roads_file: data/osm/bangladesh-latest.osm.pbf
+flood_file: data/flood/flood_extent.geojson
+districts_file: ../public/bangladesh-districts.geojson
+subdistricts_file: ../public/bangladesh-subdistricts.geojson
+dashboard_output: ../public/data/analysis
+facility_capacity_field: beds
+default_facility_capacity: 1
+speed_kph:
+  motorway: 70
+  trunk: 55
+  primary: 45
+  secondary: 35
+  tertiary: 28
+  residential: 20
+  unclassified: 18
+monsoon_speed_factor: 0.65
+flooded_speed_factor: 0.25

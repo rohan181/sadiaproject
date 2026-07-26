@@ -1,4 +1,42 @@
-# vinext-starter
+# AccessBD
+
+Healthcare accessibility research platform for Bangladesh.
+
+## Architecture
+
+- `app/`: Next.js/Vinext and Leaflet interface.
+- `pipeline/`: Python, Snakemake and PySAL batch analysis.
+- `pipeline/sql/`: PostgreSQL/PostGIS/pgRouting schema.
+- `compose.yaml`: local PostGIS and optional Valhalla services.
+- `public/data/analysis/`: versioned dashboard-ready outputs.
+
+## Run the frontend
+
+```bash
+npm install
+npm run dev
+```
+
+## Run the spatial pipeline
+
+```bash
+docker compose up -d postgis
+python -m venv .venv
+source .venv/bin/activate
+pip install -r pipeline/requirements.txt
+cd pipeline
+snakemake --cores 4
+```
+
+Place source files at the locations in `pipeline/config.yaml`. Validation stops the workflow when a required source is absent; the pipeline never substitutes generated values.
+
+Enable Valhalla when live matrix or isochrone services are required:
+
+```bash
+docker compose --profile valhalla up -d
+```
+
+## Original starter notes
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and

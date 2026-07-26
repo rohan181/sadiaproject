@@ -1,0 +1,15 @@
+geopandas==1.1.1
+pyogrio==0.11.1
+shapely==2.1.1
+rasterio==1.4.3
+exactextract==0.2.2
+pandas==2.3.1
+numpy==2.3.1
+sqlalchemy==2.0.41
+psycopg[binary]==3.2.9
+geoalchemy2==0.17.1
+snakemake==9.7.0
+pyyaml==6.0.2
+libpysal==4.13.0
+esda==2.7.1
+pyarrow==20.0.0

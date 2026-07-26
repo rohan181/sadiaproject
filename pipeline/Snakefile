@@ -1,0 +1,38 @@
+configfile: "config.yaml"
+
+rule all:
+    input:
+        "work/validated.done",
+        "work/access.parquet",
+        "work/spatial_statistics.parquet",
+        "../public/data/analysis/manifest.json"
+
+rule validate_inputs:
+    input:
+        facilities=config["facilities_file"],
+        population=config["population_raster"],
+        roads=config["roads_file"],
+        districts=config["districts_file"],
+        subdistricts=config["subdistricts_file"]
+    output: "work/validated.done"
+    shell: "python scripts/validate_inputs.py --config config.yaml --output {output}"
+
+rule calculate_access:
+    input: "work/routing.done"
+    output: "work/access.parquet"
+    shell: "python scripts/calculate_access.py --config config.yaml --output {output}"
+
+rule route_access:
+    input: "work/validated.done"
+    output: "work/routing.done"
+    shell: "python scripts/route_access.py --config config.yaml --sql sql/002_route_access.sql --output {output}"
+
+rule spatial_statistics:
+    input: "work/access.parquet"
+    output: "work/spatial_statistics.parquet"
+    shell: "python scripts/spatial_statistics.py --input {input} --output {output}"
+
+rule export_dashboard:
+    input: "work/spatial_statistics.parquet"
+    output: "../public/data/analysis/manifest.json"
+    shell: "python scripts/export_dashboard.py --input {input} --output {output}"
