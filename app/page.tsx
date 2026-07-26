@@ -20,11 +20,21 @@ const highRisk = [
   { area: "Satkhira", division: "Khulna", dry: 46, monsoon: 69, pop: "318k" },
 ];
 
+type AnalysisMode = "difference" | "flood" | "catchment" | "facility";
+
+const analysisModes: { id: AnalysisMode; icon: string; title: string; text: string }[] = [
+  { id: "difference", icon: "↕", title: "Seasonal change", text: "Monsoon delay versus dry baseline" },
+  { id: "flood", icon: "≈", title: "Flooded roads", text: "Slowed and impassable road links" },
+  { id: "catchment", icon: "◎", title: "Facility catchments", text: "15, 30 and 60-minute service reach" },
+  { id: "facility", icon: "+", title: "Proposed facility", text: "Compare access before and after" },
+];
+
 export default function Home() {
   const [season, setSeason] = useState<"dry" | "monsoon">("monsoon");
   const [selected, setSelected] = useState(regions[3]);
   const [facility, setFacility] = useState(false);
   const [threshold, setThreshold] = useState(30);
+  const [analysisMode, setAnalysisMode] = useState<AnalysisMode>("difference");
 
   const metrics = useMemo(() => {
     const reduction = facility ? 9 : 0;
@@ -66,24 +76,38 @@ export default function Home() {
         <article className="metric impact"><div className="metricTop"><span>Seasonal access loss</span><i className="dot blue" /></div><strong>{season === "monsoon" ? "34.2" : "0"}<small>%</small></strong><p>Road access affected by flooding</p></article>
       </section>
 
+      <section className="analysisStrip" aria-label="Map analysis type">
+        <div className="analysisIntro"><p className="eyebrow">Analysis layers</p><h2>Choose a planning view</h2></div>
+        <div className="analysisOptions">
+          {analysisModes.map((mode) => <button key={mode.id} className={analysisMode === mode.id ? "active" : ""} onClick={() => { setAnalysisMode(mode.id); if (mode.id === "facility") setFacility(true); }}><i>{mode.icon}</i><span><b>{mode.title}</b><small>{mode.text}</small></span></button>)}
+        </div>
+      </section>
+
       <section className="dashboardGrid">
         <article className="mapCard">
           <div className="cardHeader">
-            <div><p className="eyebrow">Accessibility map</p><h2>Travel time to nearest facility</h2></div>
-            <div className="mapTools"><button aria-label="Map layers">Layers</button><button aria-label="Expand map">↗</button></div>
+            <div><p className="eyebrow">{analysisModes.find((m) => m.id === analysisMode)?.title} map</p><h2>{analysisMode === "difference" ? "Dry-to-monsoon travel-time increase" : analysisMode === "flood" ? "Road disruption during monsoon" : analysisMode === "catchment" ? "Population within facility catchments" : "Access impact of a proposed clinic"}</h2></div>
+            <div className="mapTools"><span className="liveLayer"><i /> Layer active</span><button aria-label="Expand map">↗</button></div>
           </div>
-          <div className="mapArea">
+          <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
             <div className="bangladeshShape" />
+            {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
+            {analysisMode === "catchment" && <div className="catchments" aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
             {regions.map((r) => {
-              const value = Math.max(10, r[season] - (facility && r.name === selected.name ? 18 : 0));
+              const baseValue = analysisMode === "difference" ? r.monsoon - r.dry : analysisMode === "catchment" ? Math.round(92 - r[season]) : r[season];
+              const value = Math.max(10, baseValue - (facility && analysisMode === "facility" && r.name === selected.name ? 18 : 0));
               const risk = value > 50 ? "high" : value > 35 ? "medium" : "low";
-              return <button key={r.name} className={`region ${risk} ${selected.name === r.name ? "selected" : ""}`} style={{ left: `${r.x}%`, top: `${r.y}%` }} onClick={() => setSelected(r)} aria-label={`${r.name}, ${value} minutes`}><span>{r.name}</span><b>{value}</b></button>;
+              return <button key={r.name} className={`region ${risk} ${selected.name === r.name ? "selected" : ""}`} style={{ left: `${r.x}%`, top: `${r.y}%` }} onClick={() => setSelected(r)} aria-label={`${r.name}, ${value}`}><span>{r.name}</span><b>{value}{analysisMode === "difference" ? "+" : analysisMode === "catchment" ? "%" : ""}</b></button>;
             })}
+            {analysisMode === "facility" && <button className="proposedPin" style={{ left: `${selected.x + 4}%`, top: `${selected.y + 6}%` }} aria-label={`Proposed clinic in ${selected.name}`}><b>+</b><span>Proposed clinic</span></button>}
             <div className="mapZoom"><button>+</button><button>−</button></div>
-            <div className="legend"><span><i className="low" /> ≤30 min</span><span><i className="medium" /> 31–50</span><span><i className="high" /> &gt;50</span></div>
+            {analysisMode === "difference" && <div className="legend"><span><i className="low" /> +0–10 min</span><span><i className="medium" /> +11–20</span><span><i className="high" /> +21+</span></div>}
+            {analysisMode === "flood" && <div className="legend"><span><i className="roadOpen" /> Open</span><span><i className="roadSlow" /> Slowed</span><span><i className="roadClosed" /> Impassable</span></div>}
+            {analysisMode === "catchment" && <div className="legend"><span><i className="ring15" /> 15 min</span><span><i className="ring30" /> 30 min</span><span><i className="ring60" /> 60 min</span></div>}
+            {analysisMode === "facility" && <div className="legend"><span><i className="currentDot" /> Current access</span><span><i className="proposalDot" /> Improved</span></div>}
           </div>
-          <div className="mapFooter"><span>Road-network model • Union-level estimate</span><span>Updated 14 Jul 2026</span></div>
+          <div className="mapFooter"><span>{analysisMode === "flood" ? "BWDB flood zones • OSM road network" : analysisMode === "catchment" ? "Network isochrones • Population-weighted" : "Road-network model • Union-level estimate"}</span><span>Prototype analysis</span></div>
         </article>
 
         <aside className="sidePanel">
@@ -94,6 +118,7 @@ export default function Home() {
             <div><span>Unions over {threshold} min</span><b>{facility ? "21%" : selected[season] > 50 ? "46%" : "28%"}</b></div>
             <div><span>Seasonal change</span><b className="bad">+{selected.monsoon - selected.dry} min</b></div>
           </div>
+          {analysisMode === "facility" && <div className="comparisonPanel"><p className="eyebrow">Before / after</p><div><span><small>Current</small><b>{selected[season]} min</b></span><i>→</i><span className="improved"><small>With clinic</small><b>{Math.max(10, selected[season] - 18)} min</b></span></div><p><b>{Math.min(820, Math.round(selected.people * 126))}k</b> people gain access within {threshold} minutes</p></div>}
           <div className="scenarioBox"><div><p className="eyebrow">Planning scenario</p><h3>Add a community clinic</h3></div><label><input type="checkbox" checked={facility} onChange={(e) => setFacility(e.target.checked)} /><span /></label></div>
           <p className="scenarioHint">{facility ? `Estimated access improvement applied to ${selected.name}.` : "Turn on to estimate the local impact of one new facility."}</p>
           <button className="primaryButton">View full area analysis <span>→</span></button>
