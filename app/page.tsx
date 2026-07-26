@@ -21,13 +21,24 @@ const highRisk = [
   { area: "Satkhira", division: "Khulna", dry: 46, monsoon: 69, pop: "318k" },
 ];
 
-type AnalysisMode = "difference" | "flood" | "catchment" | "facility";
+type AnalysisMode = "surface" | "difference" | "catchment" | "e2sfca" | "underserved" | "hotspot" | "lisa" | "facility" | "flood" | "service" | "equity" | "priority" | "flow" | "swipe" | "isochrone";
 
-const analysisModes: { id: AnalysisMode; icon: string; title: string; text: string }[] = [
-  { id: "difference", icon: "↕", title: "Seasonal change", text: "Monsoon delay versus dry baseline" },
-  { id: "flood", icon: "≈", title: "Flooded roads", text: "Slowed and impassable road links" },
-  { id: "catchment", icon: "◎", title: "Facility catchments", text: "15, 30 and 60-minute service reach" },
-  { id: "facility", icon: "+", title: "Proposed facility", text: "Compare access before and after" },
+const analysisModes: { id: AnalysisMode; icon: string; title: string; text: string; mapTitle: string; stat: string }[] = [
+  { id: "surface", icon: "◒", title: "Accessibility surface", text: "Continuous travel-time zones", mapTitle: "Travel-time accessibility surface", stat: "31.6M beyond 30 min" },
+  { id: "difference", icon: "↕", title: "Seasonal change", text: "Monsoon delay versus dry baseline", mapTitle: "Dry-to-monsoon travel-time increase", stat: "+16 min national average" },
+  { id: "catchment", icon: "◎", title: "Facility catchments", text: "Population reachable by hospital", mapTitle: "Population within facility catchments", stat: "3.8M people covered" },
+  { id: "e2sfca", icon: "Σ", title: "E2SFCA access", text: "Capacity, demand and travel time", mapTitle: "Enhanced 2-step floating catchment access", stat: "0.74 median score" },
+  { id: "underserved", icon: "◉", title: "Underserved population", text: "Residents beyond the threshold", mapTitle: "Population outside reasonable access", stat: "18.6% underserved" },
+  { id: "hotspot", icon: "✦", title: "Gi* hotspots", text: "Significant underserved clusters", mapTitle: "Getis-Ord Gi* access hotspots", stat: "12 high-confidence clusters" },
+  { id: "lisa", icon: "▦", title: "LISA clusters", text: "Clusters and spatial outliers", mapTitle: "Local indicators of spatial association", stat: "8 spatial outliers" },
+  { id: "facility", icon: "+", title: "Facility scenario", text: "Compare access before and after", mapTitle: "Access impact of a proposed clinic", stat: "−18 min improvement" },
+  { id: "flood", icon: "≈", title: "Flooded roads", text: "Slowed and impassable road links", mapTitle: "Road disruption during monsoon", stat: "18.4% roads exposed" },
+  { id: "service", icon: "✚", title: "Service levels", text: "Clinic, upazila and hospital access", mapTitle: "Access by healthcare service level", stat: "3 service tiers" },
+  { id: "equity", icon: "≋", title: "Health equity", text: "Access versus social vulnerability", mapTitle: "Access and vulnerability equity gaps", stat: "0.41 equity gap" },
+  { id: "priority", icon: "#", title: "Priority matrix", text: "Composite intervention ranking", mapTitle: "Multi-criteria planning priorities", stat: "24 priority unions" },
+  { id: "flow", icon: "▶", title: "Seasonal flow", text: "Animated catchment contraction", mapTitle: "Seasonal contraction of service reach", stat: "34.2% access loss" },
+  { id: "swipe", icon: "◐", title: "Dry / monsoon swipe", text: "Side-by-side seasonal comparison", mapTitle: "Dry and monsoon accessibility comparison", stat: "+16 min difference" },
+  { id: "isochrone", icon: "⌾", title: "Travel isochrones", text: "15, 30 and 60-minute reach", mapTitle: "Network travel-time isochrones", stat: "3 travel bands" },
 ];
 
 function MapPreview({ mode, active, onOpen }: { mode: AnalysisMode; active: boolean; onOpen: () => void }) {
@@ -38,10 +49,12 @@ function MapPreview({ mode, active, onOpen }: { mode: AnalysisMode; active: bool
       <BangladeshBoundary compact /><div className="miniRiver" />
       {mode === "difference" && <><i className="miniZone z1" /><i className="miniZone z2" /><i className="miniZone z3" /><div className="miniKey"><span>+6</span><span>+17</span><span>+28 min</span></div></>}
       {mode === "flood" && <div className="miniRoads"><i /><i /><i /><i /><i /></div>}
-      {mode === "catchment" && <div className="miniRings"><i /><i /><i /><b>+</b></div>}
+      {(mode === "catchment" || mode === "isochrone" || mode === "flow") && <div className={`miniRings ${mode === "flow" ? "animated" : ""}`}><i /><i /><i /><b>+</b></div>}
       {mode === "facility" && <><div className="beforeArea"><small>Before</small><b>67 min</b></div><div className="afterArea"><small>After</small><b>49 min</b></div><div className="clinicMark">+</div></>}
+      {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(mode) && <div className={`previewMarks kind-${mode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{mode === "priority" ? i + 1 : mode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
+      {mode === "swipe" && <div className="swipeDivider"><span>Dry</span><span>Monsoon</span></div>}
     </div>
-    <div className="miniMapFoot"><span>{mode === "flood" ? "18.4% roads exposed" : mode === "catchment" ? "3.8M people covered" : mode === "facility" ? "−18 min improvement" : "+16 min national average"}</span><span>Prototype</span></div>
+    <div className="miniMapFoot"><span>{meta.stat}</span><span>Prototype</span></div>
   </article>;
 }
 
@@ -50,7 +63,7 @@ export default function Home() {
   const [selected, setSelected] = useState(regions[3]);
   const [facility, setFacility] = useState(false);
   const [threshold, setThreshold] = useState(30);
-  const [analysisMode, setAnalysisMode] = useState<AnalysisMode>("difference");
+  const [analysisMode, setAnalysisMode] = useState<AnalysisMode>("surface");
 
   const metrics = useMemo(() => {
     const reduction = facility ? 9 : 0;
@@ -102,19 +115,21 @@ export default function Home() {
       <section className="dashboardGrid">
         <article className="mapCard">
           <div className="cardHeader">
-            <div><p className="eyebrow">{analysisModes.find((m) => m.id === analysisMode)?.title} map</p><h2>{analysisMode === "difference" ? "Dry-to-monsoon travel-time increase" : analysisMode === "flood" ? "Road disruption during monsoon" : analysisMode === "catchment" ? "Population within facility catchments" : "Access impact of a proposed clinic"}</h2></div>
+            <div><p className="eyebrow">{analysisModes.find((m) => m.id === analysisMode)?.title} map</p><h2>{analysisModes.find((m) => m.id === analysisMode)?.mapTitle}</h2></div>
             <div className="mapTools"><span className="liveLayer"><i /> Layer active</span><button aria-label="Expand map">↗</button></div>
           </div>
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" /><div className="river riverTwo" />
             <BangladeshBoundary />
             {analysisMode === "flood" && <div className="floodRoads" aria-hidden="true"><i className="road r1" /><i className="road r2" /><i className="road r3" /><i className="road r4" /><i className="road r5" /><i className="road r6" /></div>}
-            {analysisMode === "catchment" && <div className="catchments" aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
+            {(analysisMode === "catchment" || analysisMode === "isochrone" || analysisMode === "flow") && <div className={`catchments ${analysisMode === "flow" ? "animated" : ""}`} aria-hidden="true"><i className="catch c60" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c30" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /><i className="catch c15" style={{ left: `${selected.x}%`, top: `${selected.y}%` }} /></div>}
+            {!(["difference", "flood", "catchment", "isochrone", "flow", "facility", "swipe"] as AnalysisMode[]).includes(analysisMode) && <div className={`analysisOverlay kind-${analysisMode}`}>{regions.map((r, i) => <i key={r.name} style={{ left: `${r.x}%`, top: `${r.y}%`, ["--i" as string]: i } as React.CSSProperties}>{analysisMode === "priority" ? i + 1 : analysisMode === "service" ? ["C", "U", "H"][i % 3] : ""}</i>)}</div>}
+            {analysisMode === "swipe" && <div className="fullSwipe"><div><span>Dry season</span></div><i /><div><span>Monsoon</span></div></div>}
             {regions.map((r) => {
-              const baseValue = analysisMode === "difference" ? r.monsoon - r.dry : analysisMode === "catchment" ? Math.round(92 - r[season]) : r[season];
+              const baseValue = analysisMode === "difference" ? r.monsoon - r.dry : ["catchment", "isochrone"].includes(analysisMode) ? Math.round(92 - r[season]) : analysisMode === "e2sfca" ? Math.round((100 - r[season]) / 10) : analysisMode === "underserved" ? Math.round(r.people * r[season] / 4) : r[season];
               const value = Math.max(10, baseValue - (facility && analysisMode === "facility" && r.name === selected.name ? 18 : 0));
               const risk = value > 50 ? "high" : value > 35 ? "medium" : "low";
-              return <button key={r.name} className={`region ${risk} ${selected.name === r.name ? "selected" : ""}`} style={{ left: `${r.x}%`, top: `${r.y}%` }} onClick={() => setSelected(r)} aria-label={`${r.name}, ${value}`}><span>{r.name}</span><b>{value}{analysisMode === "difference" ? "+" : analysisMode === "catchment" ? "%" : ""}</b></button>;
+              return <button key={r.name} className={`region ${risk} ${selected.name === r.name ? "selected" : ""}`} style={{ left: `${r.x}%`, top: `${r.y}%` }} onClick={() => setSelected(r)} aria-label={`${r.name}, ${value}`}><span>{r.name}</span><b>{value}{analysisMode === "difference" ? "+" : ["catchment", "isochrone"].includes(analysisMode) ? "%" : analysisMode === "e2sfca" ? "/10" : analysisMode === "underserved" ? "k" : ""}</b></button>;
             })}
             {analysisMode === "facility" && <button className="proposedPin" style={{ left: `${selected.x + 4}%`, top: `${selected.y + 6}%` }} aria-label={`Proposed clinic in ${selected.name}`}><b>+</b><span>Proposed clinic</span></button>}
             <div className="mapZoom"><button>+</button><button>−</button></div>
@@ -122,6 +137,7 @@ export default function Home() {
             {analysisMode === "flood" && <div className="legend"><span><i className="roadOpen" /> Open</span><span><i className="roadSlow" /> Slowed</span><span><i className="roadClosed" /> Impassable</span></div>}
             {analysisMode === "catchment" && <div className="legend"><span><i className="ring15" /> 15 min</span><span><i className="ring30" /> 30 min</span><span><i className="ring60" /> 60 min</span></div>}
             {analysisMode === "facility" && <div className="legend"><span><i className="currentDot" /> Current access</span><span><i className="proposalDot" /> Improved</span></div>}
+            {!(["difference", "flood", "catchment", "facility"] as AnalysisMode[]).includes(analysisMode) && <div className="legend"><span><i className="low" /> Low</span><span><i className="medium" /> Moderate</span><span><i className="high" /> High</span></div>}
           </div>
           <div className="mapFooter"><span>{analysisMode === "flood" ? "BWDB flood zones • OSM road network" : analysisMode === "catchment" ? "Network isochrones • Population-weighted" : "Road-network model • Union-level estimate"}</span><span>Prototype analysis</span></div>
         </article>
@@ -142,7 +158,7 @@ export default function Home() {
       </section>
 
       <section className="allMapsSection">
-        <div className="sectionTitle"><div><p className="eyebrow">All map views</p><h2>Compare every spatial lens</h2><p>Review the complete analysis set together, then open any view in the interactive map above.</p></div><span>4 analysis maps</span></div>
+        <div className="sectionTitle"><div><p className="eyebrow">Complete analysis library</p><h2>All healthcare-accessibility map views</h2><p>Review all 15 analytical lenses, then open any view in the interactive map above.</p></div><span>15 analysis maps</span></div>
         <div className="allMapsGrid">{analysisModes.map((mode) => <MapPreview key={mode.id} mode={mode.id} active={analysisMode === mode.id} onOpen={() => { setAnalysisMode(mode.id); if (mode.id === "facility") setFacility(true); window.scrollTo({ top: 540, behavior: "smooth" }); }} />)}</div>
       </section>
 
