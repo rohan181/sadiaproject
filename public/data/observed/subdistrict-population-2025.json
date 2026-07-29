@@ -1,0 +1,3274 @@
+{
+  "source": "WorldPop Global2 R2025A v1 constrained population, 2025, 100 m",
+  "sourceUrl": "https://hub.worldpop.org/geodata/summary?id=72493",
+  "generatedAt": "2026-07-26T16:29:42.202339+00:00",
+  "units": "estimated people",
+  "featureCount": 544,
+  "populationTotal": 174529284,
+  "records": [
+    {
+      "shapeID": "5055444B52925985874339",
+      "shapeName": "Abhaynagar",
+      "shapeType": "ADM3",
+      "population_2025": 294641
+    },
+    {
+      "shapeID": "5055444B49102485932636",
+      "shapeName": "Adabor",
+      "shapeType": "ADM3",
+      "population_2025": 76874
+    },
+    {
+      "shapeID": "5055444B58770697674534",
+      "shapeName": "Adamdighi",
+      "shapeType": "ADM3",
+      "population_2025": 224301
+    },
+    {
+      "shapeID": "5055444B32465848615946",
+      "shapeName": "Aditmari",
+      "shapeType": "ADM3",
+      "population_2025": 216531
+    },
+    {
+      "shapeID": "5055444B95524802719487",
+      "shapeName": "Agailjhara",
+      "shapeType": "ADM3",
+      "population_2025": 179454
+    },
+    {
+      "shapeID": "5055444B99945132628682",
+      "shapeName": "Ajmiriganj",
+      "shapeType": "ADM3",
+      "population_2025": 77719
+    },
+    {
+      "shapeID": "5055444B62959054248390",
+      "shapeName": "Akhaura",
+      "shapeType": "ADM3",
+      "population_2025": 220779
+    },
+    {
+      "shapeID": "5055444B76477721024576",
+      "shapeName": "Akkelpur",
+      "shapeType": "ADM3",
+      "population_2025": 145054
+    },
+    {
+      "shapeID": "5055444B84155048182974",
+      "shapeName": "Alamdanga",
+      "shapeType": "ADM3",
+      "population_2025": 401768
+    },
+    {
+      "shapeID": "5055444B55670429127605",
+      "shapeName": "Alfadanga",
+      "shapeType": "ADM3",
+      "population_2025": 129315
+    },
+    {
+      "shapeID": "5055444B70145349624714",
+      "shapeName": "Alikadam",
+      "shapeType": "ADM3",
+      "population_2025": 77985
+    },
+    {
+      "shapeID": "5055444B15057296288923",
+      "shapeName": "Amtali",
+      "shapeType": "ADM3",
+      "population_2025": 367151
+    },
+    {
+      "shapeID": "5055444B66497559634365",
+      "shapeName": "Anowara",
+      "shapeType": "ADM3",
+      "population_2025": 428400
+    },
+    {
+      "shapeID": "5055444B13859636437629",
+      "shapeName": "Araihazar",
+      "shapeType": "ADM3",
+      "population_2025": 678214
+    },
+    {
+      "shapeID": "5055444B32932838704208",
+      "shapeName": "Ashuganj",
+      "shapeType": "ADM3",
+      "population_2025": 213652
+    },
+    {
+      "shapeID": "5055444B75161647827572",
+      "shapeName": "Assasuni",
+      "shapeType": "ADM3",
+      "population_2025": 203575
+    },
+    {
+      "shapeID": "5055444B13262596743861",
+      "shapeName": "Atgharia",
+      "shapeType": "ADM3",
+      "population_2025": 199986
+    },
+    {
+      "shapeID": "5055444B38720066295886",
+      "shapeName": "Atpara",
+      "shapeType": "ADM3",
+      "population_2025": 168121
+    },
+    {
+      "shapeID": "5055444B3575688139772",
+      "shapeName": "Atrai",
+      "shapeType": "ADM3",
+      "population_2025": 186413
+    },
+    {
+      "shapeID": "5055444B48705627763179",
+      "shapeName": "Atwari",
+      "shapeType": "ADM3",
+      "population_2025": 158890
+    },
+    {
+      "shapeID": "5055444B71886622986948",
+      "shapeName": "Austagram",
+      "shapeType": "ADM3",
+      "population_2025": 103871
+    },
+    {
+      "shapeID": "5055444B11753174954303",
+      "shapeName": "Babuganj",
+      "shapeType": "ADM3",
+      "population_2025": 214606
+    },
+    {
+      "shapeID": "5055444B60678935174681",
+      "shapeName": "Badalgachhi",
+      "shapeType": "ADM3",
+      "population_2025": 206478
+    },
+    {
+      "shapeID": "5055444B71688043167729",
+      "shapeName": "Badarganj",
+      "shapeType": "ADM3",
+      "population_2025": 351401
+    },
+    {
+      "shapeID": "5055444B32230680322744",
+      "shapeName": "Badda",
+      "shapeType": "ADM3",
+      "population_2025": 496874
+    },
+    {
+      "shapeID": "5055444B5068099947740",
+      "shapeName": "Bagati Para",
+      "shapeType": "ADM3",
+      "population_2025": 153793
+    },
+    {
+      "shapeID": "5055444B68778321552411",
+      "shapeName": "Bagerhat Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 325616
+    },
+    {
+      "shapeID": "5055444B95183901987528",
+      "shapeName": "Bagha",
+      "shapeType": "ADM3",
+      "population_2025": 197291
+    },
+    {
+      "shapeID": "5055444B27929495018112",
+      "shapeName": "Baghai Chhari",
+      "shapeType": "ADM3",
+      "population_2025": 142241
+    },
+    {
+      "shapeID": "5055444B50671922094556",
+      "shapeName": "Bagher Para",
+      "shapeType": "ADM3",
+      "population_2025": 283176
+    },
+    {
+      "shapeID": "5055444B7328601552159",
+      "shapeName": "Baghmara",
+      "shapeType": "ADM3",
+      "population_2025": 458510
+    },
+    {
+      "shapeID": "5055444B50852908884979",
+      "shapeName": "Bahubal",
+      "shapeType": "ADM3",
+      "population_2025": 276641
+    },
+    {
+      "shapeID": "5055444B13058474946517",
+      "shapeName": "Bajitpur",
+      "shapeType": "ADM3",
+      "population_2025": 282442
+    },
+    {
+      "shapeID": "5055444B62979600608461",
+      "shapeName": "Bakalia",
+      "shapeType": "ADM3",
+      "population_2025": 91897
+    },
+    {
+      "shapeID": "5055444B60675040208225",
+      "shapeName": "Bakerganj",
+      "shapeType": "ADM3",
+      "population_2025": 413811
+    },
+    {
+      "shapeID": "5055444B53302442828",
+      "shapeName": "Bakshiganj",
+      "shapeType": "ADM3",
+      "population_2025": 243161
+    },
+    {
+      "shapeID": "5055444B42219902295699",
+      "shapeName": "Balaganj",
+      "shapeType": "ADM3",
+      "population_2025": 409972
+    },
+    {
+      "shapeID": "5055444B27992117808883",
+      "shapeName": "Balia Kandi",
+      "shapeType": "ADM3",
+      "population_2025": 256732
+    },
+    {
+      "shapeID": "5055444B48916414184469",
+      "shapeName": "Baliadangi",
+      "shapeType": "ADM3",
+      "population_2025": 224522
+    },
+    {
+      "shapeID": "5055444B77373604613442",
+      "shapeName": "Bamna",
+      "shapeType": "ADM3",
+      "population_2025": 82920
+    },
+    {
+      "shapeID": "5055444B41993390999306",
+      "shapeName": "Banari Para",
+      "shapeType": "ADM3",
+      "population_2025": 127221
+    },
+    {
+      "shapeID": "5055444B96018438653421",
+      "shapeName": "Banchharampur",
+      "shapeType": "ADM3",
+      "population_2025": 385493
+    },
+    {
+      "shapeID": "5055444B32271374417544",
+      "shapeName": "Bandar",
+      "shapeType": "ADM3",
+      "population_2025": 547953
+    },
+    {
+      "shapeID": "5055444B74490098108798",
+      "shapeName": "Bandarban Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 112251
+    },
+    {
+      "shapeID": "5055444B3033227423351",
+      "shapeName": "Bangshal",
+      "shapeType": "ADM3",
+      "population_2025": 50211
+    },
+    {
+      "shapeID": "5055444B40412060728075",
+      "shapeName": "Baniachong",
+      "shapeType": "ADM3",
+      "population_2025": 294622
+    },
+    {
+      "shapeID": "5055444B49096359165052",
+      "shapeName": "Banshkhali",
+      "shapeType": "ADM3",
+      "population_2025": 647140
+    },
+    {
+      "shapeID": "5055444B50551499462707",
+      "shapeName": "Baraigram",
+      "shapeType": "ADM3",
+      "population_2025": 341432
+    },
+    {
+      "shapeID": "5055444B33820531733438",
+      "shapeName": "Barguna Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 306959
+    },
+    {
+      "shapeID": "5055444B42611772267022",
+      "shapeName": "Barhatta",
+      "shapeType": "ADM3",
+      "population_2025": 199398
+    },
+    {
+      "shapeID": "5055444B73276272307545",
+      "shapeName": "Barisal Sadar (Kotwali)",
+      "shapeType": "ADM3",
+      "population_2025": 664820
+    },
+    {
+      "shapeID": "5055444B37824837156541",
+      "shapeName": "Barkal",
+      "shapeType": "ADM3",
+      "population_2025": 64274
+    },
+    {
+      "shapeID": "5055444B82170766050132",
+      "shapeName": "Barlekha",
+      "shapeType": "ADM3",
+      "population_2025": 316340
+    },
+    {
+      "shapeID": "5055444B91077345667431",
+      "shapeName": "Barura",
+      "shapeType": "ADM3",
+      "population_2025": 472190
+    },
+    {
+      "shapeID": "5055444B21032011714269",
+      "shapeName": "Basail",
+      "shapeType": "ADM3",
+      "population_2025": 202816
+    },
+    {
+      "shapeID": "5055444B76424346984523",
+      "shapeName": "Batiaghata",
+      "shapeType": "ADM3",
+      "population_2025": 329062
+    },
+    {
+      "shapeID": "5055444B39294686315052",
+      "shapeName": "Bauphal",
+      "shapeType": "ADM3",
+      "population_2025": 293384
+    },
+    {
+      "shapeID": "5055444B75251324769772",
+      "shapeName": "Bayejid Bostami",
+      "shapeType": "ADM3",
+      "population_2025": 278669
+    },
+    {
+      "shapeID": "5055444B74522241895423",
+      "shapeName": "Beani Bazar",
+      "shapeType": "ADM3",
+      "population_2025": 344278
+    },
+    {
+      "shapeID": "5055444B21927885992688",
+      "shapeName": "Begumganj",
+      "shapeType": "ADM3",
+      "population_2025": 461035
+    },
+    {
+      "shapeID": "5055444B29598599915126",
+      "shapeName": "Belabo",
+      "shapeType": "ADM3",
+      "population_2025": 260716
+    },
+    {
+      "shapeID": "5055444B29897435624834",
+      "shapeName": "Belai Chhari",
+      "shapeType": "ADM3",
+      "population_2025": 33679
+    },
+    {
+      "shapeID": "5055444B61751715276638",
+      "shapeName": "Belkuchi",
+      "shapeType": "ADM3",
+      "population_2025": 321336
+    },
+    {
+      "shapeID": "5055444B90956087424891",
+      "shapeName": "Bera",
+      "shapeType": "ADM3",
+      "population_2025": 240036
+    },
+    {
+      "shapeID": "5055444B49366988279383",
+      "shapeName": "Betagi",
+      "shapeType": "ADM3",
+      "population_2025": 115060
+    },
+    {
+      "shapeID": "5055444B14711722116105",
+      "shapeName": "Bhairab",
+      "shapeType": "ADM3",
+      "population_2025": 283451
+    },
+    {
+      "shapeID": "5055444B10360406555635",
+      "shapeName": "Bhaluka",
+      "shapeType": "ADM3",
+      "population_2025": 825571
+    },
+    {
+      "shapeID": "5055444B55847146222236",
+      "shapeName": "Bhandaria",
+      "shapeType": "ADM3",
+      "population_2025": 172876
+    },
+    {
+      "shapeID": "5055444B5119414311829",
+      "shapeName": "Bhanga",
+      "shapeType": "ADM3",
+      "population_2025": 264058
+    },
+    {
+      "shapeID": "5055444B89119170954251",
+      "shapeName": "Bhangura",
+      "shapeType": "ADM3",
+      "population_2025": 133347
+    },
+    {
+      "shapeID": "5055444B15524173324977",
+      "shapeName": "Bhedarganj",
+      "shapeType": "ADM3",
+      "population_2025": 313085
+    },
+    {
+      "shapeID": "5055444B14686967042049",
+      "shapeName": "Bheramara",
+      "shapeType": "ADM3",
+      "population_2025": 295989
+    },
+    {
+      "shapeID": "5055444B7097225858324",
+      "shapeName": "Bhola Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 405810
+    },
+    {
+      "shapeID": "5055444B5224825785279",
+      "shapeName": "Bholahat",
+      "shapeType": "ADM3",
+      "population_2025": 116255
+    },
+    {
+      "shapeID": "5055444B16297383305925",
+      "shapeName": "Bhuapur",
+      "shapeType": "ADM3",
+      "population_2025": 159830
+    },
+    {
+      "shapeID": "5055444B87531326935884",
+      "shapeName": "Bhurungamari",
+      "shapeType": "ADM3",
+      "population_2025": 365951
+    },
+    {
+      "shapeID": "5055444B37995463425931",
+      "shapeName": "Bijoynagar",
+      "shapeType": "ADM3",
+      "population_2025": 353037
+    },
+    {
+      "shapeID": "5055444B57714745100095",
+      "shapeName": "Biman Bandar",
+      "shapeType": "ADM3",
+      "population_2025": 104320
+    },
+    {
+      "shapeID": "5055444B78948578275311",
+      "shapeName": "Biral",
+      "shapeType": "ADM3",
+      "population_2025": 300822
+    },
+    {
+      "shapeID": "5055444B79507658875525",
+      "shapeName": "Birampur",
+      "shapeType": "ADM3",
+      "population_2025": 202745
+    },
+    {
+      "shapeID": "5055444B22722799866654",
+      "shapeName": "Birganj",
+      "shapeType": "ADM3",
+      "population_2025": 390865
+    },
+    {
+      "shapeID": "5055444B29430612429174",
+      "shapeName": "Bishwambarpur",
+      "shapeType": "ADM3",
+      "population_2025": 169493
+    },
+    {
+      "shapeID": "5055444B7917442502790",
+      "shapeName": "Bishwanath",
+      "shapeType": "ADM3",
+      "population_2025": 286660
+    },
+    {
+      "shapeID": "5055444B84943606791974",
+      "shapeName": "Boalia",
+      "shapeType": "ADM3",
+      "population_2025": 122983
+    },
+    {
+      "shapeID": "5055444B39554160616851",
+      "shapeName": "Boalkhali",
+      "shapeType": "ADM3",
+      "population_2025": 277626
+    },
+    {
+      "shapeID": "5055444B63302256730709",
+      "shapeName": "Boalmari",
+      "shapeType": "ADM3",
+      "population_2025": 289676
+    },
+    {
+      "shapeID": "5055444B39806235806178",
+      "shapeName": "Bochaganj",
+      "shapeType": "ADM3",
+      "population_2025": 200133
+    },
+    {
+      "shapeID": "5055444B728279832924",
+      "shapeName": "Boda",
+      "shapeType": "ADM3",
+      "population_2025": 282455
+    },
+    {
+      "shapeID": "5055444B83464339159312",
+      "shapeName": "Bogra Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 494841
+    },
+    {
+      "shapeID": "5055444B87015491124884",
+      "shapeName": "Brahman Para",
+      "shapeType": "ADM3",
+      "population_2025": 247462
+    },
+    {
+      "shapeID": "5055444B14183911871917",
+      "shapeName": "Brahmanbaria Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 609255
+    },
+    {
+      "shapeID": "5055444B893784701157",
+      "shapeName": "Burhanuddin",
+      "shapeType": "ADM3",
+      "population_2025": 272731
+    },
+    {
+      "shapeID": "5055444B51169249412494",
+      "shapeName": "Burichang",
+      "shapeType": "ADM3",
+      "population_2025": 399997
+    },
+    {
+      "shapeID": "5055444B56407900252664",
+      "shapeName": "Cantonment",
+      "shapeType": "ADM3",
+      "population_2025": 227786
+    },
+    {
+      "shapeID": "5055444B82655553221044",
+      "shapeName": "Chak Bazar",
+      "shapeType": "ADM3",
+      "population_2025": 53655
+    },
+    {
+      "shapeID": "5055444B84996258897066",
+      "shapeName": "Chakaria",
+      "shapeType": "ADM3",
+      "population_2025": 562908
+    },
+    {
+      "shapeID": "5055444B97657491175799",
+      "shapeName": "Chandanaish",
+      "shapeType": "ADM3",
+      "population_2025": 319567
+    },
+    {
+      "shapeID": "5055444B37030351476694",
+      "shapeName": "Chandgaon",
+      "shapeType": "ADM3",
+      "population_2025": 184216
+    },
+    {
+      "shapeID": "5055444B69698146690678",
+      "shapeName": "Chandina",
+      "shapeType": "ADM3",
+      "population_2025": 454963
+    },
+    {
+      "shapeID": "5055444B35741244965074",
+      "shapeName": "Chandpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 389758
+    },
+    {
+      "shapeID": "5055444B75331922255178",
+      "shapeName": "Char Bhadrasan",
+      "shapeType": "ADM3",
+      "population_2025": 111446
+    },
+    {
+      "shapeID": "5055444B66059160751289",
+      "shapeName": "Char Fasson",
+      "shapeType": "ADM3",
+      "population_2025": 572207
+    },
+    {
+      "shapeID": "5055444B63634660661381",
+      "shapeName": "Char Rajibpur",
+      "shapeType": "ADM3",
+      "population_2025": 102385
+    },
+    {
+      "shapeID": "5055444B52811201124670",
+      "shapeName": "Charghat",
+      "shapeType": "ADM3",
+      "population_2025": 235523
+    },
+    {
+      "shapeID": "5055444B29892543857449",
+      "shapeName": "Chatkhil",
+      "shapeType": "ADM3",
+      "population_2025": 282345
+    },
+    {
+      "shapeID": "5055444B40727855162076",
+      "shapeName": "Chatmohar",
+      "shapeType": "ADM3",
+      "population_2025": 344504
+    },
+    {
+      "shapeID": "5055444B9070330767349",
+      "shapeName": "Chauddagram",
+      "shapeType": "ADM3",
+      "population_2025": 673558
+    },
+    {
+      "shapeID": "5055444B52558284836839",
+      "shapeName": "Chaugachha",
+      "shapeType": "ADM3",
+      "population_2025": 328077
+    },
+    {
+      "shapeID": "5055444B20988672766215",
+      "shapeName": "Chauhali",
+      "shapeType": "ADM3",
+      "population_2025": 99659
+    },
+    {
+      "shapeID": "5055444B26511265806420",
+      "shapeName": "Chhagalnaiya",
+      "shapeType": "ADM3",
+      "population_2025": 256168
+    },
+    {
+      "shapeID": "5055444B94988032496724",
+      "shapeName": "Chhatak",
+      "shapeType": "ADM3",
+      "population_2025": 524352
+    },
+    {
+      "shapeID": "5055444B31518469261205",
+      "shapeName": "Chilmari",
+      "shapeType": "ADM3",
+      "population_2025": 102840
+    },
+    {
+      "shapeID": "5055444B51943841593923",
+      "shapeName": "Chirirbandar",
+      "shapeType": "ADM3",
+      "population_2025": 311616
+    },
+    {
+      "shapeID": "5055444B77604595910958",
+      "shapeName": "Chitalmari",
+      "shapeType": "ADM3",
+      "population_2025": 119054
+    },
+    {
+      "shapeID": "5055444B96751245569599",
+      "shapeName": "Chittagong Port",
+      "shapeType": "ADM3",
+      "population_2025": 126391
+    },
+    {
+      "shapeID": "5055444B67851108717142",
+      "shapeName": "Chuadanga Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 374735
+    },
+    {
+      "shapeID": "5055444B46183445583986",
+      "shapeName": "Chunarughat",
+      "shapeType": "ADM3",
+      "population_2025": 426938
+    },
+    {
+      "shapeID": "5055444B48258460974709",
+      "shapeName": "Comilla Adarsha Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 501500
+    },
+    {
+      "shapeID": "5055444B83041215814881",
+      "shapeName": "Comilla Sadar Dakshin",
+      "shapeType": "ADM3",
+      "population_2025": 679807
+    },
+    {
+      "shapeID": "5055444B56228986539746",
+      "shapeName": "Companiganj",
+      "shapeType": "ADM3",
+      "population_2025": 507890
+    },
+    {
+      "shapeID": "5055444B34344695185666",
+      "shapeName": "Companiganj",
+      "shapeType": "ADM3",
+      "population_2025": 171176
+    },
+    {
+      "shapeID": "5055444B44088891115489",
+      "shapeName": "Cox's Bazar Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 482790
+    },
+    {
+      "shapeID": "5055444B27282750635430",
+      "shapeName": "Dacope",
+      "shapeType": "ADM3",
+      "population_2025": 276059
+    },
+    {
+      "shapeID": "5055444B99414305730014",
+      "shapeName": "Daganbhuiyan",
+      "shapeType": "ADM3",
+      "population_2025": 310139
+    },
+    {
+      "shapeID": "5055444B18079460407879",
+      "shapeName": "Dakshin Sunamganj",
+      "shapeType": "ADM3",
+      "population_2025": 180511
+    },
+    {
+      "shapeID": "5055444B91315333896705",
+      "shapeName": "Dakshin Surma",
+      "shapeType": "ADM3",
+      "population_2025": 371663
+    },
+    {
+      "shapeID": "5055444B54932712585204",
+      "shapeName": "Dakshinkhan",
+      "shapeType": "ADM3",
+      "population_2025": 208840
+    },
+    {
+      "shapeID": "5055444B78904096490349",
+      "shapeName": "Damudya",
+      "shapeType": "ADM3",
+      "population_2025": 119106
+    },
+    {
+      "shapeID": "5055444B42162342633446",
+      "shapeName": "Damurhuda",
+      "shapeType": "ADM3",
+      "population_2025": 298772
+    },
+    {
+      "shapeID": "5055444B58026692506241",
+      "shapeName": "Darus Salam",
+      "shapeType": "ADM3",
+      "population_2025": 100700
+    },
+    {
+      "shapeID": "5055444B84377812112263",
+      "shapeName": "Dashmina",
+      "shapeType": "ADM3",
+      "population_2025": 141141
+    },
+    {
+      "shapeID": "5055444B33374130329407",
+      "shapeName": "Daudkandi",
+      "shapeType": "ADM3",
+      "population_2025": 424626
+    },
+    {
+      "shapeID": "5055444B15230519967712",
+      "shapeName": "Daulatkhan",
+      "shapeType": "ADM3",
+      "population_2025": 157994
+    },
+    {
+      "shapeID": "5055444B23473824839920",
+      "shapeName": "Daulatpur",
+      "shapeType": "ADM3",
+      "population_2025": 149924
+    },
+    {
+      "shapeID": "5055444B46757628050002",
+      "shapeName": "Daulatpur",
+      "shapeType": "ADM3",
+      "population_2025": 116919
+    },
+    {
+      "shapeID": "5055444B53912976326946",
+      "shapeName": "Daulatpur",
+      "shapeType": "ADM3",
+      "population_2025": 526435
+    },
+    {
+      "shapeID": "5055444B7317208084306",
+      "shapeName": "Debhata",
+      "shapeType": "ADM3",
+      "population_2025": 145119
+    },
+    {
+      "shapeID": "5055444B86934116157766",
+      "shapeName": "Debidwar",
+      "shapeType": "ADM3",
+      "population_2025": 533753
+    },
+    {
+      "shapeID": "5055444B68978005941657",
+      "shapeName": "Debiganj",
+      "shapeType": "ADM3",
+      "population_2025": 340050
+    },
+    {
+      "shapeID": "5055444B15353027914244",
+      "shapeName": "Delduar",
+      "shapeType": "ADM3",
+      "population_2025": 219556
+    },
+    {
+      "shapeID": "5055444B14528909504793",
+      "shapeName": "Demra",
+      "shapeType": "ADM3",
+      "population_2025": 394289
+    },
+    {
+      "shapeID": "5055444B19243019661723",
+      "shapeName": "Derai",
+      "shapeType": "ADM3",
+      "population_2025": 203754
+    },
+    {
+      "shapeID": "5055444B37852279213101",
+      "shapeName": "Dewanganj",
+      "shapeType": "ADM3",
+      "population_2025": 311563
+    },
+    {
+      "shapeID": "5055444B49062995436606",
+      "shapeName": "Dhamoirhat",
+      "shapeType": "ADM3",
+      "population_2025": 218531
+    },
+    {
+      "shapeID": "5055444B39396107660312",
+      "shapeName": "Dhamrai",
+      "shapeType": "ADM3",
+      "population_2025": 1595606
+    },
+    {
+      "shapeID": "5055444B25808786190602",
+      "shapeName": "Dhanbari",
+      "shapeType": "ADM3",
+      "population_2025": 166783
+    },
+    {
+      "shapeID": "5055444B44526348177341",
+      "shapeName": "Dhanmondi",
+      "shapeType": "ADM3",
+      "population_2025": 88476
+    },
+    {
+      "shapeID": "5055444B99906709627914",
+      "shapeName": "Dharampasha",
+      "shapeType": "ADM3",
+      "population_2025": 208936
+    },
+    {
+      "shapeID": "5055444B86250199527476",
+      "shapeName": "Dhobaura",
+      "shapeType": "ADM3",
+      "population_2025": 276829
+    },
+    {
+      "shapeID": "5055444B75599042311563",
+      "shapeName": "Dhunat",
+      "shapeType": "ADM3",
+      "population_2025": 313811
+    },
+    {
+      "shapeID": "5055444B62446820117735",
+      "shapeName": "Dhupchanchia",
+      "shapeType": "ADM3",
+      "population_2025": 239217
+    },
+    {
+      "shapeID": "5055444B20721684317964",
+      "shapeName": "Dighalia",
+      "shapeType": "ADM3",
+      "population_2025": 114247
+    },
+    {
+      "shapeID": "5055444B92856865175572",
+      "shapeName": "Dighinala",
+      "shapeType": "ADM3",
+      "population_2025": 134043
+    },
+    {
+      "shapeID": "5055444B48556909875029",
+      "shapeName": "Dimla",
+      "shapeType": "ADM3",
+      "population_2025": 399755
+    },
+    {
+      "shapeID": "5055444B62353958062010",
+      "shapeName": "Dinajpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 487577
+    },
+    {
+      "shapeID": "5055444B89474781080787",
+      "shapeName": "Dohar",
+      "shapeType": "ADM3",
+      "population_2025": 763833
+    },
+    {
+      "shapeID": "5055444B45421324298866",
+      "shapeName": "Domar",
+      "shapeType": "ADM3",
+      "population_2025": 329238
+    },
+    {
+      "shapeID": "5055444B66556337069640",
+      "shapeName": "Double Mooring",
+      "shapeType": "ADM3",
+      "population_2025": 91546
+    },
+    {
+      "shapeID": "5055444B64610175900905",
+      "shapeName": "Dowarabazar",
+      "shapeType": "ADM3",
+      "population_2025": 365349
+    },
+    {
+      "shapeID": "5055444B35753624845680",
+      "shapeName": "Dumki",
+      "shapeType": "ADM3",
+      "population_2025": 79726
+    },
+    {
+      "shapeID": "5055444B11044248230769",
+      "shapeName": "Dumuria",
+      "shapeType": "ADM3",
+      "population_2025": 454324
+    },
+    {
+      "shapeID": "5055444B76788625169588",
+      "shapeName": "Durgapur",
+      "shapeType": "ADM3",
+      "population_2025": 264747
+    },
+    {
+      "shapeID": "5055444B93638080796536",
+      "shapeName": "Durgapur",
+      "shapeType": "ADM3",
+      "population_2025": 249985
+    },
+    {
+      "shapeID": "5055444B5933683148381",
+      "shapeName": "Fakirhat",
+      "shapeType": "ADM3",
+      "population_2025": 130103
+    },
+    {
+      "shapeID": "5055444B71558155368166",
+      "shapeName": "Faridganj",
+      "shapeType": "ADM3",
+      "population_2025": 376204
+    },
+    {
+      "shapeID": "5055444B5426320976059",
+      "shapeName": "Faridpur",
+      "shapeType": "ADM3",
+      "population_2025": 131743
+    },
+    {
+      "shapeID": "5055444B21946407329202",
+      "shapeName": "Faridpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 570378
+    },
+    {
+      "shapeID": "5055444B95801532899797",
+      "shapeName": "Fatikchhari",
+      "shapeType": "ADM3",
+      "population_2025": 1019605
+    },
+    {
+      "shapeID": "5055444B87277518835017",
+      "shapeName": "Fenchuganj",
+      "shapeType": "ADM3",
+      "population_2025": 142340
+    },
+    {
+      "shapeID": "5055444B40138424940148",
+      "shapeName": "Feni Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 572570
+    },
+    {
+      "shapeID": "5055444B44901139304438",
+      "shapeName": "Fulbari",
+      "shapeType": "ADM3",
+      "population_2025": 231426
+    },
+    {
+      "shapeID": "5055444B78175035306518",
+      "shapeName": "Fulbaria",
+      "shapeType": "ADM3",
+      "population_2025": 588218
+    },
+    {
+      "shapeID": "5055444B23049188583489",
+      "shapeName": "Fulchhari",
+      "shapeType": "ADM3",
+      "population_2025": 198298
+    },
+    {
+      "shapeID": "5055444B33879349571627",
+      "shapeName": "Fulgazi",
+      "shapeType": "ADM3",
+      "population_2025": 151998
+    },
+    {
+      "shapeID": "5055444B85005696436554",
+      "shapeName": "Gabtali",
+      "shapeType": "ADM3",
+      "population_2025": 375385
+    },
+    {
+      "shapeID": "5055444B28348959120095",
+      "shapeName": "Gaffargaon",
+      "shapeType": "ADM3",
+      "population_2025": 511211
+    },
+    {
+      "shapeID": "5055444B3189341921764",
+      "shapeName": "Gaibandha Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 434762
+    },
+    {
+      "shapeID": "5055444B92476324318819",
+      "shapeName": "Galachipa",
+      "shapeType": "ADM3",
+      "population_2025": 448501
+    },
+    {
+      "shapeID": "5055444B51911213656614",
+      "shapeName": "Gangachara",
+      "shapeType": "ADM3",
+      "population_2025": 310485
+    },
+    {
+      "shapeID": "5055444B93126942536388",
+      "shapeName": "Gangni",
+      "shapeType": "ADM3",
+      "population_2025": 314181
+    },
+    {
+      "shapeID": "5055444B70908799520391",
+      "shapeName": "Gauripur",
+      "shapeType": "ADM3",
+      "population_2025": 381345
+    },
+    {
+      "shapeID": "5055444B66414754271755",
+      "shapeName": "Gaurnadi",
+      "shapeType": "ADM3",
+      "population_2025": 271333
+    },
+    {
+      "shapeID": "5055444B82094787312382",
+      "shapeName": "Gazaria",
+      "shapeType": "ADM3",
+      "population_2025": 255501
+    },
+    {
+      "shapeID": "5055444B30367199884921",
+      "shapeName": "Gazipur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 2554559
+    },
+    {
+      "shapeID": "5055444B38357461991586",
+      "shapeName": "Gendaria",
+      "shapeType": "ADM3",
+      "population_2025": 51421
+    },
+    {
+      "shapeID": "5055444B57482053594042",
+      "shapeName": "Ghatail",
+      "shapeType": "ADM3",
+      "population_2025": 566076
+    },
+    {
+      "shapeID": "5055444B67168337318866",
+      "shapeName": "Ghior",
+      "shapeType": "ADM3",
+      "population_2025": 161790
+    },
+    {
+      "shapeID": "5055444B96277257106353",
+      "shapeName": "Ghoraghat",
+      "shapeType": "ADM3",
+      "population_2025": 162950
+    },
+    {
+      "shapeID": "5055444B47253162871751",
+      "shapeName": "Goalandaghat",
+      "shapeType": "ADM3",
+      "population_2025": 133636
+    },
+    {
+      "shapeID": "5055444B10956713741536",
+      "shapeName": "Gobindaganj",
+      "shapeType": "ADM3",
+      "population_2025": 685974
+    },
+    {
+      "shapeID": "5055444B45852065441553",
+      "shapeName": "Godagari",
+      "shapeType": "ADM3",
+      "population_2025": 442845
+    },
+    {
+      "shapeID": "5055444B69213858716566",
+      "shapeName": "Golabganj",
+      "shapeType": "ADM3",
+      "population_2025": 480319
+    },
+    {
+      "shapeID": "5055444B89693136712968",
+      "shapeName": "Gomastapur",
+      "shapeType": "ADM3",
+      "population_2025": 342200
+    },
+    {
+      "shapeID": "5055444B13443177435533",
+      "shapeName": "Gopalganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 405347
+    },
+    {
+      "shapeID": "5055444B71793030218448",
+      "shapeName": "Gopalpur",
+      "shapeType": "ADM3",
+      "population_2025": 226629
+    },
+    {
+      "shapeID": "5055444B74969054630595",
+      "shapeName": "Gosairhat",
+      "shapeType": "ADM3",
+      "population_2025": 146262
+    },
+    {
+      "shapeID": "5055444B62684954860182",
+      "shapeName": "Gowainghat",
+      "shapeType": "ADM3",
+      "population_2025": 397600
+    },
+    {
+      "shapeID": "5055444B56461784969328",
+      "shapeName": "Gulshan",
+      "shapeType": "ADM3",
+      "population_2025": 246666
+    },
+    {
+      "shapeID": "5055444B53518678954927",
+      "shapeName": "Gurudaspur",
+      "shapeType": "ADM3",
+      "population_2025": 236413
+    },
+    {
+      "shapeID": "5055444B24382626124582",
+      "shapeName": "Habiganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 376581
+    },
+    {
+      "shapeID": "5055444B97119696275156",
+      "shapeName": "Haim Char",
+      "shapeType": "ADM3",
+      "population_2025": 68298
+    },
+    {
+      "shapeID": "5055444B37219354955474",
+      "shapeName": "Hajiganj",
+      "shapeType": "ADM3",
+      "population_2025": 365395
+    },
+    {
+      "shapeID": "5055444B56333063181641",
+      "shapeName": "Hakimpur",
+      "shapeType": "ADM3",
+      "population_2025": 94569
+    },
+    {
+      "shapeID": "5055444B67671348239307",
+      "shapeName": "Halishahar",
+      "shapeType": "ADM3",
+      "population_2025": 106672
+    },
+    {
+      "shapeID": "5055444B66377868060311",
+      "shapeName": "Haluaghat",
+      "shapeType": "ADM3",
+      "population_2025": 389613
+    },
+    {
+      "shapeID": "5055444B20021225888412",
+      "shapeName": "Harinakunda",
+      "shapeType": "ADM3",
+      "population_2025": 226829
+    },
+    {
+      "shapeID": "5055444B33565614058430",
+      "shapeName": "Haripur",
+      "shapeType": "ADM3",
+      "population_2025": 159917
+    },
+    {
+      "shapeID": "5055444B53451019672150",
+      "shapeName": "Harirampur",
+      "shapeType": "ADM3",
+      "population_2025": 138590
+    },
+    {
+      "shapeID": "5055444B98016911778597",
+      "shapeName": "Hathazari",
+      "shapeType": "ADM3",
+      "population_2025": 686948
+    },
+    {
+      "shapeID": "5055444B78670664180744",
+      "shapeName": "Hatibandha",
+      "shapeType": "ADM3",
+      "population_2025": 336754
+    },
+    {
+      "shapeID": "5055444B26590135153615",
+      "shapeName": "Hatiya",
+      "shapeType": "ADM3",
+      "population_2025": 467703
+    },
+    {
+      "shapeID": "5055444B79082430711641",
+      "shapeName": "Hazaribagh",
+      "shapeType": "ADM3",
+      "population_2025": 167126
+    },
+    {
+      "shapeID": "5055444B36389182328145",
+      "shapeName": "Hizla",
+      "shapeType": "ADM3",
+      "population_2025": 127416
+    },
+    {
+      "shapeID": "5055444B68305043582994",
+      "shapeName": "Homna",
+      "shapeType": "ADM3",
+      "population_2025": 235618
+    },
+    {
+      "shapeID": "5055444B58039681953949",
+      "shapeName": "Hossainpur",
+      "shapeType": "ADM3",
+      "population_2025": 295424
+    },
+    {
+      "shapeID": "5055444B93250488853616",
+      "shapeName": "Ishwardi",
+      "shapeType": "ADM3",
+      "population_2025": 468621
+    },
+    {
+      "shapeID": "5055444B3881119476901",
+      "shapeName": "Ishwarganj",
+      "shapeType": "ADM3",
+      "population_2025": 386393
+    },
+    {
+      "shapeID": "5055444B8648993873034",
+      "shapeName": "Islampur",
+      "shapeType": "ADM3",
+      "population_2025": 309686
+    },
+    {
+      "shapeID": "5055444B52552217694509",
+      "shapeName": "Itna",
+      "shapeType": "ADM3",
+      "population_2025": 112898
+    },
+    {
+      "shapeID": "5055444B57165749218775",
+      "shapeName": "Jagannathpur",
+      "shapeType": "ADM3",
+      "population_2025": 392988
+    },
+    {
+      "shapeID": "5055444B19736672664555",
+      "shapeName": "Jaintiapur",
+      "shapeType": "ADM3",
+      "population_2025": 208939
+    },
+    {
+      "shapeID": "5055444B28351243268521",
+      "shapeName": "Jaldhaka",
+      "shapeType": "ADM3",
+      "population_2025": 363924
+    },
+    {
+      "shapeID": "5055444B62205139742422",
+      "shapeName": "Jamalganj",
+      "shapeType": "ADM3",
+      "population_2025": 140459
+    },
+    {
+      "shapeID": "5055444B56108573685352",
+      "shapeName": "Jamalpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 632488
+    },
+    {
+      "shapeID": "5055444B25595964672870",
+      "shapeName": "Jatrabari",
+      "shapeType": "ADM3",
+      "population_2025": 318037
+    },
+    {
+      "shapeID": "5055444B65755720973040",
+      "shapeName": "Jhalokati Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 170250
+    },
+    {
+      "shapeID": "5055444B48976868209107",
+      "shapeName": "Jhenaidah Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 497382
+    },
+    {
+      "shapeID": "5055444B69691307586178",
+      "shapeName": "Jhenaigati",
+      "shapeType": "ADM3",
+      "population_2025": 216463
+    },
+    {
+      "shapeID": "5055444B85710752222432",
+      "shapeName": "Jhikargachha",
+      "shapeType": "ADM3",
+      "population_2025": 401263
+    },
+    {
+      "shapeID": "5055444B6466456665233",
+      "shapeName": "Jiban Nagar",
+      "shapeType": "ADM3",
+      "population_2025": 216000
+    },
+    {
+      "shapeID": "5055444B93992233540184",
+      "shapeName": "Joypurhat Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 292570
+    },
+    {
+      "shapeID": "5055444B74589798981468",
+      "shapeName": "Jurai Chhari",
+      "shapeType": "ADM3",
+      "population_2025": 31814
+    },
+    {
+      "shapeID": "5055444B59468636811398",
+      "shapeName": "Juri",
+      "shapeType": "ADM3",
+      "population_2025": 212303
+    },
+    {
+      "shapeID": "5055444B43660249750517",
+      "shapeName": "Kabirhat",
+      "shapeType": "ADM3",
+      "population_2025": 231543
+    },
+    {
+      "shapeID": "5055444B26000063371605",
+      "shapeName": "Kachua",
+      "shapeType": "ADM3",
+      "population_2025": 476952
+    },
+    {
+      "shapeID": "5055444B45763883342001",
+      "shapeName": "Kachua",
+      "shapeType": "ADM3",
+      "population_2025": 86358
+    },
+    {
+      "shapeID": "5055444B98895982185439",
+      "shapeName": "Kadamtali",
+      "shapeType": "ADM3",
+      "population_2025": 246719
+    },
+    {
+      "shapeID": "5055444B63983691041165",
+      "shapeName": "Kafrul",
+      "shapeType": "ADM3",
+      "population_2025": 232672
+    },
+    {
+      "shapeID": "5055444B94680478371785",
+      "shapeName": "Kahaloo",
+      "shapeType": "ADM3",
+      "population_2025": 323800
+    },
+    {
+      "shapeID": "5055444B76754438754784",
+      "shapeName": "Kaharole",
+      "shapeType": "ADM3",
+      "population_2025": 203077
+    },
+    {
+      "shapeID": "5055444B33791215686777",
+      "shapeName": "Kala Para",
+      "shapeType": "ADM3",
+      "population_2025": 330216
+    },
+    {
+      "shapeID": "5055444B44586905762707",
+      "shapeName": "Kalabagan",
+      "shapeType": "ADM3",
+      "population_2025": 45152
+    },
+    {
+      "shapeID": "5055444B30865127714111",
+      "shapeName": "Kalai",
+      "shapeType": "ADM3",
+      "population_2025": 160919
+    },
+    {
+      "shapeID": "5055444B76251255413943",
+      "shapeName": "Kalaroa",
+      "shapeType": "ADM3",
+      "population_2025": 316308
+    },
+    {
+      "shapeID": "5055444B27555215453497",
+      "shapeName": "Kalia",
+      "shapeType": "ADM3",
+      "population_2025": 277069
+    },
+    {
+      "shapeID": "5055444B52699552656375",
+      "shapeName": "Kaliakair",
+      "shapeType": "ADM3",
+      "population_2025": 940932
+    },
+    {
+      "shapeID": "5055444B61428192086039",
+      "shapeName": "Kaliganj",
+      "shapeType": "ADM3",
+      "population_2025": 546522
+    },
+    {
+      "shapeID": "5055444B90064357882675",
+      "shapeName": "Kaliganj",
+      "shapeType": "ADM3",
+      "population_2025": 287743
+    },
+    {
+      "shapeID": "5055444B41249726663470",
+      "shapeName": "Kaliganj",
+      "shapeType": "ADM3",
+      "population_2025": 257544
+    },
+    {
+      "shapeID": "5055444B80538323098735",
+      "shapeName": "Kaliganj",
+      "shapeType": "ADM3",
+      "population_2025": 303848
+    },
+    {
+      "shapeID": "5055444B56749671391085",
+      "shapeName": "Kalihati",
+      "shapeType": "ADM3",
+      "population_2025": 441522
+    },
+    {
+      "shapeID": "5055444B57411868126880",
+      "shapeName": "Kalkini",
+      "shapeType": "ADM3",
+      "population_2025": 311406
+    },
+    {
+      "shapeID": "5055444B66227675822918",
+      "shapeName": "Kalmakanda",
+      "shapeType": "ADM3",
+      "population_2025": 298827
+    },
+    {
+      "shapeID": "5055444B5247362700203",
+      "shapeName": "Kalukhali",
+      "shapeType": "ADM3",
+      "population_2025": 189755
+    },
+    {
+      "shapeID": "5055444B17952966104219",
+      "shapeName": "Kamalganj",
+      "shapeType": "ADM3",
+      "population_2025": 297303
+    },
+    {
+      "shapeID": "5055444B78094476092411",
+      "shapeName": "Kamalnagar",
+      "shapeType": "ADM3",
+      "population_2025": 234118
+    },
+    {
+      "shapeID": "5055444B74368179000930",
+      "shapeName": "Kamarkhanda",
+      "shapeType": "ADM3",
+      "population_2025": 193603
+    },
+    {
+      "shapeID": "5055444B25875561692739",
+      "shapeName": "Kamrangir Char",
+      "shapeType": "ADM3",
+      "population_2025": 48606
+    },
+    {
+      "shapeID": "5055444B41434433148091",
+      "shapeName": "Kanaighat",
+      "shapeType": "ADM3",
+      "population_2025": 281462
+    },
+    {
+      "shapeID": "5055444B40108237642327",
+      "shapeName": "Kanthalia",
+      "shapeType": "ADM3",
+      "population_2025": 120534
+    },
+    {
+      "shapeID": "5055444B15486218196636",
+      "shapeName": "Kapasia",
+      "shapeType": "ADM3",
+      "population_2025": 693483
+    },
+    {
+      "shapeID": "5055444B98244501145639",
+      "shapeName": "Kaptai",
+      "shapeType": "ADM3",
+      "population_2025": 54015
+    },
+    {
+      "shapeID": "5055444B80392478978834",
+      "shapeName": "Karimganj",
+      "shapeType": "ADM3",
+      "population_2025": 295179
+    },
+    {
+      "shapeID": "5055444B61264629124243",
+      "shapeName": "Kasba",
+      "shapeType": "ADM3",
+      "population_2025": 491984
+    },
+    {
+      "shapeID": "5055444B44426403332782",
+      "shapeName": "Kashiani",
+      "shapeType": "ADM3",
+      "population_2025": 280024
+    },
+    {
+      "shapeID": "5055444B24455875774794",
+      "shapeName": "Katiadi",
+      "shapeType": "ADM3",
+      "population_2025": 431259
+    },
+    {
+      "shapeID": "5055444B28911251557363",
+      "shapeName": "Kaunia",
+      "shapeType": "ADM3",
+      "population_2025": 187430
+    },
+    {
+      "shapeID": "5055444B7582936934927",
+      "shapeName": "Kawkhali",
+      "shapeType": "ADM3",
+      "population_2025": 67538
+    },
+    {
+      "shapeID": "5055444B19367082920466",
+      "shapeName": "Kawkhali (Betbunia)",
+      "shapeType": "ADM3",
+      "population_2025": 67756
+    },
+    {
+      "shapeID": "5055444B60898734615082",
+      "shapeName": "Kazipur",
+      "shapeType": "ADM3",
+      "population_2025": 310238
+    },
+    {
+      "shapeID": "5055444B31571719417761",
+      "shapeName": "Kendua",
+      "shapeType": "ADM3",
+      "population_2025": 323709
+    },
+    {
+      "shapeID": "5055444B13645595955380",
+      "shapeName": "Keraniganj",
+      "shapeType": "ADM3",
+      "population_2025": 2000435
+    },
+    {
+      "shapeID": "5055444B35284050445786",
+      "shapeName": "Keshabpur",
+      "shapeType": "ADM3",
+      "population_2025": 252821
+    },
+    {
+      "shapeID": "5055444B92688731308594",
+      "shapeName": "Khagrachhari Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 119578
+    },
+    {
+      "shapeID": "5055444B19619959781410",
+      "shapeName": "Khaliajuri",
+      "shapeType": "ADM3",
+      "population_2025": 43527
+    },
+    {
+      "shapeID": "5055444B34358039659895",
+      "shapeName": "Khalishpur",
+      "shapeType": "ADM3",
+      "population_2025": 126958
+    },
+    {
+      "shapeID": "5055444B24865476374111",
+      "shapeName": "Khan Jahan Ali",
+      "shapeType": "ADM3",
+      "population_2025": 122534
+    },
+    {
+      "shapeID": "5055444B43604682805019",
+      "shapeName": "Khansama",
+      "shapeType": "ADM3",
+      "population_2025": 156533
+    },
+    {
+      "shapeID": "5055444B82593576675649",
+      "shapeName": "Khetlal",
+      "shapeType": "ADM3",
+      "population_2025": 126183
+    },
+    {
+      "shapeID": "5055444B61701169401467",
+      "shapeName": "Khilgaon",
+      "shapeType": "ADM3",
+      "population_2025": 258135
+    },
+    {
+      "shapeID": "5055444B65231246155988",
+      "shapeName": "Khilkhet",
+      "shapeType": "ADM3",
+      "population_2025": 236833
+    },
+    {
+      "shapeID": "5055444B67450707106328",
+      "shapeName": "Khoksa",
+      "shapeType": "ADM3",
+      "population_2025": 132903
+    },
+    {
+      "shapeID": "5055444B15799752378337",
+      "shapeName": "Khulna Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 136236
+    },
+    {
+      "shapeID": "5055444B97703922589889",
+      "shapeName": "Khulshi",
+      "shapeType": "ADM3",
+      "population_2025": 125997
+    },
+    {
+      "shapeID": "5055444B13115177631970",
+      "shapeName": "Kishoreganj",
+      "shapeType": "ADM3",
+      "population_2025": 268896
+    },
+    {
+      "shapeID": "5055444B23116047472537",
+      "shapeName": "Kishoreganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 637239
+    },
+    {
+      "shapeID": "5055444B41131729628640",
+      "shapeName": "Kotali Para",
+      "shapeType": "ADM3",
+      "population_2025": 256613
+    },
+    {
+      "shapeID": "5055444B95278477608214",
+      "shapeName": "Kotchandpur",
+      "shapeType": "ADM3",
+      "population_2025": 201617
+    },
+    {
+      "shapeID": "5055444B43057747226647",
+      "shapeName": "Kotwali",
+      "shapeType": "ADM3",
+      "population_2025": 107876
+    },
+    {
+      "shapeID": "5055444B96747808832933",
+      "shapeName": "Kotwali",
+      "shapeType": "ADM3",
+      "population_2025": 23381
+    },
+    {
+      "shapeID": "5055444B46202498291187",
+      "shapeName": "Kotwali",
+      "shapeType": "ADM3",
+      "population_2025": 781888
+    },
+    {
+      "shapeID": "5055444B74268178694093",
+      "shapeName": "Koyra",
+      "shapeType": "ADM3",
+      "population_2025": 250214
+    },
+    {
+      "shapeID": "5055444B34645993170454",
+      "shapeName": "Kulaura",
+      "shapeType": "ADM3",
+      "population_2025": 487563
+    },
+    {
+      "shapeID": "5055444B4949777620192",
+      "shapeName": "Kuliar Char",
+      "shapeType": "ADM3",
+      "population_2025": 182269
+    },
+    {
+      "shapeID": "5055444B47909201503305",
+      "shapeName": "Kumarkhali",
+      "shapeType": "ADM3",
+      "population_2025": 360303
+    },
+    {
+      "shapeID": "5055444B50958574054556",
+      "shapeName": "Kurigram Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 352008
+    },
+    {
+      "shapeID": "5055444B28612098242790",
+      "shapeName": "Kushtia Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 492136
+    },
+    {
+      "shapeID": "5055444B6774293613253",
+      "shapeName": "Kutubdia",
+      "shapeType": "ADM3",
+      "population_2025": 130366
+    },
+    {
+      "shapeID": "5055444B57247897751497",
+      "shapeName": "Lakhai",
+      "shapeType": "ADM3",
+      "population_2025": 121262
+    },
+    {
+      "shapeID": "5055444B78219247274360",
+      "shapeName": "Laksam",
+      "shapeType": "ADM3",
+      "population_2025": 299751
+    },
+    {
+      "shapeID": "5055444B76771399523865",
+      "shapeName": "Lakshmichhari",
+      "shapeType": "ADM3",
+      "population_2025": 29980
+    },
+    {
+      "shapeID": "5055444B13201052505859",
+      "shapeName": "Lakshmipur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 860353
+    },
+    {
+      "shapeID": "5055444B37083431015696",
+      "shapeName": "Lalbagh",
+      "shapeType": "ADM3",
+      "population_2025": 141957
+    },
+    {
+      "shapeID": "5055444B5187624990089",
+      "shapeName": "Lalmohan",
+      "shapeType": "ADM3",
+      "population_2025": 319068
+    },
+    {
+      "shapeID": "5055444B31815132153948",
+      "shapeName": "Lalmonirhat Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 311879
+    },
+    {
+      "shapeID": "5055444B7503946702912",
+      "shapeName": "Lalpur",
+      "shapeType": "ADM3",
+      "population_2025": 296990
+    },
+    {
+      "shapeID": "5055444B8807227421792",
+      "shapeName": "Lama",
+      "shapeType": "ADM3",
+      "population_2025": 171377
+    },
+    {
+      "shapeID": "5055444B82968761851300",
+      "shapeName": "Langadu",
+      "shapeType": "ADM3",
+      "population_2025": 114919
+    },
+    {
+      "shapeID": "5055444B32629504836566",
+      "shapeName": "Lohagara",
+      "shapeType": "ADM3",
+      "population_2025": 556006
+    },
+    {
+      "shapeID": "5055444B42901183691580",
+      "shapeName": "Lohagara",
+      "shapeType": "ADM3",
+      "population_2025": 279851
+    },
+    {
+      "shapeID": "5055444B16433505042831",
+      "shapeName": "Lohajang",
+      "shapeType": "ADM3",
+      "population_2025": 191690
+    },
+    {
+      "shapeID": "5055444B11405319731642",
+      "shapeName": "Madan",
+      "shapeType": "ADM3",
+      "population_2025": 130089
+    },
+    {
+      "shapeID": "5055444B83620057326875",
+      "shapeName": "Madarganj",
+      "shapeType": "ADM3",
+      "population_2025": 368412
+    },
+    {
+      "shapeID": "5055444B75961082304780",
+      "shapeName": "Madaripur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 379358
+    },
+    {
+      "shapeID": "5055444B26771557951521",
+      "shapeName": "Madhabpur",
+      "shapeType": "ADM3",
+      "population_2025": 430054
+    },
+    {
+      "shapeID": "5055444B21452508615420",
+      "shapeName": "Madhukhali",
+      "shapeType": "ADM3",
+      "population_2025": 206074
+    },
+    {
+      "shapeID": "5055444B31553273158599",
+      "shapeName": "Madhupur",
+      "shapeType": "ADM3",
+      "population_2025": 307071
+    },
+    {
+      "shapeID": "5055444B78521168573013",
+      "shapeName": "Magura Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 448406
+    },
+    {
+      "shapeID": "5055444B79967096461469",
+      "shapeName": "Mahadebpur",
+      "shapeType": "ADM3",
+      "population_2025": 332113
+    },
+    {
+      "shapeID": "5055444B90687829441345",
+      "shapeName": "Mahalchhari",
+      "shapeType": "ADM3",
+      "population_2025": 65641
+    },
+    {
+      "shapeID": "5055444B67374732574136",
+      "shapeName": "Maheshkhali",
+      "shapeType": "ADM3",
+      "population_2025": 245527
+    },
+    {
+      "shapeID": "5055444B40942545652713",
+      "shapeName": "Maheshpur",
+      "shapeType": "ADM3",
+      "population_2025": 448253
+    },
+    {
+      "shapeID": "5055444B25908372106798",
+      "shapeName": "Manda",
+      "shapeType": "ADM3",
+      "population_2025": 421973
+    },
+    {
+      "shapeID": "5055444B84634680798783",
+      "shapeName": "Manikchhari",
+      "shapeType": "ADM3",
+      "population_2025": 86210
+    },
+    {
+      "shapeID": "5055444B26017737484602",
+      "shapeName": "Manikganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 385362
+    },
+    {
+      "shapeID": "5055444B69742529684169",
+      "shapeName": "Manirampur",
+      "shapeType": "ADM3",
+      "population_2025": 425089
+    },
+    {
+      "shapeID": "5055444B30201395073710",
+      "shapeName": "Manohardi",
+      "shapeType": "ADM3",
+      "population_2025": 384902
+    },
+    {
+      "shapeID": "5055444B22432577988520",
+      "shapeName": "Manoharganj",
+      "shapeType": "ADM3",
+      "population_2025": 180547
+    },
+    {
+      "shapeID": "5055444B7100787207450",
+      "shapeName": "Manpura",
+      "shapeType": "ADM3",
+      "population_2025": 112655
+    },
+    {
+      "shapeID": "5055444B80501500491091",
+      "shapeName": "Mathbaria",
+      "shapeType": "ADM3",
+      "population_2025": 417731
+    },
+    {
+      "shapeID": "5055444B51642868289665",
+      "shapeName": "Matihar",
+      "shapeType": "ADM3",
+      "population_2025": 43857
+    },
+    {
+      "shapeID": "5055444B50883090324101",
+      "shapeName": "Matiranga",
+      "shapeType": "ADM3",
+      "population_2025": 173995
+    },
+    {
+      "shapeID": "5055444B79931584238091",
+      "shapeName": "Matlab Dakshin",
+      "shapeType": "ADM3",
+      "population_2025": 252637
+    },
+    {
+      "shapeID": "5055444B59303037542676",
+      "shapeName": "Matlab Uttar",
+      "shapeType": "ADM3",
+      "population_2025": 444928
+    },
+    {
+      "shapeID": "5055444B59699637370048",
+      "shapeName": "Maulvi Bazar Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 374102
+    },
+    {
+      "shapeID": "5055444B22662076450588",
+      "shapeName": "Meghna",
+      "shapeType": "ADM3",
+      "population_2025": 141761
+    },
+    {
+      "shapeID": "5055444B74768834499877",
+      "shapeName": "Mehendiganj",
+      "shapeType": "ADM3",
+      "population_2025": 199493
+    },
+    {
+      "shapeID": "5055444B46245287013568",
+      "shapeName": "Meherpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 285002
+    },
+    {
+      "shapeID": "5055444B58797813051725",
+      "shapeName": "Melandaha",
+      "shapeType": "ADM3",
+      "population_2025": 369523
+    },
+    {
+      "shapeID": "5055444B1093476169518",
+      "shapeName": "Mirpur",
+      "shapeType": "ADM3",
+      "population_2025": 211628
+    },
+    {
+      "shapeID": "5055444B311297956594",
+      "shapeName": "Mirpur",
+      "shapeType": "ADM3",
+      "population_2025": 432110
+    },
+    {
+      "shapeID": "5055444B69190373788059",
+      "shapeName": "Mirsharai",
+      "shapeType": "ADM3",
+      "population_2025": 788842
+    },
+    {
+      "shapeID": "5055444B29956220315136",
+      "shapeName": "Mirzaganj",
+      "shapeType": "ADM3",
+      "population_2025": 145038
+    },
+    {
+      "shapeID": "5055444B21231975915207",
+      "shapeName": "Mirzapur",
+      "shapeType": "ADM3",
+      "population_2025": 590187
+    },
+    {
+      "shapeID": "5055444B64460137576377",
+      "shapeName": "Mitha Pukur",
+      "shapeType": "ADM3",
+      "population_2025": 671817
+    },
+    {
+      "shapeID": "5055444B44243630461995",
+      "shapeName": "Mithamain",
+      "shapeType": "ADM3",
+      "population_2025": 78885
+    },
+    {
+      "shapeID": "5055444B96237484517929",
+      "shapeName": "Mohammadpur",
+      "shapeType": "ADM3",
+      "population_2025": 207601
+    },
+    {
+      "shapeID": "5055444B50148309792291",
+      "shapeName": "Mohammadpur",
+      "shapeType": "ADM3",
+      "population_2025": 229809
+    },
+    {
+      "shapeID": "5055444B90444582723877",
+      "shapeName": "Mohanganj",
+      "shapeType": "ADM3",
+      "population_2025": 123832
+    },
+    {
+      "shapeID": "5055444B74655378820598",
+      "shapeName": "Mohanpur",
+      "shapeType": "ADM3",
+      "population_2025": 231285
+    },
+    {
+      "shapeID": "5055444B47603984491155",
+      "shapeName": "Mollahat",
+      "shapeType": "ADM3",
+      "population_2025": 131463
+    },
+    {
+      "shapeID": "5055444B32061612470944",
+      "shapeName": "Mongla",
+      "shapeType": "ADM3",
+      "population_2025": 214458
+    },
+    {
+      "shapeID": "5055444B56461064683403",
+      "shapeName": "Morrelganj",
+      "shapeType": "ADM3",
+      "population_2025": 337873
+    },
+    {
+      "shapeID": "5055444B92723626214353",
+      "shapeName": "Motijheel",
+      "shapeType": "ADM3",
+      "population_2025": 114363
+    },
+    {
+      "shapeID": "5055444B97958802920528",
+      "shapeName": "Mujib Nagar",
+      "shapeType": "ADM3",
+      "population_2025": 109350
+    },
+    {
+      "shapeID": "5055444B82620831567558",
+      "shapeName": "Muksudpur",
+      "shapeType": "ADM3",
+      "population_2025": 308591
+    },
+    {
+      "shapeID": "5055444B43282791113331",
+      "shapeName": "Muktagachha",
+      "shapeType": "ADM3",
+      "population_2025": 457903
+    },
+    {
+      "shapeID": "5055444B40910797955149",
+      "shapeName": "Muladi",
+      "shapeType": "ADM3",
+      "population_2025": 187444
+    },
+    {
+      "shapeID": "5055444B71946296416416",
+      "shapeName": "Munshiganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 369249
+    },
+    {
+      "shapeID": "5055444B46038543043233",
+      "shapeName": "Muradnagar",
+      "shapeType": "ADM3",
+      "population_2025": 690980
+    },
+    {
+      "shapeID": "5055444B90775494635734",
+      "shapeName": "Mymensingh Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 785666
+    },
+    {
+      "shapeID": "5055444B95626234950113",
+      "shapeName": "Nabiganj",
+      "shapeType": "ADM3",
+      "population_2025": 453578
+    },
+    {
+      "shapeID": "5055444B46982243115028",
+      "shapeName": "Nabinagar",
+      "shapeType": "ADM3",
+      "population_2025": 668093
+    },
+    {
+      "shapeID": "5055444B4211226512154",
+      "shapeName": "Nachole",
+      "shapeType": "ADM3",
+      "population_2025": 275236
+    },
+    {
+      "shapeID": "5055444B32574655365855",
+      "shapeName": "Nagarkanda",
+      "shapeType": "ADM3",
+      "population_2025": 226266
+    },
+    {
+      "shapeID": "5055444B94760569525433",
+      "shapeName": "Nagarpur",
+      "shapeType": "ADM3",
+      "population_2025": 254870
+    },
+    {
+      "shapeID": "5055444B88377635255294",
+      "shapeName": "Nageshwari",
+      "shapeType": "ADM3",
+      "population_2025": 513053
+    },
+    {
+      "shapeID": "5055444B3274428108722",
+      "shapeName": "Naikhongchhari",
+      "shapeType": "ADM3",
+      "population_2025": 111393
+    },
+    {
+      "shapeID": "5055444B95271208193973",
+      "shapeName": "Nakla",
+      "shapeType": "ADM3",
+      "population_2025": 198659
+    },
+    {
+      "shapeID": "5055444B67892409347150",
+      "shapeName": "Nalchity",
+      "shapeType": "ADM3",
+      "population_2025": 223364
+    },
+    {
+      "shapeID": "5055444B16793155331867",
+      "shapeName": "Nalitabari",
+      "shapeType": "ADM3",
+      "population_2025": 318515
+    },
+    {
+      "shapeID": "5055444B36065227637036",
+      "shapeName": "Nandail",
+      "shapeType": "ADM3",
+      "population_2025": 425699
+    },
+    {
+      "shapeID": "5055444B95396653214812",
+      "shapeName": "Nandigram",
+      "shapeType": "ADM3",
+      "population_2025": 255460
+    },
+    {
+      "shapeID": "5055444B76725439062785",
+      "shapeName": "Nangalkot",
+      "shapeType": "ADM3",
+      "population_2025": 404726
+    },
+    {
+      "shapeID": "5055444B1204952470090",
+      "shapeName": "Naniarchar",
+      "shapeType": "ADM3",
+      "population_2025": 62273
+    },
+    {
+      "shapeID": "5055444B48392577301269",
+      "shapeName": "Naogaon Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 349929
+    },
+    {
+      "shapeID": "5055444B86380402084799",
+      "shapeName": "Narail Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 304365
+    },
+    {
+      "shapeID": "5055444B24324023791660",
+      "shapeName": "Narayanganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 1132348
+    },
+    {
+      "shapeID": "5055444B74474908989262",
+      "shapeName": "Naria",
+      "shapeType": "ADM3",
+      "population_2025": 240491
+    },
+    {
+      "shapeID": "5055444B56950685480062",
+      "shapeName": "Narsingdi Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 803599
+    },
+    {
+      "shapeID": "5055444B53942313768557",
+      "shapeName": "Nasirnagar",
+      "shapeType": "ADM3",
+      "population_2025": 282667
+    },
+    {
+      "shapeID": "5055444B49495174582406",
+      "shapeName": "Natore Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 498806
+    },
+    {
+      "shapeID": "5055444B6233610222310",
+      "shapeName": "Nawabganj",
+      "shapeType": "ADM3",
+      "population_2025": 1083234
+    },
+    {
+      "shapeID": "5055444B29878683718336",
+      "shapeName": "Nawabganj",
+      "shapeType": "ADM3",
+      "population_2025": 289225
+    },
+    {
+      "shapeID": "5055444B78695242801039",
+      "shapeName": "Nawabganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 539008
+    },
+    {
+      "shapeID": "5055444B52021808696745",
+      "shapeName": "Nazirpur",
+      "shapeType": "ADM3",
+      "population_2025": 155049
+    },
+    {
+      "shapeID": "5055444B29300824944570",
+      "shapeName": "Nesarabad (Swarupkati)",
+      "shapeType": "ADM3",
+      "population_2025": 188355
+    },
+    {
+      "shapeID": "5055444B11666029706524",
+      "shapeName": "Netrokona Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 465412
+    },
+    {
+      "shapeID": "5055444B9752476477947",
+      "shapeName": "New Market",
+      "shapeType": "ADM3",
+      "population_2025": 45608
+    },
+    {
+      "shapeID": "5055444B35482632168622",
+      "shapeName": "Niamatpur",
+      "shapeType": "ADM3",
+      "population_2025": 340962
+    },
+    {
+      "shapeID": "5055444B31777377596981",
+      "shapeName": "Nikli",
+      "shapeType": "ADM3",
+      "population_2025": 108650
+    },
+    {
+      "shapeID": "5055444B81704367582691",
+      "shapeName": "Nilphamari Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 519172
+    },
+    {
+      "shapeID": "5055444B59544750070179",
+      "shapeName": "Noakhali Sadar (Sudharam)",
+      "shapeType": "ADM3",
+      "population_2025": 624734
+    },
+    {
+      "shapeID": "5055444B6547949128734",
+      "shapeName": "Paba",
+      "shapeType": "ADM3",
+      "population_2025": 428361
+    },
+    {
+      "shapeID": "5055444B21601893255114",
+      "shapeName": "Pabna Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 723192
+    },
+    {
+      "shapeID": "5055444B18185339389693",
+      "shapeName": "Pahartali",
+      "shapeType": "ADM3",
+      "population_2025": 88805
+    },
+    {
+      "shapeID": "5055444B32742026242546",
+      "shapeName": "Paikgachha",
+      "shapeType": "ADM3",
+      "population_2025": 258098
+    },
+    {
+      "shapeID": "5055444B2198312346565",
+      "shapeName": "Pakundia",
+      "shapeType": "ADM3",
+      "population_2025": 426598
+    },
+    {
+      "shapeID": "5055444B96134179230312",
+      "shapeName": "Palash",
+      "shapeType": "ADM3",
+      "population_2025": 349269
+    },
+    {
+      "shapeID": "5055444B31221494753785",
+      "shapeName": "Palashbari",
+      "shapeType": "ADM3",
+      "population_2025": 263416
+    },
+    {
+      "shapeID": "5055444B7396550141885",
+      "shapeName": "Pallabi",
+      "shapeType": "ADM3",
+      "population_2025": 295582
+    },
+    {
+      "shapeID": "5055444B25185864846738",
+      "shapeName": "Paltan",
+      "shapeType": "ADM3",
+      "population_2025": 37804
+    },
+    {
+      "shapeID": "5055444B34393793043573",
+      "shapeName": "Panchagarh Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 325146
+    },
+    {
+      "shapeID": "5055444B1649196171252",
+      "shapeName": "Panchbibi",
+      "shapeType": "ADM3",
+      "population_2025": 260309
+    },
+    {
+      "shapeID": "5055444B74503201942965",
+      "shapeName": "Panchhari",
+      "shapeType": "ADM3",
+      "population_2025": 103407
+    },
+    {
+      "shapeID": "5055444B64565543707518",
+      "shapeName": "Panchlaish",
+      "shapeType": "ADM3",
+      "population_2025": 80981
+    },
+    {
+      "shapeID": "5055444B93889096596285",
+      "shapeName": "Pangsha",
+      "shapeType": "ADM3",
+      "population_2025": 283612
+    },
+    {
+      "shapeID": "5055444B76537033079747",
+      "shapeName": "Parbatipur",
+      "shapeType": "ADM3",
+      "population_2025": 426974
+    },
+    {
+      "shapeID": "5055444B3242961930205",
+      "shapeName": "Parshuram",
+      "shapeType": "ADM3",
+      "population_2025": 133515
+    },
+    {
+      "shapeID": "5055444B40707250714885",
+      "shapeName": "Patenga",
+      "shapeType": "ADM3",
+      "population_2025": 230804
+    },
+    {
+      "shapeID": "5055444B98087879130234",
+      "shapeName": "Patgram",
+      "shapeType": "ADM3",
+      "population_2025": 362879
+    },
+    {
+      "shapeID": "5055444B56621242326739",
+      "shapeName": "Patharghata",
+      "shapeType": "ADM3",
+      "population_2025": 202864
+    },
+    {
+      "shapeID": "5055444B19774112487674",
+      "shapeName": "Patiya",
+      "shapeType": "ADM3",
+      "population_2025": 812447
+    },
+    {
+      "shapeID": "5055444B91431094862758",
+      "shapeName": "Patnitala",
+      "shapeType": "ADM3",
+      "population_2025": 271536
+    },
+    {
+      "shapeID": "5055444B33989432035169",
+      "shapeName": "Patuakhali Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 394791
+    },
+    {
+      "shapeID": "5055444B9589532337582",
+      "shapeName": "Pekua",
+      "shapeType": "ADM3",
+      "population_2025": 267296
+    },
+    {
+      "shapeID": "5055444B25764140823276",
+      "shapeName": "Phulbari",
+      "shapeType": "ADM3",
+      "population_2025": 237504
+    },
+    {
+      "shapeID": "5055444B96560704124015",
+      "shapeName": "Phulpur",
+      "shapeType": "ADM3",
+      "population_2025": 722098
+    },
+    {
+      "shapeID": "5055444B58469671805988",
+      "shapeName": "Phultala",
+      "shapeType": "ADM3",
+      "population_2025": 101596
+    },
+    {
+      "shapeID": "5055444B86740606942965",
+      "shapeName": "Pirgachha",
+      "shapeType": "ADM3",
+      "population_2025": 332681
+    },
+    {
+      "shapeID": "5055444B35718531117283",
+      "shapeName": "Pirganj",
+      "shapeType": "ADM3",
+      "population_2025": 505555
+    },
+    {
+      "shapeID": "5055444B42154785912558",
+      "shapeName": "Pirganj",
+      "shapeType": "ADM3",
+      "population_2025": 275884
+    },
+    {
+      "shapeID": "5055444B11684382381514",
+      "shapeName": "Pirojpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 166248
+    },
+    {
+      "shapeID": "5055444B54487127643063",
+      "shapeName": "Porsha",
+      "shapeType": "ADM3",
+      "population_2025": 163629
+    },
+    {
+      "shapeID": "5055444B54942136795919",
+      "shapeName": "Purbadhala",
+      "shapeType": "ADM3",
+      "population_2025": 358142
+    },
+    {
+      "shapeID": "5055444B90282468448704",
+      "shapeName": "Puthia",
+      "shapeType": "ADM3",
+      "population_2025": 284473
+    },
+    {
+      "shapeID": "5055444B90978043630705",
+      "shapeName": "Rajapur",
+      "shapeType": "ADM3",
+      "population_2025": 117994
+    },
+    {
+      "shapeID": "5055444B93678014899997",
+      "shapeName": "Rajarhat",
+      "shapeType": "ADM3",
+      "population_2025": 183031
+    },
+    {
+      "shapeID": "5055444B15060771373546",
+      "shapeName": "Rajasthali",
+      "shapeType": "ADM3",
+      "population_2025": 44766
+    },
+    {
+      "shapeID": "5055444B85021187940919",
+      "shapeName": "Rajbari Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 399260
+    },
+    {
+      "shapeID": "5055444B11792824344189",
+      "shapeName": "Rajnagar",
+      "shapeType": "ADM3",
+      "population_2025": 245088
+    },
+    {
+      "shapeID": "5055444B47802764053873",
+      "shapeName": "Rajoir",
+      "shapeType": "ADM3",
+      "population_2025": 248845
+    },
+    {
+      "shapeID": "5055444B47903202093493",
+      "shapeName": "Rajpara",
+      "shapeType": "ADM3",
+      "population_2025": 65472
+    },
+    {
+      "shapeID": "5055444B57812164143880",
+      "shapeName": "Ramganj",
+      "shapeType": "ADM3",
+      "population_2025": 459724
+    },
+    {
+      "shapeID": "5055444B38799821527712",
+      "shapeName": "Ramgarh",
+      "shapeType": "ADM3",
+      "population_2025": 85610
+    },
+    {
+      "shapeID": "5055444B89015715919581",
+      "shapeName": "Ramgati",
+      "shapeType": "ADM3",
+      "population_2025": 182998
+    },
+    {
+      "shapeID": "5055444B66987540891927",
+      "shapeName": "Ramna",
+      "shapeType": "ADM3",
+      "population_2025": 102629
+    },
+    {
+      "shapeID": "5055444B66391023963948",
+      "shapeName": "Rampal",
+      "shapeType": "ADM3",
+      "population_2025": 219993
+    },
+    {
+      "shapeID": "5055444B30627422876303",
+      "shapeName": "Rampura",
+      "shapeType": "ADM3",
+      "population_2025": 98600
+    },
+    {
+      "shapeID": "5055444B73950402088749",
+      "shapeName": "Ramu",
+      "shapeType": "ADM3",
+      "population_2025": 457406
+    },
+    {
+      "shapeID": "5055444B57589177592395",
+      "shapeName": "Rangamati Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 100141
+    },
+    {
+      "shapeID": "5055444B60964273253151",
+      "shapeName": "Rangpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 804137
+    },
+    {
+      "shapeID": "5055444B52491986806664",
+      "shapeName": "Rangunia",
+      "shapeType": "ADM3",
+      "population_2025": 558611
+    },
+    {
+      "shapeID": "5055444B30475124532663",
+      "shapeName": "Raninagar",
+      "shapeType": "ADM3",
+      "population_2025": 187336
+    },
+    {
+      "shapeID": "5055444B74943148977386",
+      "shapeName": "Ranisankail",
+      "shapeType": "ADM3",
+      "population_2025": 246783
+    },
+    {
+      "shapeID": "5055444B26554901820582",
+      "shapeName": "Raozan",
+      "shapeType": "ADM3",
+      "population_2025": 553633
+    },
+    {
+      "shapeID": "5055444B84227309830947",
+      "shapeName": "Raumari",
+      "shapeType": "ADM3",
+      "population_2025": 266306
+    },
+    {
+      "shapeID": "5055444B74571408942121",
+      "shapeName": "Rowangchhari",
+      "shapeType": "ADM3",
+      "population_2025": 56906
+    },
+    {
+      "shapeID": "5055444B16102075953805",
+      "shapeName": "Royganj",
+      "shapeType": "ADM3",
+      "population_2025": 458834
+    },
+    {
+      "shapeID": "5055444B1613484588697",
+      "shapeName": "Roypur",
+      "shapeType": "ADM3",
+      "population_2025": 321790
+    },
+    {
+      "shapeID": "5055444B39659813181832",
+      "shapeName": "Roypura",
+      "shapeType": "ADM3",
+      "population_2025": 539657
+    },
+    {
+      "shapeID": "5055444B15740177551005",
+      "shapeName": "Ruma",
+      "shapeType": "ADM3",
+      "population_2025": 35162
+    },
+    {
+      "shapeID": "5055444B98720015841654",
+      "shapeName": "Rupganj",
+      "shapeType": "ADM3",
+      "population_2025": 992122
+    },
+    {
+      "shapeID": "5055444B36775211946071",
+      "shapeName": "Rupsa",
+      "shapeType": "ADM3",
+      "population_2025": 204011
+    },
+    {
+      "shapeID": "5055444B47617762942552",
+      "shapeName": "Sabujbagh",
+      "shapeType": "ADM3",
+      "population_2025": 184377
+    },
+    {
+      "shapeID": "5055444B68847835082367",
+      "shapeName": "Sadarpur",
+      "shapeType": "ADM3",
+      "population_2025": 316123
+    },
+    {
+      "shapeID": "5055444B23601063726349",
+      "shapeName": "Sadullapur",
+      "shapeType": "ADM3",
+      "population_2025": 303478
+    },
+    {
+      "shapeID": "5055444B53491444498319",
+      "shapeName": "Saghatta",
+      "shapeType": "ADM3",
+      "population_2025": 300061
+    },
+    {
+      "shapeID": "5055444B15265131690562",
+      "shapeName": "Saidpur",
+      "shapeType": "ADM3",
+      "population_2025": 272749
+    },
+    {
+      "shapeID": "5055444B2662823308468",
+      "shapeName": "Sakhipur",
+      "shapeType": "ADM3",
+      "population_2025": 610874
+    },
+    {
+      "shapeID": "5055444B68654289756116",
+      "shapeName": "Saltha",
+      "shapeType": "ADM3",
+      "population_2025": 164487
+    },
+    {
+      "shapeID": "5055444B38303257659951",
+      "shapeName": "Sandwip",
+      "shapeType": "ADM3",
+      "population_2025": 435165
+    },
+    {
+      "shapeID": "5055444B30152429816544",
+      "shapeName": "Santhia",
+      "shapeType": "ADM3",
+      "population_2025": 441851
+    },
+    {
+      "shapeID": "5055444B68995178117667",
+      "shapeName": "Sapahar",
+      "shapeType": "ADM3",
+      "population_2025": 192574
+    },
+    {
+      "shapeID": "5055444B36413802235947",
+      "shapeName": "Sarail",
+      "shapeType": "ADM3",
+      "population_2025": 271447
+    },
+    {
+      "shapeID": "5055444B91761091581926",
+      "shapeName": "Sarankhola",
+      "shapeType": "ADM3",
+      "population_2025": 119488
+    },
+    {
+      "shapeID": "5055444B56899132484318",
+      "shapeName": "Sariakandi",
+      "shapeType": "ADM3",
+      "population_2025": 227470
+    },
+    {
+      "shapeID": "5055444B77410212597117",
+      "shapeName": "Sarishabari",
+      "shapeType": "ADM3",
+      "population_2025": 378393
+    },
+    {
+      "shapeID": "5055444B15331282943417",
+      "shapeName": "Satkania",
+      "shapeType": "ADM3",
+      "population_2025": 543636
+    },
+    {
+      "shapeID": "5055444B68417393184011",
+      "shapeName": "Satkhira Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 654396
+    },
+    {
+      "shapeID": "5055444B13608186326056",
+      "shapeName": "Saturia",
+      "shapeType": "ADM3",
+      "population_2025": 204591
+    },
+    {
+      "shapeID": "5055444B14680374784380",
+      "shapeName": "Savar",
+      "shapeType": "ADM3",
+      "population_2025": 3869260
+    },
+    {
+      "shapeID": "5055444B94204865824830",
+      "shapeName": "Senbagh",
+      "shapeType": "ADM3",
+      "population_2025": 385944
+    },
+    {
+      "shapeID": "5055444B42865599243727",
+      "shapeName": "Serajdikhan",
+      "shapeType": "ADM3",
+      "population_2025": 364896
+    },
+    {
+      "shapeID": "5055444B88449011386405",
+      "shapeName": "Shah Ali",
+      "shapeType": "ADM3",
+      "population_2025": 69668
+    },
+    {
+      "shapeID": "5055444B12266298386193",
+      "shapeName": "Shah Makhdum",
+      "shapeType": "ADM3",
+      "population_2025": 42369
+    },
+    {
+      "shapeID": "5055444B26697181188091",
+      "shapeName": "Shahbagh",
+      "shapeType": "ADM3",
+      "population_2025": 103608
+    },
+    {
+      "shapeID": "5055444B61931792811678",
+      "shapeName": "Shahjadpur",
+      "shapeType": "ADM3",
+      "population_2025": 494576
+    },
+    {
+      "shapeID": "5055444B68903355888510",
+      "shapeName": "Shahrasti",
+      "shapeType": "ADM3",
+      "population_2025": 288145
+    },
+    {
+      "shapeID": "5055444B71336622802607",
+      "shapeName": "Shailkupa",
+      "shapeType": "ADM3",
+      "population_2025": 430419
+    },
+    {
+      "shapeID": "5055444B26369547392038",
+      "shapeName": "Shajahanpur",
+      "shapeType": "ADM3",
+      "population_2025": 399827
+    },
+    {
+      "shapeID": "5055444B40078895461279",
+      "shapeName": "Shalikha",
+      "shapeType": "ADM3",
+      "population_2025": 189206
+    },
+    {
+      "shapeID": "5055444B47272791978719",
+      "shapeName": "Shariatpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 248185
+    },
+    {
+      "shapeID": "5055444B18695908729515",
+      "shapeName": "Sharsha",
+      "shapeType": "ADM3",
+      "population_2025": 490942
+    },
+    {
+      "shapeID": "5055444B71144810702424",
+      "shapeName": "Sher-e-bangla Nagar",
+      "shapeType": "ADM3",
+      "population_2025": 107453
+    },
+    {
+      "shapeID": "5055444B70149320100288",
+      "shapeName": "Sherpur",
+      "shapeType": "ADM3",
+      "population_2025": 436529
+    },
+    {
+      "shapeID": "5055444B8502207940741",
+      "shapeName": "Sherpur Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 577584
+    },
+    {
+      "shapeID": "5055444B86703057545377",
+      "shapeName": "Shib Char",
+      "shapeType": "ADM3",
+      "population_2025": 427431
+    },
+    {
+      "shapeID": "5055444B74745553133953",
+      "shapeName": "Shibalaya",
+      "shapeType": "ADM3",
+      "population_2025": 158770
+    },
+    {
+      "shapeID": "5055444B6771742340057",
+      "shapeName": "Shibganj",
+      "shapeType": "ADM3",
+      "population_2025": 426745
+    },
+    {
+      "shapeID": "5055444B62264346581700",
+      "shapeName": "Shibganj",
+      "shapeType": "ADM3",
+      "population_2025": 622614
+    },
+    {
+      "shapeID": "5055444B16111921801",
+      "shapeName": "Shibpur",
+      "shapeType": "ADM3",
+      "population_2025": 467899
+    },
+    {
+      "shapeID": "5055444B91970115546789",
+      "shapeName": "Shyamnagar",
+      "shapeType": "ADM3",
+      "population_2025": 352566
+    },
+    {
+      "shapeID": "5055444B82614645252879",
+      "shapeName": "Shyampur",
+      "shapeType": "ADM3",
+      "population_2025": 72422
+    },
+    {
+      "shapeID": "5055444B61145755581844",
+      "shapeName": "Singair",
+      "shapeType": "ADM3",
+      "population_2025": 402392
+    },
+    {
+      "shapeID": "5055444B99745031093411",
+      "shapeName": "Singra",
+      "shapeType": "ADM3",
+      "population_2025": 398649
+    },
+    {
+      "shapeID": "5055444B98549548680688",
+      "shapeName": "Sirajganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 550547
+    },
+    {
+      "shapeID": "5055444B64235181700103",
+      "shapeName": "Sitakunda",
+      "shapeType": "ADM3",
+      "population_2025": 695899
+    },
+    {
+      "shapeID": "5055444B25330959395307",
+      "shapeName": "Sonadanga",
+      "shapeType": "ADM3",
+      "population_2025": 109542
+    },
+    {
+      "shapeID": "5055444B14188015816574",
+      "shapeName": "Sonagazi",
+      "shapeType": "ADM3",
+      "population_2025": 332805
+    },
+    {
+      "shapeID": "5055444B89790535635406",
+      "shapeName": "Sonaimuri",
+      "shapeType": "ADM3",
+      "population_2025": 344546
+    },
+    {
+      "shapeID": "5055444B64704613710909",
+      "shapeName": "Sonargaon",
+      "shapeType": "ADM3",
+      "population_2025": 903230
+    },
+    {
+      "shapeID": "5055444B64677126820268",
+      "shapeName": "Sonatola",
+      "shapeType": "ADM3",
+      "population_2025": 178464
+    },
+    {
+      "shapeID": "5055444B4323491857941",
+      "shapeName": "Sreebardi",
+      "shapeType": "ADM3",
+      "population_2025": 259151
+    },
+    {
+      "shapeID": "5055444B61286165049189",
+      "shapeName": "Sreemangal",
+      "shapeType": "ADM3",
+      "population_2025": 313492
+    },
+    {
+      "shapeID": "5055444B3417610497527",
+      "shapeName": "Sreenagar",
+      "shapeType": "ADM3",
+      "population_2025": 361669
+    },
+    {
+      "shapeID": "5055444B53188311171075",
+      "shapeName": "Sreepur",
+      "shapeType": "ADM3",
+      "population_2025": 1324125
+    },
+    {
+      "shapeID": "5055444B72092725021808",
+      "shapeName": "Sreepur",
+      "shapeType": "ADM3",
+      "population_2025": 192467
+    },
+    {
+      "shapeID": "5055444B25255559930535",
+      "shapeName": "Subarnachar",
+      "shapeType": "ADM3",
+      "population_2025": 515018
+    },
+    {
+      "shapeID": "5055444B66896198128187",
+      "shapeName": "Sujanagar",
+      "shapeType": "ADM3",
+      "population_2025": 335004
+    },
+    {
+      "shapeID": "5055444B90768873722388",
+      "shapeName": "Sulla",
+      "shapeType": "ADM3",
+      "population_2025": 67499
+    },
+    {
+      "shapeID": "5055444B97560692768354",
+      "shapeName": "Sunamganj Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 331690
+    },
+    {
+      "shapeID": "5055444B52225315755922",
+      "shapeName": "Sundarganj",
+      "shapeType": "ADM3",
+      "population_2025": 453998
+    },
+    {
+      "shapeID": "5055444B49503871645568",
+      "shapeName": "Sutrapur",
+      "shapeType": "ADM3",
+      "population_2025": 76163
+    },
+    {
+      "shapeID": "5055444B38529052727167",
+      "shapeName": "Sylhet Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 759891
+    },
+    {
+      "shapeID": "5055444B95452950620517",
+      "shapeName": "Tahirpur",
+      "shapeType": "ADM3",
+      "population_2025": 162509
+    },
+    {
+      "shapeID": "5055444B51023191617559",
+      "shapeName": "Tala",
+      "shapeType": "ADM3",
+      "population_2025": 322415
+    },
+    {
+      "shapeID": "5055444B87492899662704",
+      "shapeName": "Tangail Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 507995
+    },
+    {
+      "shapeID": "5055444B20385993089689",
+      "shapeName": "Tanore",
+      "shapeType": "ADM3",
+      "population_2025": 272827
+    },
+    {
+      "shapeID": "5055444B41041723149943",
+      "shapeName": "Taraganj",
+      "shapeType": "ADM3",
+      "population_2025": 150432
+    },
+    {
+      "shapeID": "5055444B72148073143785",
+      "shapeName": "Tarail",
+      "shapeType": "ADM3",
+      "population_2025": 194217
+    },
+    {
+      "shapeID": "5055444B40057720303666",
+      "shapeName": "Tarash",
+      "shapeType": "ADM3",
+      "population_2025": 341689
+    },
+    {
+      "shapeID": "5055444B2612720248468",
+      "shapeName": "Tazumuddin",
+      "shapeType": "ADM3",
+      "population_2025": 148650
+    },
+    {
+      "shapeID": "5055444B91995345267504",
+      "shapeName": "Tejgaon",
+      "shapeType": "ADM3",
+      "population_2025": 74148
+    },
+    {
+      "shapeID": "5055444B57500985162038",
+      "shapeName": "Tejgaon Ind. Area",
+      "shapeType": "ADM3",
+      "population_2025": 92258
+    },
+    {
+      "shapeID": "5055444B37552741338938",
+      "shapeName": "Teknaf",
+      "shapeType": "ADM3",
+      "population_2025": 331319
+    },
+    {
+      "shapeID": "5055444B24539740757234",
+      "shapeName": "Tentulia",
+      "shapeType": "ADM3",
+      "population_2025": 164444
+    },
+    {
+      "shapeID": "5055444B83461070324075",
+      "shapeName": "Terokhada",
+      "shapeType": "ADM3",
+      "population_2025": 141797
+    },
+    {
+      "shapeID": "5055444B92466625108630",
+      "shapeName": "Thakurgaon Sadar",
+      "shapeType": "ADM3",
+      "population_2025": 690004
+    },
+    {
+      "shapeID": "5055444B32847645930703",
+      "shapeName": "Thanchi",
+      "shapeType": "ADM3",
+      "population_2025": 32989
+    },
+    {
+      "shapeID": "5055444B67482191059434",
+      "shapeName": "Titas",
+      "shapeType": "ADM3",
+      "population_2025": 209740
+    },
+    {
+      "shapeID": "5055444B54809057308219",
+      "shapeName": "Tongibari",
+      "shapeType": "ADM3",
+      "population_2025": 214048
+    },
+    {
+      "shapeID": "5055444B56674431526223",
+      "shapeName": "Trishal",
+      "shapeType": "ADM3",
+      "population_2025": 567333
+    },
+    {
+      "shapeID": "5055444B95964430529833",
+      "shapeName": "Tungi Para",
+      "shapeType": "ADM3",
+      "population_2025": 86845
+    },
+    {
+      "shapeID": "5055444B30733148378014",
+      "shapeName": "Turag",
+      "shapeType": "ADM3",
+      "population_2025": 350752
+    },
+    {
+      "shapeID": "5055444B67012705011880",
+      "shapeName": "Ukhia",
+      "shapeType": "ADM3",
+      "population_2025": 513819
+    },
+    {
+      "shapeID": "5055444B25253769673904",
+      "shapeName": "Ulipur",
+      "shapeType": "ADM3",
+      "population_2025": 332205
+    },
+    {
+      "shapeID": "5055444B69566265360354",
+      "shapeName": "Ullah Para",
+      "shapeType": "ADM3",
+      "population_2025": 697844
+    },
+    {
+      "shapeID": "5055444B65870568835453",
+      "shapeName": "Uttar Khan",
+      "shapeType": "ADM3",
+      "population_2025": 330843
+    },
+    {
+      "shapeID": "5055444B45163668529800",
+      "shapeName": "Uttara",
+      "shapeType": "ADM3",
+      "population_2025": 213434
+    },
+    {
+      "shapeID": "5055444B71045315974475",
+      "shapeName": "Wazirpur",
+      "shapeType": "ADM3",
+      "population_2025": 282236
+    },
+    {
+      "shapeID": "5055444B92630668918235",
+      "shapeName": "Zakiganj",
+      "shapeType": "ADM3",
+      "population_2025": 212115
+    },
+    {
+      "shapeID": "5055444B37868983096118",
+      "shapeName": "Zanjira",
+      "shapeType": "ADM3",
+      "population_2025": 276389
+    },
+    {
+      "shapeID": "5055444B71206516737064",
+      "shapeName": "Zianagar",
+      "shapeType": "ADM3",
+      "population_2025": 62032
+    }
+  ]
+}

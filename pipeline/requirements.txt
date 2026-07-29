@@ -13,3 +13,4 @@ pyyaml==6.0.2
 libpysal==4.13.0
 esda==2.7.1
 pyarrow==20.0.0
+osmium==4.1.1

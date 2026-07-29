@@ -4,9 +4,9 @@ analysis_crs: EPSG:32646
 thresholds_minutes: [15, 30, 60]
 seasons: [dry, monsoon]
 population_raster: data/population/bgd_population_2025_100m.tif
-facilities_file: data/facilities/dghs_facilities.csv
+facilities_file: data/facilities/osm_healthcare_facilities.csv
 roads_file: data/osm/bangladesh-latest.osm.pbf
-flood_file: data/flood/flood_extent.geojson
+flood_file: data/flood/ffwc_inundation_2020_model.tif
 districts_file: ../public/bangladesh-districts.geojson
 subdistricts_file: ../public/bangladesh-subdistricts.geojson
 dashboard_output: ../public/data/analysis

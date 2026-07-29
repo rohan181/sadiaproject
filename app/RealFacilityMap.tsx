@@ -5,25 +5,8 @@ import type { FeatureCollection } from "geojson";
 import { CircleMarker, GeoJSON, MapContainer, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-type Facility = { id: number; lat: number; lon: number; tags?: Record<string, string> };
+type Facility = { id: string; lat: number; lon: number; tags?: Record<string, string> };
 type Boundary = FeatureCollection;
-const QUERY = `[out:json][timeout:35];nwr["amenity"~"^(hospital|clinic)$"](20.55,88.0,26.65,92.75);out center tags;`;
-
-function inRing(lon: number, lat: number, ring: number[][]) {
-  let inside = false;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i], [xj, yj] = ring[j];
-    if ((yi > lat) !== (yj > lat) && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) inside = !inside;
-  }
-  return inside;
-}
-
-function insideBangladesh(facility: Facility, shape: FeatureCollection) {
-  const geometry = shape.features[0]?.geometry;
-  if (!geometry || !["Polygon", "MultiPolygon"].includes(geometry.type)) return false;
-  const polygons = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
-  return polygons.some((polygon) => inRing(facility.lon, facility.lat, polygon[0] as number[][]));
-}
 
 export function RealFacilityMap() {
   const [facilities, setFacilities] = useState<Facility[]>([]);
@@ -35,10 +18,10 @@ export function RealFacilityMap() {
     const controller = new AbortController();
     Promise.all([
       fetch("/bangladesh-boundary.geojson", { signal: controller.signal }).then((r) => r.json()),
-      fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(QUERY)}`, { signal: controller.signal }).then((r) => { if (!r.ok) throw new Error("Overpass request failed"); return r.json(); }),
+      fetch("/data/observed/osm-healthcare-facilities.geojson", { signal: controller.signal }).then((r) => { if (!r.ok) throw new Error("Local facility data unavailable"); return r.json(); }),
     ]).then(([shape, data]) => {
       setBoundary(shape);
-      setFacilities(data.elements.map((item: Facility & { center?: { lat: number; lon: number } }) => ({ ...item, lat: item.lat ?? item.center?.lat, lon: item.lon ?? item.center?.lon })).filter((item: Facility) => Number.isFinite(item.lat) && Number.isFinite(item.lon) && insideBangladesh(item, shape)));
+      setFacilities(data.features.map((feature: { geometry: { coordinates: [number, number] }; properties: Record<string, string> }) => ({ id: feature.properties.facility_id, lon: feature.geometry.coordinates[0], lat: feature.geometry.coordinates[1], tags: { ...feature.properties, amenity: feature.properties.facility_type } })));
     }).catch((reason) => { if (reason?.name !== "AbortError") setError(true); }).finally(() => setLoading(false));
     return () => controller.abort();
   }, []);
@@ -46,6 +29,6 @@ export function RealFacilityMap() {
   return <section className="realMapSection" aria-labelledby="real-map-title">
     <div className="realMapHeader"><div><p className="eyebrow">Observed locations • OpenStreetMap</p><h2 id="real-map-title">Live healthcare facility map</h2><p>Pan and zoom the real basemap. Tap a mapped hospital or clinic for its recorded details.</p></div><div className="realMapFilters"><button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>All</button><button className={filter === "hospital" ? "active" : ""} onClick={() => setFilter("hospital")}>Hospitals</button><button className={filter === "clinic" ? "active" : ""} onClick={() => setFilter("clinic")}>Clinics</button></div></div>
     <div className="leafletWrap"><MapContainer center={[23.75, 90.35]} zoom={7} minZoom={6} maxZoom={17} scrollWheelZoom className="leafletMap"><TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />{boundary && <GeoJSON data={boundary} style={{ color: "#075d55", weight: 2, fillOpacity: .02 }} />}{visible.map((f) => <CircleMarker key={f.id} center={[f.lat, f.lon]} radius={f.tags?.amenity === "hospital" ? 5 : 3.5} pathOptions={{ color: "#fff", weight: 1, fillColor: f.tags?.amenity === "hospital" ? "#d65343" : "#087c71", fillOpacity: .9 }}><Popup><div className="facilityPopup"><b>{f.tags?.name ?? f.tags?.["name:bn"] ?? "Unnamed mapped facility"}</b><span>{f.tags?.amenity === "hospital" ? "Hospital" : "Clinic"}</span>{f.tags?.operator && <small>Operator: {f.tags.operator}</small>}{f.tags?.phone && <small>{f.tags.phone}</small>}<a href={`https://www.openstreetmap.org/?mlat=${f.lat}&mlon=${f.lon}#map=16/${f.lat}/${f.lon}`} target="_blank" rel="noreferrer">Open source record ↗</a></div></Popup></CircleMarker>)}</MapContainer><div className="realMapCount">{loading ? "Loading observed facilities…" : error ? "Live facility feed unavailable" : <><b>{visible.length.toLocaleString()}</b> mapped facilities shown</>}</div></div>
-    <div className="realMapFoot"><span><i className="hospitalKey" /> Hospital</span><span><i className="clinicKey" /> Clinic</span><b>Live OSM query • not simulated</b></div>
+    <div className="realMapFoot"><span><i className="hospitalKey" /> Hospital</span><span><i className="clinicKey" /> Clinic</span><b>3,355 facilities extracted from the downloaded OSM PBF • not simulated</b></div>
   </section>;
 }

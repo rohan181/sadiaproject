@@ -4,10 +4,14 @@ This directory converts versioned source data into dashboard-ready geospatial re
 
 ## Required source contracts
 
-### DGHS facilities CSV
+### Facility coordinates CSV
 
 Required columns: `facility_id`, `name`, `longitude`, `latitude`, `facility_type`.
 Optional capacity columns: `beds`, `doctors`, `service_level`.
+
+The current preliminary configuration uses real mapped healthcare locations
+extracted from OpenStreetMap. Replace it with an authenticated DGHS coordinate
+export for the authoritative model; never infer missing DGHS coordinates.
 
 ### WorldPop raster
 
@@ -43,6 +47,14 @@ pip install -r pipeline/requirements.txt
 cd pipeline
 snakemake --cores 4 --dry-run
 snakemake --cores 4
+```
+
+To regenerate only the real WorldPop district and upazila totals without the
+database routing stages:
+
+```bash
+cd pipeline
+snakemake --cores 2 ../public/data/observed/district-population-2025.json ../public/data/observed/subdistrict-population-2025.json
 ```
 
 For national-scale matrices, batch origins by district or tile rather than sending every origin in one pgRouting request. Merge batches before spatial statistics.

@@ -5,7 +5,22 @@ rule all:
         "work/validated.done",
         "work/access.parquet",
         "work/spatial_statistics.parquet",
-        "../public/data/analysis/manifest.json"
+        "../public/data/analysis/manifest.json",
+        "../public/data/observed/district-population-2025.json",
+        "../public/data/observed/subdistrict-population-2025.json"
+
+rule aggregate_observed_population:
+    input:
+        population=config["population_raster"],
+        districts=config["districts_file"],
+        subdistricts=config["subdistricts_file"]
+    output:
+        districts="../public/data/observed/district-population-2025.json",
+        subdistricts="../public/data/observed/subdistrict-population-2025.json"
+    shell:
+        "python scripts/aggregate_population.py --raster {input.population} "
+        "--districts {input.districts} --subdistricts {input.subdistricts} "
+        "--output-dir ../public/data/observed"
 
 rule validate_inputs:
     input:
