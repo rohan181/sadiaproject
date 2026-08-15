@@ -54,6 +54,12 @@ CREATE INDEX IF NOT EXISTS roads_geom_gix ON network.roads USING gist (geom);
 CREATE INDEX IF NOT EXISTS roads_source_idx ON network.roads (source);
 CREATE INDEX IF NOT EXISTS roads_target_idx ON network.roads (target);
 
+CREATE TABLE IF NOT EXISTS network.vertices (
+  id bigint PRIMARY KEY,
+  geom geometry(Point, 4326) NOT NULL
+);
+CREATE INDEX IF NOT EXISTS vertices_geom_gix ON network.vertices USING gist (geom);
+
 CREATE TABLE IF NOT EXISTS analysis.origin_access (
   origin_id bigint NOT NULL REFERENCES source.population_origins(origin_id),
   season text NOT NULL CHECK (season IN ('dry', 'monsoon')),

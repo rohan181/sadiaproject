@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { BangladeshBoundary } from "./BangladeshBoundary";
+import { BangladeshBoundary, type UpazilaAccess } from "./BangladeshBoundary";
 import { PipelineStatus } from "./PipelineStatus";
 
 const RealFacilityMap = dynamic(
@@ -104,7 +104,7 @@ const analysisModes: {
     title: "Accessibility surface",
     text: "Continuous travel-time zones",
     mapTitle: "Travel-time accessibility surface",
-    stat: "Awaiting verified calculation",
+    stat: "508 of 544 upazilas modeled (dry season)",
   },
   {
     id: "difference",
@@ -136,7 +136,7 @@ const analysisModes: {
     title: "Underserved population",
     text: "Residents beyond the threshold",
     mapTitle: "Population outside reasonable access",
-    stat: "Awaiting verified calculation",
+    stat: "508 of 544 upazilas modeled (dry season)",
   },
   {
     id: "hotspot",
@@ -144,7 +144,7 @@ const analysisModes: {
     title: "Gi* hotspots",
     text: "Significant underserved clusters",
     mapTitle: "Getis-Ord Gi* access hotspots",
-    stat: "Awaiting verified calculation",
+    stat: "PySAL Getis-Ord Gi*, 999 permutations",
   },
   {
     id: "lisa",
@@ -152,7 +152,7 @@ const analysisModes: {
     title: "LISA clusters",
     text: "Clusters and spatial outliers",
     mapTitle: "Local indicators of spatial association",
-    stat: "Awaiting verified calculation",
+    stat: "PySAL Local Moran's I, 999 permutations",
   },
   {
     id: "facility",
@@ -376,6 +376,10 @@ export default function Home() {
     useState<PopulationDataset | null>(null);
   const [subdistrictPopulation, setSubdistrictPopulation] =
     useState<PopulationDataset | null>(null);
+  const [upazilaAccess, setUpazilaAccess] = useState<Record<
+    string,
+    UpazilaAccess
+  > | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -396,6 +400,33 @@ export default function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("/data/analysis/manifest.json")
+      .then((response) => response.json())
+      .then((manifest) => {
+        if (manifest.status !== "complete") return null;
+        return fetch("/data/analysis/upazila-access.geojson").then((r) =>
+          r.json(),
+        );
+      })
+      .then((geojson) => {
+        if (!geojson) return;
+        const byName: Record<string, UpazilaAccess> = {};
+        for (const feature of geojson.features) {
+          const props = feature.properties;
+          byName[props.shapeName] = {
+            mean_travel_minutes: props.mean_travel_minutes ?? null,
+            underserved_percent: props.underserved_percent ?? null,
+            gi_zscore: props.gi_zscore ?? null,
+            gi_pvalue: props.gi_pvalue ?? null,
+            lisa_quadrant: props.lisa_quadrant ?? null,
+          };
+        }
+        setUpazilaAccess(byName);
+      })
+      .catch(() => setUpazilaAccess(null));
+  }, []);
+
   const districtMetrics = useMemo(() => {
     if (!selectedDistrict) return null;
     return (
@@ -413,6 +444,11 @@ export default function Home() {
       ) ?? null
     );
   }, [selectedSubdistrict, subdistrictPopulation]);
+
+  const subdistrictAccess = useMemo(() => {
+    if (!selectedSubdistrict || !upazilaAccess) return null;
+    return upazilaAccess[selectedSubdistrict] ?? null;
+  }, [selectedSubdistrict, upazilaAccess]);
 
   const populationRankings = useMemo(
     () => [...(districtPopulation?.records ?? [])]
@@ -1158,9 +1194,11 @@ export default function Home() {
                 <BangladeshBoundary
                   interactive
                   level="subdistrict"
+                  analysisMode={analysisMode}
                   selectedDistrict={selectedDistrict}
                   selectedSubdistrict={selectedSubdistrict}
                   onSubdistrictSelect={setSelectedSubdistrict}
+                  accessByName={upazilaAccess ?? undefined}
                 />
                 {analysisMode === "flow" && (
                   <div className="flowStory">
@@ -1219,8 +1257,53 @@ export default function Home() {
                       <span>WorldPop 2025 population</span>
                       <b>{formatPopulation(subdistrictMetrics.population_2025)}</b>
                     </div>
-                    <div><span>Travel time</span><b>Pending routing</b></div>
-                    <div><span>Facilities</span><b>Coordinate join pending</b></div>
+                    {subdistrictAccess ? (
+                      <>
+                        <div>
+                          <span>Mean travel time (dry season)</span>
+                          <b>
+                            {subdistrictAccess.mean_travel_minutes != null
+                              ? `${subdistrictAccess.mean_travel_minutes.toFixed(1)} min`
+                              : "No modeled route"}
+                          </b>
+                        </div>
+                        <div>
+                          <span>Beyond {threshold} min threshold</span>
+                          <b>
+                            {subdistrictAccess.underserved_percent != null
+                              ? `${subdistrictAccess.underserved_percent.toFixed(1)}%`
+                              : "—"}
+                          </b>
+                        </div>
+                        <div>
+                          <span>Gi* hotspot significance</span>
+                          <b>
+                            {subdistrictAccess.gi_zscore != null
+                              ? `z=${subdistrictAccess.gi_zscore.toFixed(2)}${
+                                  (subdistrictAccess.gi_pvalue ?? 1) <= 0.05
+                                    ? " (significant)"
+                                    : " (not significant)"
+                                }`
+                              : "—"}
+                          </b>
+                        </div>
+                        <div>
+                          <span>LISA cluster</span>
+                          <b>
+                            {subdistrictAccess.lisa_quadrant != null
+                              ? { 1: "High-High", 2: "Low-High", 3: "Low-Low", 4: "High-Low" }[
+                                  subdistrictAccess.lisa_quadrant
+                                ]
+                              : "—"}
+                          </b>
+                        </div>
+                      </>
+                    ) : (
+                      <div>
+                        <span>Accessibility</span>
+                        <b>No modeled route (isolated network segment)</b>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <p className="emptyHint">

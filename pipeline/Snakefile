@@ -37,8 +37,33 @@ rule calculate_access:
     output: "work/access.parquet"
     shell: "python scripts/calculate_access.py --config config.yaml --output {output}"
 
+rule filter_roads_pbf:
+    input: config["roads_file"]
+    output: "work/roads_filtered.osm.pbf"
+    shell:
+        "osmium tags-filter {input} "
+        "w/highway=motorway,motorway_link,trunk,trunk_link,primary,primary_link,secondary,secondary_link,"
+        "tertiary,tertiary_link,unclassified,residential,living_street "
+        "-o {output} --overwrite"
+
+rule load_roads:
+    input:
+        pbf="work/roads_filtered.osm.pbf",
+        validated="work/validated.done"
+    output: "work/roads_loaded.done"
+    shell: "python scripts/load_roads.py --config config.yaml --roads-pbf {input.pbf} --output {output}"
+
+rule load_facilities_and_origins:
+    input:
+        roads="work/roads_loaded.done",
+        subdistrict_population="../public/data/observed/subdistrict-population-2025.json"
+    output: "work/facilities_loaded.done"
+    shell: "python scripts/load_facilities_and_origins.py --config config.yaml --output {output}"
+
 rule route_access:
-    input: "work/validated.done"
+    input:
+        roads="work/roads_loaded.done",
+        facilities="work/facilities_loaded.done"
     output: "work/routing.done"
     shell: "python scripts/route_access.py --config config.yaml --sql sql/002_route_access.sql --output {output}"
 

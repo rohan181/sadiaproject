@@ -27,17 +27,38 @@ Observed or historical FFWC/BWDB-derived flood extent. Station readings alone ca
 
 ## Database preparation contract
 
-Before `snakemake` calculates results:
+Before `snakemake` calculates results, the `filter_roads_pbf` / `load_roads` /
+`load_facilities_and_origins` rules run automatically and:
 
-1. Load facilities into `source.facilities`.
-2. Convert WorldPop cells into `source.population_origins`.
-3. Load and topologize OSM roads in `network.roads`.
-4. Snap every facility and population origin to a road vertex and populate `road_vertex_id`.
-5. Intersect flood extent with roads and set `flood_exposed` and monsoon costs.
+1. Load facilities into `source.facilities` (`scripts/load_facilities_and_origins.py`).
+2. Convert WorldPop cells into `source.population_origins`. Origins are one
+   point per upazila (ADM3), not one per 100 m raster cell: routing ~600k raw
+   cells is not tractable on a single machine, and `analysis.admin_results`
+   is aggregated at district/upazila level anyway. Each origin reuses the
+   already-computed WorldPop zonal sum for that upazila
+   (`../public/data/observed/subdistrict-population-2025.json`) and a
+   representative point guaranteed to fall inside the polygon.
+3. Load and topologize OSM roads in `network.roads` (`scripts/load_roads.py`).
+   OSM node IDs are reused directly as pgRouting vertex IDs — a node becomes a
+   vertex if it is a way endpoint or shared by two or more qualifying ways —
+   which keeps real intersections connected without a distance-tolerance
+   snap. Only the road classes with a configured `speed_kph` are included.
+4. Snap every facility and population origin to a road vertex and populate
+   `road_vertex_id` (nearest-neighbour KNN against `network.vertices`).
+5. Intersect flood extent with roads and set `flood_exposed` and monsoon
+   costs: an edge is flood-exposed if the flood raster value at its midpoint
+   is a valid positive depth. Flood-exposed edges get `monsoon_speed_factor *
+   flooded_speed_factor` applied; other edges only get `monsoon_speed_factor`.
 
-The routing rule stops if zero origin-access rows are produced.
+The routing rule stops if zero origin-access rows are produced. Some origins
+can still end up with no route if they sit on a disconnected OSM road
+fragment — that is a property of the real network, not something the
+pipeline papers over.
 
 ## Run
+
+Requires `osmium-tool` (`brew install osmium-tool`) in addition to the Python
+dependencies, for the `filter_roads_pbf` rule.
 
 ```bash
 docker compose up -d postgis

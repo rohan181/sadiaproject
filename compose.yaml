@@ -1,6 +1,6 @@
 services:
   postgis:
-    image: pgrouting/pgrouting:16-3.4-3.6
+    image: pgrouting/pgrouting:16-3.4-3.6.1
     environment:
       POSTGRES_DB: accessbd
       POSTGRES_USER: accessbd
