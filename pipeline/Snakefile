@@ -5,6 +5,7 @@ rule all:
         "work/validated.done",
         "work/access.parquet",
         "work/spatial_statistics.parquet",
+        "work/district_statistics.parquet",
         "../public/data/analysis/manifest.json",
         "../public/data/observed/district-population-2025.json",
         "../public/data/observed/subdistrict-population-2025.json"
@@ -69,10 +70,18 @@ rule route_access:
 
 rule spatial_statistics:
     input: "work/access.parquet"
-    output: "work/spatial_statistics.parquet"
-    shell: "python scripts/spatial_statistics.py --input {input} --output {output}"
+    output:
+        upazila="work/spatial_statistics.parquet",
+        district="work/district_statistics.parquet"
+    shell:
+        "python scripts/spatial_statistics.py --input {input} "
+        "--upazila-output {output.upazila} --district-output {output.district}"
 
 rule export_dashboard:
-    input: "work/spatial_statistics.parquet"
+    input:
+        upazila="work/spatial_statistics.parquet",
+        district="work/district_statistics.parquet"
     output: "../public/data/analysis/manifest.json"
-    shell: "python scripts/export_dashboard.py --input {input} --output {output}"
+    shell:
+        "python scripts/export_dashboard.py --upazila-input {input.upazila} "
+        "--district-input {input.district} --output {output}"

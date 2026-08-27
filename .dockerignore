@@ -1,0 +1,14 @@
+node_modules
+.next
+.vinext
+.wrangler
+dist
+out
+coverage
+.git
+.venv
+pipeline/data
+pipeline/work
+pipeline/.snakemake
+*.log
+.DS_Store

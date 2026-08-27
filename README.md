@@ -13,14 +13,29 @@ analysis pipeline.
 - `pipeline/data/` — downloaded source datasets (gitignored; see
   `pipeline/data/README.md` for exact URLs and checksums).
 - `pipeline/sql/` — PostgreSQL/PostGIS/pgRouting schema.
-- `compose.yaml` — local PostGIS/pgRouting (and optional Valhalla) service.
+- `compose.yaml` — the app container, local PostGIS/pgRouting, and an
+  optional Valhalla service.
 - `public/data/` — committed, dashboard-ready outputs the frontend reads
-  directly, so the app runs without Docker/Python for everyday use.
+  directly, so the app runs without Python or a database for everyday use.
+- `docs/travel-time-methodology.md` — the exact travel-time equations, the
+  mapping library, and what the map's colors/tooltip numbers mean.
 
 ## Quick start — just the dashboard
 
 Generated outputs are already committed under `public/data/`, so you can run
-the frontend without Docker, Python, or a database:
+the frontend without Python or a database.
+
+**Option A — with Docker (nothing but Docker required):**
+
+```bash
+docker compose up -d app
+```
+
+Open http://localhost:3000. This builds the Next.js/vinext app from the
+`Dockerfile` and serves the committed real data — no Node.js install needed
+on the host. Stop it with `docker compose down`.
+
+**Option B — with Node.js directly:**
 
 ```bash
 npm install

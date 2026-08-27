@@ -2,8 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { BangladeshBoundary, type UpazilaAccess } from "./BangladeshBoundary";
 import { PipelineStatus } from "./PipelineStatus";
+import { TravelTimeEstimator } from "./TravelTimeEstimator";
+import type { UpazilaAccess } from "./LeafletBoundaryMap";
+
+const LeafletBoundaryMap = dynamic(
+  () =>
+    import("./LeafletBoundaryMap").then((module) => module.LeafletBoundaryMap),
+  { ssr: false },
+);
 
 const RealFacilityMap = dynamic(
   () => import("./RealFacilityMap").then((module) => module.RealFacilityMap),
@@ -66,7 +73,8 @@ type AnalysisMode =
   | "priority"
   | "flow"
   | "swipe"
-  | "isochrone";
+  | "isochrone"
+  | "estimate";
 type LibraryCategory = "all" | "access" | "seasonal" | "equity" | "planning";
 
 const analysisCategory: Record<
@@ -79,6 +87,7 @@ const analysisCategory: Record<
   underserved: "access",
   service: "access",
   isochrone: "access",
+  estimate: "access",
   difference: "seasonal",
   flood: "seasonal",
   flow: "seasonal",
@@ -218,6 +227,26 @@ const analysisModes: {
     mapTitle: "Network travel-time isochrones",
     stat: "Awaiting verified calculation",
   },
+  {
+    id: "estimate",
+    icon: "⏱",
+    title: "Travel time estimation",
+    text: "Look up minutes to the nearest facility",
+    mapTitle: "Upazila travel-time estimator",
+    stat: "508 of 544 upazilas modeled (dry season)",
+  },
+];
+
+// Modes backed by a real pipeline output (see LeafletBoundaryMap's
+// REAL_METRIC_FIELD and the TravelTimeEstimator widget). The placeholder
+// per-region markers and generic legend are hidden for these so fabricated
+// and real numbers never appear on the same map at once.
+const REAL_DATA_MODES: AnalysisMode[] = [
+  "surface",
+  "underserved",
+  "hotspot",
+  "lisa",
+  "estimate",
 ];
 
 function MapPreview({
@@ -258,7 +287,7 @@ function MapPreview({
         </button>
       </div>
       <div className={`miniMap mode-${mode}`}>
-        <BangladeshBoundary compact />
+        <LeafletBoundaryMap compact />
         <div className="miniRiver" />
         {mode === "difference" && (
           <>
@@ -371,12 +400,15 @@ export default function Home() {
   const [mapExpanded, setMapExpanded] = useState(false);
   const [libraryCategory, setLibraryCategory] =
     useState<LibraryCategory>("all");
-  const [overviewZoom, setOverviewZoom] = useState(1);
   const [districtPopulation, setDistrictPopulation] =
     useState<PopulationDataset | null>(null);
   const [subdistrictPopulation, setSubdistrictPopulation] =
     useState<PopulationDataset | null>(null);
   const [upazilaAccess, setUpazilaAccess] = useState<Record<
+    string,
+    UpazilaAccess
+  > | null>(null);
+  const [districtAccess, setDistrictAccess] = useState<Record<
     string,
     UpazilaAccess
   > | null>(null);
@@ -401,30 +433,44 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    function toAccessByName(geojson: {
+      features: Array<{ properties: Record<string, number | null> & { shapeName: string } }>;
+    }): Record<string, UpazilaAccess> {
+      const byName: Record<string, UpazilaAccess> = {};
+      for (const feature of geojson.features) {
+        const props = feature.properties;
+        byName[props.shapeName] = {
+          mean_travel_minutes: props.mean_travel_minutes ?? null,
+          underserved_percent: props.underserved_percent ?? null,
+          gi_zscore: props.gi_zscore ?? null,
+          gi_pvalue: props.gi_pvalue ?? null,
+          lisa_quadrant: props.lisa_quadrant ?? null,
+        };
+      }
+      return byName;
+    }
+
     fetch("/data/analysis/manifest.json")
       .then((response) => response.json())
       .then((manifest) => {
         if (manifest.status !== "complete") return null;
-        return fetch("/data/analysis/upazila-access.geojson").then((r) =>
-          r.json(),
-        );
+        return Promise.all([
+          fetch("/data/analysis/upazila-access.geojson").then((r) => r.json()),
+          fetch("/data/analysis/district-access.geojson").then((r) =>
+            r.json(),
+          ),
+        ]);
       })
-      .then((geojson) => {
-        if (!geojson) return;
-        const byName: Record<string, UpazilaAccess> = {};
-        for (const feature of geojson.features) {
-          const props = feature.properties;
-          byName[props.shapeName] = {
-            mean_travel_minutes: props.mean_travel_minutes ?? null,
-            underserved_percent: props.underserved_percent ?? null,
-            gi_zscore: props.gi_zscore ?? null,
-            gi_pvalue: props.gi_pvalue ?? null,
-            lisa_quadrant: props.lisa_quadrant ?? null,
-          };
-        }
-        setUpazilaAccess(byName);
+      .then((result) => {
+        if (!result) return;
+        const [upazilaGeojson, districtGeojson] = result;
+        setUpazilaAccess(toAccessByName(upazilaGeojson));
+        setDistrictAccess(toAccessByName(districtGeojson));
       })
-      .catch(() => setUpazilaAccess(null));
+      .catch(() => {
+        setUpazilaAccess(null);
+        setDistrictAccess(null);
+      });
   }, []);
 
   const districtMetrics = useMemo(() => {
@@ -435,6 +481,11 @@ export default function Home() {
       ) ?? null
     );
   }, [selectedDistrict, districtPopulation]);
+
+  const districtAccessRecord = useMemo(() => {
+    if (!selectedDistrict || !districtAccess) return null;
+    return districtAccess[selectedDistrict] ?? null;
+  }, [selectedDistrict, districtAccess]);
 
   const subdistrictMetrics = useMemo(() => {
     if (!selectedSubdistrict) return null;
@@ -606,13 +657,23 @@ export default function Home() {
           <div className={`mapArea mode-${analysisMode}`}>
             <div className="river riverOne" />
             <div className="river riverTwo" />
-            <BangladeshBoundary
+            <LeafletBoundaryMap
               interactive
               analysisMode={analysisMode}
-              zoom={overviewZoom}
               selectedDistrict={selectedDistrict}
               onDistrictSelect={setSelectedDistrict}
+              accessByName={districtAccess ?? undefined}
             />
+            {analysisMode === "estimate" && (
+              <TravelTimeEstimator
+                upazilas={subdistrictPopulation?.records ?? []}
+                accessByName={upazilaAccess}
+                onOpenSubdistrict={() => {
+                  setMapLevel("subdistrict");
+                  setMapExpanded(true);
+                }}
+              />
+            )}
             {analysisMode === "flood" && (
               <div className="floodRoads" aria-hidden="true">
                 <i className="road r1" />
@@ -654,7 +715,8 @@ export default function Home() {
                 "facility",
                 "swipe",
               ] as AnalysisMode[]
-            ).includes(analysisMode) && (
+            ).includes(analysisMode) &&
+              !REAL_DATA_MODES.includes(analysisMode) && (
               <div className={`analysisOverlay kind-${analysisMode}`}>
                 {regions.map((r, i) => (
                   <i
@@ -687,7 +749,7 @@ export default function Home() {
                 </div>
               </div>
             )}
-            {regions.map((r) => {
+            {!REAL_DATA_MODES.includes(analysisMode) && regions.map((r) => {
               const baseValue =
                 analysisMode === "difference"
                   ? r.monsoon - r.dry
@@ -745,35 +807,6 @@ export default function Home() {
                 <span>Proposed clinic</span>
               </button>
             )}
-            <div className="mapZoom">
-              <button
-                aria-label="Zoom in"
-                onClick={() =>
-                  setOverviewZoom((value) =>
-                    Math.min(2, Number((value + 0.2).toFixed(1))),
-                  )
-                }
-              >
-                +
-              </button>
-              <button
-                aria-label="Zoom out"
-                onClick={() =>
-                  setOverviewZoom((value) =>
-                    Math.max(1, Number((value - 0.2).toFixed(1))),
-                  )
-                }
-              >
-                −
-              </button>
-              <button
-                aria-label="Reset map zoom"
-                className="resetZoom"
-                onClick={() => setOverviewZoom(1)}
-              >
-                ↺
-              </button>
-            </div>
             <div className="mapInteractionHint">
               <b>
                 {selectedDistrict
@@ -781,8 +814,8 @@ export default function Home() {
                   : "Tap a district"}
               </b>
               <span>
-                {Math.round(overviewZoom * 100)}% zoom • open large map for
-                upazila analysis
+                Real OpenStreetMap basemap • open large map for upazila
+                analysis
               </span>
             </div>
             {analysisMode === "difference" && (
@@ -835,7 +868,13 @@ export default function Home() {
               </div>
             )}
             {!(
-              ["difference", "flood", "catchment", "facility"] as AnalysisMode[]
+              [
+                "difference",
+                "flood",
+                "catchment",
+                "facility",
+                "estimate",
+              ] as AnalysisMode[]
             ).includes(analysisMode) && (
               <div className="legend">
                 <span>
@@ -854,7 +893,11 @@ export default function Home() {
             <span>
               WorldPop 2025 population and real administrative geometry loaded
             </span>
-            <span>Accessibility output pending routing run</span>
+            <span>
+              {districtAccess
+                ? "Accessibility surface, Gi* and LISA computed for all 64 districts"
+                : "Accessibility output pending routing run"}
+            </span>
           </div>
         </article>
 
@@ -872,8 +915,16 @@ export default function Home() {
           </div>
           <div className="timeRing">
             <div>
-              <strong>—</strong>
-              <small>routing pending</small>
+              <strong>
+                {districtAccessRecord?.mean_travel_minutes != null
+                  ? districtAccessRecord.mean_travel_minutes.toFixed(0)
+                  : "—"}
+              </strong>
+              <small>
+                {districtAccessRecord?.mean_travel_minutes != null
+                  ? "mean minutes"
+                  : "routing pending"}
+              </small>
             </div>
           </div>
           <div className="detailRows">
@@ -882,8 +933,20 @@ export default function Home() {
               <b>{formatPopulation(districtMetrics?.population_2025)}</b>
             </div>
             <div>
-              <span>Population beyond {threshold} min</span>
-              <b>Not calculated</b>
+              <span>Mean travel time (dry season)</span>
+              <b>
+                {districtAccessRecord?.mean_travel_minutes != null
+                  ? `${districtAccessRecord.mean_travel_minutes.toFixed(1)} min`
+                  : "Not calculated"}
+              </b>
+            </div>
+            <div>
+              <span>Beyond 30 min (modeled)</span>
+              <b>
+                {districtAccessRecord?.underserved_percent != null
+                  ? `${districtAccessRecord.underserved_percent.toFixed(1)}%`
+                  : "Not calculated"}
+              </b>
             </div>
             <div>
               <span>Seasonal change</span>
@@ -999,11 +1062,20 @@ export default function Home() {
             </div>
             <div className="mapModalBody">
               <div className={`bigMap mode-${analysisMode}`}>
-                <BangladeshBoundary
+                <LeafletBoundaryMap
                   interactive
+                  analysisMode={analysisMode}
                   selectedDistrict={selectedDistrict}
                   onDistrictSelect={setSelectedDistrict}
+                  accessByName={districtAccess ?? undefined}
                 />
+                {analysisMode === "estimate" && (
+                  <TravelTimeEstimator
+                    upazilas={subdistrictPopulation?.records ?? []}
+                    accessByName={upazilaAccess}
+                    onOpenSubdistrict={() => setMapLevel("subdistrict")}
+                  />
+                )}
                 {analysisMode === "flood" && (
                   <div className="floodRoads">
                     <i className="road r1" />
@@ -1044,7 +1116,8 @@ export default function Home() {
                     "facility",
                     "swipe",
                   ] as AnalysisMode[]
-                ).includes(analysisMode) && (
+                ).includes(analysisMode) &&
+                  !REAL_DATA_MODES.includes(analysisMode) && (
                   <div className={`analysisOverlay kind-${analysisMode}`}>
                     {regions.map((r, i) => (
                       <i
@@ -1095,17 +1168,19 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-                <div className="bigMapLegend">
-                  <span>
-                    <i className="low" /> Lower access burden
-                  </span>
-                  <span>
-                    <i className="medium" /> Moderate
-                  </span>
-                  <span>
-                    <i className="high" /> Highest priority
-                  </span>
-                </div>
+                {analysisMode !== "estimate" && (
+                  <div className="bigMapLegend">
+                    <span>
+                      <i className="low" /> Lower access burden
+                    </span>
+                    <span>
+                      <i className="medium" /> Moderate
+                    </span>
+                    <span>
+                      <i className="high" /> Highest priority
+                    </span>
+                  </div>
+                )}
               </div>
               <aside>
                 <p className="eyebrow">Selected location</p>
@@ -1122,7 +1197,11 @@ export default function Home() {
                         ?.title
                     }
                   </b>
-                  <span>Routing output not yet calculated</span>
+                  <span>
+                    {districtAccessRecord?.mean_travel_minutes != null
+                      ? "Real pgRouting + PySAL output"
+                      : "Routing output not yet calculated"}
+                  </span>
                 </div>
                 {districtMetrics ? (
                   <div className="detailRows">
@@ -1130,7 +1209,22 @@ export default function Home() {
                       <span>WorldPop 2025 population</span>
                       <b>{formatPopulation(districtMetrics.population_2025)}</b>
                     </div>
-                    <div><span>Travel time</span><b>Pending routing</b></div>
+                    <div>
+                      <span>Mean travel time (dry season)</span>
+                      <b>
+                        {districtAccessRecord?.mean_travel_minutes != null
+                          ? `${districtAccessRecord.mean_travel_minutes.toFixed(1)} min`
+                          : "Pending routing"}
+                      </b>
+                    </div>
+                    <div>
+                      <span>Beyond 30 min (modeled)</span>
+                      <b>
+                        {districtAccessRecord?.underserved_percent != null
+                          ? `${districtAccessRecord.underserved_percent.toFixed(1)}%`
+                          : "Pending routing"}
+                      </b>
+                    </div>
                     <div><span>Facilities</span><b>Coordinate join pending</b></div>
                   </div>
                 ) : (
@@ -1191,7 +1285,7 @@ export default function Home() {
             </div>
             <div className="mapModalBody">
               <div className={`bigMap subdistrictMap mode-${analysisMode}`}>
-                <BangladeshBoundary
+                <LeafletBoundaryMap
                   interactive
                   level="subdistrict"
                   analysisMode={analysisMode}
@@ -1200,6 +1294,12 @@ export default function Home() {
                   onSubdistrictSelect={setSelectedSubdistrict}
                   accessByName={upazilaAccess ?? undefined}
                 />
+                {analysisMode === "estimate" && (
+                  <TravelTimeEstimator
+                    upazilas={subdistrictPopulation?.records ?? []}
+                    accessByName={upazilaAccess}
+                  />
+                )}
                 {analysisMode === "flow" && (
                   <div className="flowStory">
                     <div className="flowPulse p1" />
@@ -1218,17 +1318,19 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-                <div className="bigMapLegend">
-                  <span>
-                    <i className="low" /> Better access
-                  </span>
-                  <span>
-                    <i className="medium" /> Moderate
-                  </span>
-                  <span>
-                    <i className="high" /> Underserved
-                  </span>
-                </div>
+                {analysisMode !== "estimate" && (
+                  <div className="bigMapLegend">
+                    <span>
+                      <i className="low" /> Better access
+                    </span>
+                    <span>
+                      <i className="medium" /> Moderate
+                    </span>
+                    <span>
+                      <i className="high" /> Underserved
+                    </span>
+                  </div>
+                )}
               </div>
               <aside>
                 <p className="eyebrow">Selected subdistrict</p>
@@ -1268,7 +1370,7 @@ export default function Home() {
                           </b>
                         </div>
                         <div>
-                          <span>Beyond {threshold} min threshold</span>
+                          <span>Beyond 30 min (modeled)</span>
                           <b>
                             {subdistrictAccess.underserved_percent != null
                               ? `${subdistrictAccess.underserved_percent.toFixed(1)}%`

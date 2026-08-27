@@ -86,3 +86,20 @@ For national-scale matrices, batch origins by district or tile rather than sendi
 - Travel times are network-modelled results from genuine inputs.
 - Flood differences are scenario-modelled results constrained by observed flood data.
 - Gi* and LISA are inferential statistics derived from the calculated accessibility values.
+
+## Outputs
+
+`scripts/spatial_statistics.py` aggregates the same routed `access.parquet`
+rows at two administrative levels — it does not compute two independent
+models, just two group-bys of one result:
+
+- `work/spatial_statistics.parquet` → `public/data/analysis/upazila-access.geojson`
+  (544 ADM3 features: `mean_travel_minutes`, `underserved_percent`,
+  `gi_zscore`/`gi_pvalue`, `lisa_quadrant`).
+- `work/district_statistics.parquet` → `public/data/analysis/district-access.geojson`
+  (64 ADM2 features, same fields, Gi*/LISA computed on district-level Queen
+  contiguity rather than reusing the upazila statistics).
+
+Both dry-season only; `analysis.origin_access` has monsoon rows too, but
+`spatial_statistics.py` doesn't export them yet — see the "Seasonal change"
+analysis mode, which is still a placeholder for that reason.
