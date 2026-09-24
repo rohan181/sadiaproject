@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { UpazilaAccess } from "./BangladeshBoundary";
+import type { UpazilaAccess } from "./LeafletBoundaryMap";
 
 type UpazilaOption = { shapeID: string; shapeName: string; population_2025: number };
 

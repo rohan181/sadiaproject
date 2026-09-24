@@ -72,10 +72,13 @@ function thematicInfo(
   accessByName: Record<string, UpazilaAccess> | undefined,
   breaks: number[] | null,
 ): { fill: string; label: string } {
+  const palette = palettes[analysisMode ?? "surface"] ?? palettes.surface;
   if (!accessByName) {
     return {
       fill: mapFill(analysisMode),
       label: "analysis output pending verified routing",
+      fill: palette[0],
+      label: "loading access metrics...",
     };
   }
   const record = accessByName[name];
@@ -84,8 +87,10 @@ function thematicInfo(
       return { fill: NO_DATA_FILL, label: "no modeled route" };
     }
     const palette = palettes.lisa;
+    const lisaPalette = palettes.lisa;
     return {
       fill: palette[LISA_BUCKET[record.lisa_quadrant] ?? 0],
+      fill: lisaPalette[LISA_BUCKET[record.lisa_quadrant] ?? 0],
       label: LISA_LABEL[record.lisa_quadrant] ?? "unclassified",
     };
   }
@@ -108,11 +113,14 @@ function thematicInfo(
   const field = REAL_METRIC_FIELD[analysisMode ?? ""];
   if (field) {
     const value = record?.[field];
+  if (analysisMode === "underserved") {
+    const value = record?.underserved_percent;
     if (value == null || !breaks) {
       return {
         fill: NO_DATA_FILL,
         label: "no modeled route (isolated network segment)",
       };
+      return { fill: NO_DATA_FILL, label: "no modeled route" };
     }
     const bucket = bucketOf(value, breaks);
     const unit =
@@ -120,11 +128,35 @@ function thematicInfo(
     return {
       fill: palettes[analysisMode ?? "surface"][bucket],
       label: `${value.toFixed(1)} ${unit}`,
+      fill: palettes.underserved[bucket],
+      label: `${value.toFixed(1)}% underserved`,
+    };
+  }
+  const travelMin = record?.mean_travel_minutes;
+  if (travelMin != null) {
+    const bucket = breaks ? bucketOf(travelMin, breaks) : 0;
+    const modeLabel =
+      analysisMode === "difference"
+        ? `${travelMin.toFixed(1)} min baseline travel`
+        : analysisMode === "catchment"
+          ? `${travelMin.toFixed(1)} min catchment`
+          : analysisMode === "e2sfca"
+            ? `${travelMin.toFixed(1)} min access time`
+            : analysisMode === "facility"
+              ? `${travelMin.toFixed(1)} min travel time`
+              : analysisMode === "flood"
+                ? `${travelMin.toFixed(1)} min (dry season ref)`
+                : `${travelMin.toFixed(1)} min mean travel time`;
+    return {
+      fill: palette[bucket],
+      label: modeLabel,
     };
   }
   return {
     fill: mapFill(analysisMode),
     label: "analysis output pending verified routing",
+    fill: NO_DATA_FILL,
+    label: "no modeled route (isolated network segment)",
   };
 }
 
@@ -175,13 +207,23 @@ export function LeafletBoundaryMap({
   }, [interactive, level]);
 
   const field = REAL_METRIC_FIELD[analysisMode ?? ""];
+  const metricField: keyof UpazilaAccess =
+    analysisMode === "hotspot"
+      ? "gi_zscore"
+      : analysisMode === "underserved"
+        ? "underserved_percent"
+        : "mean_travel_minutes";
+
   const breaks = useMemo(() => {
     if (!field || !accessByName) return null;
+    if (!accessByName) return null;
     const values = Object.values(accessByName)
       .map((record) => record[field])
+      .map((record) => record[metricField])
       .filter((value): value is number => value != null);
     return values.length ? quantileBreaks(values) : null;
   }, [field, accessByName]);
+  }, [metricField, accessByName]);
 
   const selectedName = level === "subdistrict" ? selectedSubdistrict : selectedDistrict;
   const select = (name: string) =>

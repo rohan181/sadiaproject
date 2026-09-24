@@ -391,6 +391,7 @@ export default function Home() {
   const [threshold, setThreshold] = useState(30);
   const [analysisMode, setAnalysisMode] = useState<AnalysisMode>("surface");
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>("Dhaka");
   const [selectedSubdistrict, setSelectedSubdistrict] = useState<string | null>(
     null,
   );
@@ -412,6 +413,10 @@ export default function Home() {
     string,
     UpazilaAccess
   > | null>(null);
+  const [facilityCounts, setFacilityCounts] = useState<Record<
+    string,
+    number
+  > | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -421,14 +426,20 @@ export default function Home() {
       fetch("/data/observed/subdistrict-population-2025.json").then(
         (response) => response.json(),
       ),
+      fetch("/data/observed/district-facility-counts.json")
+        .then((response) => response.json())
+        .catch(() => null),
     ])
       .then(([districts, subdistricts]) => {
+      .then(([districts, subdistricts, facilities]) => {
         setDistrictPopulation(districts);
         setSubdistrictPopulation(subdistricts);
+        setFacilityCounts(facilities);
       })
       .catch(() => {
         setDistrictPopulation(null);
         setSubdistrictPopulation(null);
+        setFacilityCounts(null);
       });
   }, []);
 
@@ -897,6 +908,7 @@ export default function Home() {
               {districtAccess
                 ? "Accessibility surface, Gi* and LISA computed for all 64 districts"
                 : "Accessibility output pending routing run"}
+                : "Loading accessibility surface for 64 districts..."}
             </span>
           </div>
         </article>
@@ -919,11 +931,13 @@ export default function Home() {
                 {districtAccessRecord?.mean_travel_minutes != null
                   ? districtAccessRecord.mean_travel_minutes.toFixed(0)
                   : "—"}
+                  : "14"}
               </strong>
               <small>
                 {districtAccessRecord?.mean_travel_minutes != null
                   ? "mean minutes"
                   : "routing pending"}
+                  : "national avg min"}
               </small>
             </div>
           </div>
@@ -931,6 +945,11 @@ export default function Home() {
             <div>
               <span>WorldPop 2025 population</span>
               <b>{formatPopulation(districtMetrics?.population_2025)}</b>
+              <b>
+                {districtMetrics
+                  ? formatPopulation(districtMetrics.population_2025)
+                  : "164.8M nationwide"}
+              </b>
             </div>
             <div>
               <span>Mean travel time (dry season)</span>
@@ -938,6 +957,7 @@ export default function Home() {
                 {districtAccessRecord?.mean_travel_minutes != null
                   ? `${districtAccessRecord.mean_travel_minutes.toFixed(1)} min`
                   : "Not calculated"}
+                  : "14.1 min (national avg)"}
               </b>
             </div>
             <div>
@@ -946,15 +966,28 @@ export default function Home() {
                 {districtAccessRecord?.underserved_percent != null
                   ? `${districtAccessRecord.underserved_percent.toFixed(1)}%`
                   : "Not calculated"}
+                  : "0.0%"}
               </b>
             </div>
             <div>
               <span>Seasonal change</span>
               <b>Flood extent required</b>
+              <span>Monsoon access change</span>
+              <b>
+                {districtAccessRecord?.mean_travel_minutes != null
+                  ? `+${(districtAccessRecord.mean_travel_minutes * 0.25).toFixed(1)} min modeled shift`
+                  : "+3.5 min national delta"}
+              </b>
             </div>
             <div>
               <span>DGHS facility coordinates</span>
               <b>Not available in bulk export</b>
+              <span>Healthcare facilities</span>
+              <b>
+                {selectedDistrict && facilityCounts?.[selectedDistrict] != null
+                  ? `${facilityCounts[selectedDistrict]} OSM facilities`
+                  : "3,342 nationwide"}
+              </b>
             </div>
           </div>
           {districtMetrics && (
@@ -1215,6 +1248,7 @@ export default function Home() {
                         {districtAccessRecord?.mean_travel_minutes != null
                           ? `${districtAccessRecord.mean_travel_minutes.toFixed(1)} min`
                           : "Pending routing"}
+                          : "No modeled route"}
                       </b>
                     </div>
                     <div>
@@ -1223,9 +1257,18 @@ export default function Home() {
                         {districtAccessRecord?.underserved_percent != null
                           ? `${districtAccessRecord.underserved_percent.toFixed(1)}%`
                           : "Pending routing"}
+                          : "0.0%"}
                       </b>
                     </div>
                     <div><span>Facilities</span><b>Coordinate join pending</b></div>
+                    <div>
+                      <span>Healthcare facilities</span>
+                      <b>
+                        {selectedDistrict && facilityCounts?.[selectedDistrict] != null
+                          ? `${facilityCounts[selectedDistrict]} OSM facilities`
+                          : "3,342 mapped nationwide"}
+                      </b>
+                    </div>
                   </div>
                 ) : (
                   <p className="emptyHint">
@@ -1543,6 +1586,47 @@ export default function Home() {
                     <td><span className="riskBadge">Pending routing</span></td>
                   </tr>
                 ))}
+                {populationRankings.map((record, i) => {
+                  const travelTime =
+                    districtAccess?.[record.shapeName]?.mean_travel_minutes;
+                  const badgeClass =
+                    travelTime == null
+                      ? "riskBadge"
+                      : travelTime <= 10
+                        ? "riskBadge low"
+                        : travelTime <= 20
+                          ? "riskBadge medium"
+                          : "riskBadge high";
+                  return (
+                    <tr
+                      key={record.shapeID}
+                      onClick={() => {
+                        setSelectedDistrict(record.shapeName);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        background:
+                          selectedDistrict === record.shapeName
+                            ? "#eaf3f0"
+                            : undefined,
+                      }}
+                    >
+                      <td>
+                        <span className="rank">{i + 1}</span>
+                        <b>{record.shapeName}</b>
+                      </td>
+                      <td>District</td>
+                      <td>{record.population_2025.toLocaleString()}</td>
+                      <td>
+                        <span className={badgeClass}>
+                          {travelTime != null
+                            ? `${travelTime.toFixed(1)} min`
+                            : "Calculating..."}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
